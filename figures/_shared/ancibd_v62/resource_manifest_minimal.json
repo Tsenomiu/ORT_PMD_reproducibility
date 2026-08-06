@@ -1,0 +1,36 @@
+{
+  "schema": "ORT-release-minimal-ancIBD-resource-manifest-v1",
+  "description": "Path-free AADR v62 all-SNP resource metadata required by the plotting scripts.",
+  "v62_source": "v62.0_1240k_public.snp",
+  "v62_source_sha256": "1189e253b82058822fddabc4966c1448dea70373a96c40106e720bedd93b55bf",
+  "callable_first_to_last_span_cM": 3538.8511000000008,
+  "canonical_callable_first_to_last_span_cM": 3538.8511000000008,
+  "totals": {
+    "exact": 1100313,
+    "v62": 1150639
+  },
+  "chromosomes": {
+    "1": {"canonical_first_M": 0.02013, "canonical_last_M": 2.86273},
+    "2": {"canonical_first_M": 0.000138, "canonical_last_M": 2.688325},
+    "3": {"canonical_first_M": 0.000024, "canonical_last_M": 2.232573},
+    "4": {"canonical_first_M": 0.003413, "canonical_last_M": 2.145423},
+    "5": {"canonical_first_M": 0.000381, "canonical_last_M": 2.040858},
+    "6": {"canonical_first_M": 0.00318, "canonical_last_M": 1.920325},
+    "7": {"canonical_first_M": 0.000035, "canonical_last_M": 1.871526},
+    "8": {"canonical_first_M": 0.000004, "canonical_last_M": 1.680022},
+    "9": {"canonical_first_M": 0.001643, "canonical_last_M": 1.66301},
+    "10": {"canonical_first_M": 0.000058, "canonical_last_M": 1.809153},
+    "11": {"canonical_first_M": 0.000004, "canonical_last_M": 1.582171},
+    "12": {"canonical_first_M": 0.000898, "canonical_last_M": 1.746799},
+    "13": {"canonical_first_M": 0.001903, "canonical_last_M": 1.257046},
+    "14": {"canonical_first_M": 0.016071, "canonical_last_M": 1.202023},
+    "15": {"canonical_first_M": 0.000049, "canonical_last_M": 1.41346},
+    "16": {"canonical_first_M": -0.000001, "canonical_last_M": 1.340263},
+    "17": {"canonical_first_M": -0.000258, "canonical_last_M": 1.284738},
+    "18": {"canonical_first_M": 0.001604, "canonical_last_M": 1.17709},
+    "19": {"canonical_first_M": 0.000019, "canonical_last_M": 1.077316},
+    "20": {"canonical_first_M": 0.000011, "canonical_last_M": 1.082134},
+    "21": {"canonical_first_M": -0.008529, "canonical_last_M": 0.627865},
+    "22": {"canonical_first_M": 0.016324, "canonical_last_M": 0.740762}
+  }
+}

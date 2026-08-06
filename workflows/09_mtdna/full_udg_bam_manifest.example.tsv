@@ -1,0 +1,4 @@
+sample	bam
+ORT15	/path/to/ORT15_fu.sublibrary_a.collapsed.dedup.bam
+ORT15	/path/to/ORT15_fu.sublibrary_b.collapsed.dedup.bam
+ORT15	/path/to/ORT15_fu.sublibrary_c.collapsed.dedup.bam

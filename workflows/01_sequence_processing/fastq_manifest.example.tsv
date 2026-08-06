@@ -1,0 +1,2 @@
+sample	library	lane	r1	r2
+ORT15	fu	lane1	/path/to/ORT15_fu_lane1_R1.fastq.gz	/path/to/ORT15_fu_lane1_R2.fastq.gz

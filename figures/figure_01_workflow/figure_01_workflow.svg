@@ -1,0 +1,79 @@
+<svg width="680" height="556" viewBox="0 0 680 556" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>ORT PMD workflow overview</title>
+<desc>ORT15 and ORT16 full-UDG (matched validation) and non-UDG (damage) libraries go through shared preprocessing; both libraries are then processed by four PMD treatments (raw, trim, rescale, bamRefine), imputed with GLIMPSE, and evaluated on residual damage, imputation concordance, relatedness, and ancestry. bamRefine-5 and Rescale-5 perform comparably on imputation, and no single method is designated the universal winner. Colours encode library type, PMD treatment, evaluation, and shared steps.</desc>
+<style>
+text{font-family:'Helvetica Neue',Arial,sans-serif}
+.t{font-size:14px;font-weight:400;fill:#2C2C2A}
+.ts{font-size:12px;font-weight:400;fill:#5F5E5A}
+.tss{font-size:10.5px;font-weight:400;fill:#5F5E5A}
+.th{font-size:14px;font-weight:500;fill:#2C2C2A}
+.teal rect{fill:#E1F5EE;stroke:#0F6E56;stroke-width:.8}
+.teal .th{fill:#085041}.teal .ts{fill:#0F6E56}
+.coral rect{fill:#FAECE7;stroke:#993C1D;stroke-width:.8}
+.coral .th{fill:#712B13}.coral .ts{fill:#993C1D}
+.purple rect{fill:#EEEDFE;stroke:#534AB7;stroke-width:.8}
+.purple .th{fill:#3C3489}.purple .ts{fill:#534AB7}
+.gray rect{fill:#F1EFE8;stroke:#5F5E5A;stroke-width:.8}
+.gray .th{fill:#2C2C2A}.gray .ts{fill:#5F5E5A}
+.method rect{fill:#E7ECEF;stroke:#5A6B73;stroke-width:.8}
+.method .th{fill:#2C3E45}.method .ts{fill:#5A6B73}
+.sel rect{fill:#FBF0CE;stroke:#B8860B;stroke-width:1.4}
+.sel .th{fill:#6B4E00}.sel .ts{fill:#8A6D0B}
+.cn{stroke:#888780;fill:none}
+</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+
+<text class="ts" x="40" y="42">Samples — ORT15 ♂ &amp; ORT16 ♀, Oortsog Ovoo, Mongolia</text>
+<g class="teal"><rect x="40" y="50" width="290" height="50" rx="6"/><text class="th" x="185" y="74" text-anchor="middle">Full-UDG (fu): 3 independent libraries (a,b,c)</text><text class="ts" x="185" y="90" text-anchor="middle">ORT15 0.90× · ORT16 1.46× · matched validation</text></g>
+<g class="coral"><rect x="350" y="50" width="290" height="50" rx="6"/><text class="th" x="495" y="74" text-anchor="middle">Non-UDG (nu): 1 library</text><text class="ts" x="495" y="90" text-anchor="middle">ORT15 0.27× · ORT16 0.35× · damage → corrected</text></g>
+<line class="cn" x1="185" y1="100" x2="185" y2="124" stroke-width="1.3" marker-end="url(#arrow)"/>
+<line class="cn" x1="495" y1="100" x2="495" y2="124" stroke-width="1.3" marker-end="url(#arrow)"/>
+
+<text class="ts" x="40" y="120">Preprocessing</text>
+<g class="gray"><rect x="40" y="126" width="600" height="44" rx="6"/><text class="th" x="340" y="148" text-anchor="middle">AdapterRemoval → BWA aln (hs37d5) → merge lanes → dedup</text><text class="ts" x="340" y="163" text-anchor="middle">collapsed reads · per-library dedup</text></g>
+<line class="cn" x1="340" y1="170" x2="340" y2="194" stroke-width="1.3" marker-end="url(#arrow)"/>
+
+<text class="ts" x="40" y="190">Post-mortem damage (PMD) correction</text>
+<g class="method"><rect x="40" y="198" width="135" height="52" rx="6"/><text class="th" x="107" y="222" text-anchor="middle">raw</text><text class="tss" x="107" y="238" text-anchor="middle">no correction (raw)</text></g>
+<g class="method"><rect x="195" y="198" width="135" height="52" rx="6"/><text class="th" x="262" y="222" text-anchor="middle">Trim</text><text class="tss" x="262" y="238" text-anchor="middle">trimBam · soft-clip</text></g>
+<g class="method"><rect x="350" y="198" width="135" height="52" rx="6"/><text class="th" x="417" y="222" text-anchor="middle">Rescale</text><text class="tss" x="417" y="238" text-anchor="middle">mapDamage2 · base quality</text></g>
+<g class="method"><rect x="505" y="198" width="135" height="52" rx="6"/><text class="th" x="572" y="222" text-anchor="middle">SNP mask</text><text class="tss" x="572" y="238" text-anchor="middle">bamRefine · 1000G SNPs</text></g>
+<line class="cn" x1="107" y1="250" x2="107" y2="264" stroke-width="1.1"/>
+<line class="cn" x1="262" y1="250" x2="262" y2="264" stroke-width="1.1"/>
+<line class="cn" x1="417" y1="250" x2="417" y2="264" stroke-width="1.1"/>
+<line class="cn" x1="572" y1="250" x2="572" y2="264" stroke-width="1.1"/>
+<line class="cn" x1="107" y1="264" x2="572" y2="264" stroke-width="1.1"/>
+<line class="cn" x1="340" y1="264" x2="340" y2="286" stroke-width="1.3" marker-end="url(#arrow)"/>
+
+<text class="ts" x="40" y="282">Imputation</text>
+<g class="gray"><rect x="190" y="288" width="300" height="44" rx="6"/><text class="th" x="340" y="310" text-anchor="middle">GLIMPSE v1 — 1000G Phase 3 panel</text><text class="ts" x="340" y="325" text-anchor="middle">2,504 individuals · ~78M SNP sites</text></g>
+<line class="cn" x1="340" y1="332" x2="340" y2="352" stroke-width="1.3" marker-end="url(#arrow)"/>
+<text class="ts" x="40" y="346">Evaluation — corrected nu vs fu validation</text>
+<line class="cn" x1="107" y1="352" x2="572" y2="352" stroke-width="1.1"/>
+<line class="cn" x1="107" y1="352" x2="107" y2="364" stroke-width="1.1"/>
+<line class="cn" x1="262" y1="352" x2="262" y2="364" stroke-width="1.1"/>
+<line class="cn" x1="417" y1="352" x2="417" y2="364" stroke-width="1.1"/>
+<line class="cn" x1="572" y1="352" x2="572" y2="364" stroke-width="1.1"/>
+
+<g class="purple"><rect x="40" y="364" width="135" height="52" rx="6"/><text class="th" x="107" y="388" text-anchor="middle">Residual damage</text><text class="ts" x="107" y="404" text-anchor="middle">ALT-allele fraction</text></g>
+<g class="purple"><rect x="195" y="364" width="135" height="52" rx="6"/><text class="th" x="262" y="388" text-anchor="middle">Concordance</text><text class="ts" x="262" y="404" text-anchor="middle">r² by MAF · NRD</text></g>
+<g class="purple"><rect x="350" y="364" width="135" height="52" rx="6"/><text class="th" x="417" y="388" text-anchor="middle">Relatedness</text><text class="ts" x="417" y="404" text-anchor="middle">ancIBD · KING/IBS0</text></g>
+<g class="purple"><rect x="505" y="364" width="135" height="52" rx="6"/><text class="th" x="572" y="388" text-anchor="middle">Ancestry</text><text class="ts" x="572" y="404" text-anchor="middle">PCA · 1240k</text></g>
+<line class="cn" x1="107" y1="416" x2="107" y2="432" stroke-width="1.1"/>
+<line class="cn" x1="262" y1="416" x2="262" y2="432" stroke-width="1.1"/>
+<line class="cn" x1="417" y1="416" x2="417" y2="432" stroke-width="1.1"/>
+<line class="cn" x1="572" y1="416" x2="572" y2="432" stroke-width="1.1"/>
+<line class="cn" x1="107" y1="432" x2="572" y2="432" stroke-width="1.1"/>
+<line class="cn" x1="340" y1="432" x2="340" y2="446" stroke-width="1.3" marker-end="url(#arrow)"/>
+
+<text class="ts" x="40" y="428">Conclusions</text>
+<g class="sel"><rect x="40" y="446" width="600" height="54" rx="8"/><text class="th" x="340" y="470" text-anchor="middle">bamRefine-5 and Rescale-5 perform comparably (see text)</text><text class="ts" x="340" y="488" text-anchor="middle">ORT15 × ORT16 first-degree, parent–offspring (ORT16 mother · ORT15 son)</text></g>
+
+<rect x="40" y="512" width="12" height="12" rx="2" fill="#5DCAA5" stroke="#0F6E56" stroke-width=".8"/><text class="ts" x="58" y="522">full-UDG library</text>
+<rect x="165" y="512" width="12" height="12" rx="2" fill="#F0997B" stroke="#993C1D" stroke-width=".8"/><text class="ts" x="183" y="522">non-UDG library</text>
+<rect x="295" y="512" width="12" height="12" rx="2" fill="#E7ECEF" stroke="#5A6B73" stroke-width=".8"/><text class="ts" x="313" y="522">PMD treatment</text>
+<rect x="415" y="512" width="12" height="12" rx="2" fill="#FBF0CE" stroke="#B8860B" stroke-width="1.2"/><text class="ts" x="433" y="522">summary</text>
+<rect x="510" y="512" width="12" height="12" rx="2" fill="#AFA9EC" stroke="#534AB7" stroke-width=".8"/><text class="ts" x="528" y="522">evaluation</text>
+
+<text class="ts" x="40" y="540">Settings: fu — trim/bamRefine 5 bp; rescale 5/12 bp. nu — trim/bamRefine 5/10 bp; rescale 5/10/12 bp.</text><text class="ts" x="40" y="552">All 4 treatments run on both fu and nu; bamRefine-5 and Rescale-5 perform comparably on cross-library concordance.</text>
+</svg>

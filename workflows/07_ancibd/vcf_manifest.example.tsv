@@ -1,0 +1,17 @@
+iid	source_vcf
+ORT15_fu_raw	/path/to/ORT15_fu.raw.imputed.allchr.vcf.gz
+ORT15_fu_trim5	/path/to/ORT15_fu.trim5.imputed.allchr.vcf.gz
+ORT15_fu_rescale5	/path/to/ORT15_fu.rescale5.imputed.allchr.vcf.gz
+ORT15_fu_bamrefine5	/path/to/ORT15_fu.bamrefine5.imputed.allchr.vcf.gz
+ORT15_nu_raw	/path/to/ORT15_nu.raw.imputed.allchr.vcf.gz
+ORT15_nu_trim5	/path/to/ORT15_nu.trim5.imputed.allchr.vcf.gz
+ORT15_nu_rescale5	/path/to/ORT15_nu.rescale5.imputed.allchr.vcf.gz
+ORT15_nu_bamrefine5	/path/to/ORT15_nu.bamrefine5.imputed.allchr.vcf.gz
+ORT16_fu_raw	/path/to/ORT16_fu.raw.imputed.allchr.vcf.gz
+ORT16_fu_trim5	/path/to/ORT16_fu.trim5.imputed.allchr.vcf.gz
+ORT16_fu_rescale5	/path/to/ORT16_fu.rescale5.imputed.allchr.vcf.gz
+ORT16_fu_bamrefine5	/path/to/ORT16_fu.bamrefine5.imputed.allchr.vcf.gz
+ORT16_nu_raw	/path/to/ORT16_nu.raw.imputed.allchr.vcf.gz
+ORT16_nu_trim5	/path/to/ORT16_nu.trim5.imputed.allchr.vcf.gz
+ORT16_nu_rescale5	/path/to/ORT16_nu.rescale5.imputed.allchr.vcf.gz
+ORT16_nu_bamrefine5	/path/to/ORT16_nu.bamrefine5.imputed.allchr.vcf.gz

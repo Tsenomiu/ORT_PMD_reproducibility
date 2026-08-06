@@ -1,0 +1,8 @@
+output_id	duplicate_mode	input_bam
+ORT15_fu_collapsed	SE	/path/to/ORT15_fu_lane1.collapsed.bam
+ORT15_fu_collapsed	SE	/path/to/ORT15_fu_lane2.collapsed.bam
+ORT15_fu_collapsed_truncated	SE	/path/to/ORT15_fu_lane1.collapsed.bam
+ORT15_fu_collapsed_truncated	SE	/path/to/ORT15_fu_lane1.collapsed.truncated.bam
+ORT15_fu_all_reads	PE	/path/to/ORT15_fu_lane1.collapsed.bam
+ORT15_fu_all_reads	PE	/path/to/ORT15_fu_lane1.collapsed.truncated.bam
+ORT15_fu_all_reads	PE	/path/to/ORT15_fu_lane1.paired.bam

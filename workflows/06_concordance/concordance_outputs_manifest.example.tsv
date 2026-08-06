@@ -1,0 +1,2 @@
+individual	treatment	rsquare_grp	error_spl
+ORT15	raw	/path/to/conc_ORT15_raw.rsquare.grp.txt.gz	/path/to/conc_ORT15_raw.error.spl.txt.gz

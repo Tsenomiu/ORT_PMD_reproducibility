@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use these workflows, please cite the software and the associated article."
+title: "ORT post-mortem damage correction workflows"
+type: software
+version: 0.1.0
+repository-code: "https://github.com/Tsenomiu/ORT_PMD_reproducibility"
+authors:
+  - family-names: Ravdandorj
+    given-names: Odongoo
+    orcid: "https://orcid.org/0009-0009-7089-9940"
+  - family-names: Sampildondov
+    given-names: Chuluun
+  - family-names: Janchiv
+    given-names: Khulan
+  - family-names: Gakuhari
+    given-names: Takashi
+preferred-citation:
+  type: article
+  title: "Post-mortem damage correction in low-coverage ancient genomes: effects on site retention, imputation and kinship inference"
+  authors:
+    - family-names: Ravdandorj
+      given-names: Odongoo
+    - family-names: Sampildondov
+      given-names: Chuluun
+    - family-names: Janchiv
+      given-names: Khulan
+    - family-names: Gakuhari
+      given-names: Takashi

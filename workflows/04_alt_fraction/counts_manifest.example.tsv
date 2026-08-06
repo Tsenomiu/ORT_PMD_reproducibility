@@ -1,0 +1,3 @@
+sample	library	treatment	counts_tsv
+ORT15	fu	raw	/path/to/ORT15_fu_raw.counts.tsv
+ORT15	fu	trim5	/path/to/ORT15_fu_trim5.counts.tsv

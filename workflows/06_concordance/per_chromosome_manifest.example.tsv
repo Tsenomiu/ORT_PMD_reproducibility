@@ -1,0 +1,5 @@
+individual	treatment	comparator_vcf	target_with_ds_vcf
+ORT15	bamrefine5	/path/to/concordance_inputs/ORT15_fu.imputed.vcf.gz	/path/to/concordance_inputs/ORT15_nu.bamrefine5.withDS.vcf.gz
+ORT15	rescale5	/path/to/concordance_inputs/ORT15_fu.imputed.vcf.gz	/path/to/concordance_inputs/ORT15_nu.rescale5.withDS.vcf.gz
+ORT16	bamrefine5	/path/to/concordance_inputs/ORT16_fu.imputed.vcf.gz	/path/to/concordance_inputs/ORT16_nu.bamrefine5.withDS.vcf.gz
+ORT16	rescale5	/path/to/concordance_inputs/ORT16_fu.imputed.vcf.gz	/path/to/concordance_inputs/ORT16_nu.rescale5.withDS.vcf.gz
