@@ -13,24 +13,51 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[1]
 parser = argparse.ArgumentParser()
-parser.add_argument("--input", type=Path, default=HERE / "input_values.tsv")
+parser.add_argument(
+    "--tkgwv2", type=Path,
+    default=ROOT / "data/summary/kinship/tkgwv2_pair_results.tsv",
+)
+parser.add_argument(
+    "--readv2", type=Path,
+    default=ROOT / "data/summary/kinship/readv2_ort15_ort16.tsv",
+)
+parser.add_argument(
+    "--king-ibs0", type=Path,
+    default=ROOT / "data/summary/kinship/king_ibs0_summary.tsv",
+)
 parser.add_argument("--output", type=Path, required=True)
 args = parser.parse_args()
 
-with args.input.open(newline="", encoding="utf-8") as handle:
-    values = {row["metric"]: row["value"] for row in csv.DictReader(handle, delimiter="\t")}
+def table(path):
+    with path.open(newline="", encoding="utf-8") as handle:
+        return list(csv.DictReader(handle, delimiter="\t"))
+
+
+tkgwv2 = next(
+    row for row in table(args.tkgwv2)
+    if row["sample1"] == "ORT15_fu_bamrefine5" and row["sample2"] == "ORT16_fu_bamrefine5"
+)
+readv2 = next(row for row in table(args.readv2) if row["analysis"] == "primary_chr1_22_X_Y")
+king = next(row for row in table(args.king_ibs0) if row["analysis"] == "genomewide")
 
 highlight_color = "#c1121f"
 methods=["TKGWV2","KING-robust","READv2"]
-coeffs=[float(values["TKGWV2_half_relatedness"]),
-        float(values["KING_robust_kinship"]),
-        round(float(values["READv2_normalized_kinship"]), 3)]
-snps=["4.5M SNPs","5.3M SNPs","169k sites"]
-king_kin=float(values["KING_robust_kinship"])
-ibs0_obs=float(values["IBS0_observed_per_site"])
-ibs0_fs=float(values["IBS0_full_sibling_expectation"])
-ibs0_unrel=float(values["IBS0_unrelated_expectation"])
+coeffs=[
+    float(tkgwv2["HRC"]),
+    float(king["KING_robust"]),
+    round(float(readv2["KinshipCoefficient"]), 3),
+]
+snps=[
+    f"{int(tkgwv2['used_snps']) / 1e6:.1f}M SNPs",
+    f"{int(king['sites']) / 1e6:.1f}M SNPs",
+    f"{round(int(readv2['OverlapNSNPs']) / 1000):d}k sites",
+]
+king_kin=float(king["KING_robust"])
+ibs0_obs=float(king["observed_IBS0_per_site"])
+ibs0_fs=float(king["full_sibling_expected"])
+ibs0_unrel=float(king["unrelated_expected"])
 ref_pts={"MZ twin / duplicate":(0.50,0.0),"Parent-offspring":(0.25,0.0),
          "Full siblings":(0.25,ibs0_fs),"2nd degree":(0.125,ibs0_fs*2),"Unrelated":(0.0,ibs0_unrel)}
 fig,(axA,axB)=plt.subplots(1,2,figsize=(7.6,3.7),gridspec_kw={"width_ratios":[1.0,1.15]})

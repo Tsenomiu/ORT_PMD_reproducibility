@@ -26,8 +26,8 @@ environment.
   background requires separately licensed AADR data.
 - The matched PCA projection wrapper starts from prebuilt PLINK query datasets. The
   repository does not reconstruct all 24 imputed and 24 pseudo-haploid query datasets
-  from FASTQ/BAM inputs, and the exact pileupCaller build used for pseudo-haploid
-  calling was not recorded.
+  from FASTQ/BAM inputs. The recorded pseudo-haploid calls used pileupCaller
+  (sequenceTools) 1.5.4.0.
 
 ## Workflow coverage
 

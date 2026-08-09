@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 
 HERE = Path(__file__).resolve().parent
 INPUTS = HERE / "inputs"
+UNCORRECTED_FULL_UDG_INPUTS = HERE.parent / "supplementary_01_pmd_uncorrected" / "inputs"
 
 
 def profile(path: Path, end: str, change: str, reference: str):
@@ -38,6 +39,8 @@ def input_path(individual: str, library: str, treatment: str) -> Path:
         # Rescaling changes base qualities, not mismatch counts; the mapDamage
         # profile is therefore the same as the uncorrected aggregate table.
         treatment = "uncorrected"
+    if library == "fullUDG" and treatment == "uncorrected":
+        return UNCORRECTED_FULL_UDG_INPUTS / f"{individual}_fullUDG.txt"
     return INPUTS / f"{prefix}_{treatment}.txt"
 
 

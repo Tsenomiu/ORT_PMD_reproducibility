@@ -79,6 +79,43 @@ def validate_readv2() -> None:
     if round(statistics.median(high), 3) != 0.001:
         raise AssertionError("high-overlap unrelated median changed")
 
+    reported = rows(ROOT / "data/summary/kinship/readv2_ort15_ort16.tsv")
+    if {r["analysis"] for r in reported} != {"primary_chr1_22_X_Y", "autosome_only_sensitivity"}:
+        raise AssertionError("unexpected READv2 reported-analysis rows")
+    primary = next(r for r in reported if r["analysis"] == "primary_chr1_22_X_Y")
+    for field, cohort_field in (
+        ("PairIndividuals", "PairIndividuals"),
+        ("Rel", "Rel"),
+        ("OverlapNSNPs", "OverlapNSNPs"),
+        ("KinshipCoefficient", "KinshipCoefficient"),
+        ("First_degree_subtype", "1st_Type"),
+    ):
+        if primary[field] != ort_pair[cohort_field]:
+            raise AssertionError(f"READv2 primary view differs from cohort table in {field}")
+    sensitivity = next(r for r in reported if r["analysis"] == "autosome_only_sensitivity")
+    if int(sensitivity["OverlapNSNPs"]) != 157451:
+        raise AssertionError("unexpected autosome-only READv2 overlap")
+    close(float(sensitivity["KinshipCoefficient"]), 0.23159213948114488)
+    if sensitivity["First_degree_subtype"] != "Parent-offspring":
+        raise AssertionError("unexpected autosome-only READv2 subtype")
+
+
+def validate_king_ibs0() -> None:
+    data = {r["analysis"]: r for r in rows(ROOT / "data/summary/kinship/king_ibs0_summary.tsv")}
+    if set(data) != {"genomewide", "chromosome1_high_confidence"}:
+        raise AssertionError("unexpected KING/IBS0 summary rows")
+    genomewide = data["genomewide"]
+    if int(genomewide["sites"]) != 5272558 or int(genomewide["IBS0"]) != 17988:
+        raise AssertionError("unexpected genome-wide KING/IBS0 counts")
+    close(float(genomewide["KING_robust"]), 0.2379)
+    close(float(genomewide["observed_IBS0_per_site"]), 0.00341)
+    close(float(genomewide["unrelated_expected"]), 0.07341)
+    close(float(genomewide["full_sibling_expected"]), 0.01835)
+    high_confidence = data["chromosome1_high_confidence"]
+    if int(high_confidence["sites"]) != 324285 or int(high_confidence["IBS0"]) != 36:
+        raise AssertionError("unexpected high-confidence chromosome-1 IBS0 counts")
+    close(float(high_confidence["observed_IBS0_per_site"]), 0.00011)
+
 
 def validate_mtdna() -> None:
     calls = rows(ROOT / "data/summary/mtdna/haplogrep_classification.tsv")
@@ -96,9 +133,11 @@ def validate_mtdna() -> None:
 def main() -> None:
     validate_tkgwv2()
     validate_readv2()
+    validate_king_ibs0()
     validate_mtdna()
     print("PASS  TKGWV2 16-state table")
     print("PASS  READv2 210-pair cohort table")
+    print("PASS  KING/IBS0 genome-wide and chromosome-1 summaries")
     print("PASS  mitochondrial classification and concordance tables")
 
 

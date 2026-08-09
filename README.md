@@ -21,7 +21,7 @@ git clone https://github.com/Tsenomiu/ORT_PMD_reproducibility.git
 cd ORT_PMD_reproducibility
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements-figures-lock.txt
+python -m pip install -r requirements.txt
 bash reproduce_all.sh
 ```
 
@@ -97,9 +97,10 @@ export ORT_CONFIG="$PWD/workflows/config.sh"
 source "$ORT_CONFIG"
 ```
 
-Then run an individual workflow using the example command in that workflow's
-README. Large genomic inputs and outputs are ignored by `.gitignore` and should
-remain outside the repository.
+Then follow the input and output instructions in the relevant workflow README.
+Executable examples are supplied where the complete command was reconstructed.
+Large genomic inputs and outputs are ignored by `.gitignore` and should remain
+outside the repository.
 
 ## Citation
 

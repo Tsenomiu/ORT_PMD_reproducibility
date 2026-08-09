@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use these workflows, please cite the software archive and the associated article."
 title: "Reproducibility workflows for post-mortem damage correction in low-coverage ancient genomes"
 type: software
-version: "1.0.0"
+version: "1.0.1"
 date-released: "2026-08-10"
 repository-code: "https://github.com/Tsenomiu/ORT_PMD_reproducibility"
 license: MIT

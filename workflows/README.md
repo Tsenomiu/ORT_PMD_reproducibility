@@ -1,7 +1,7 @@
 # Analysis workflows
 
 The workflows are ordered by analysis stage. Each directory documents required
-software, inputs, outputs, and an example command.
+software, inputs, outputs, and any available executable example.
 
 1. `01_sequence_processing`: adapter removal, mapping, merging, and duplicate removal
 2. `02_contamination`: nuclear and mitochondrial contamination estimates

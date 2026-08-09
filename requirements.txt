@@ -1,4 +1,5 @@
-matplotlib>=3.9
-numpy>=1.26
-Pillow>=10
-PyYAML>=6.0
+# Exact environment used for the validated figure build.
+matplotlib==3.10.7
+numpy==2.3.4
+Pillow==12.0.0
+PyYAML==6.0.3

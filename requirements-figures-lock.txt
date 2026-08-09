@@ -1,5 +1,0 @@
-# Exact plotting environment used for the version 1.0.0 figure build.
-matplotlib==3.10.7
-numpy==2.3.4
-Pillow==12.0.0
-PyYAML==6.0.3

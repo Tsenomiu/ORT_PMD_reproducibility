@@ -14,8 +14,9 @@ against `data/summary/pca/query_manifest_matched48.tsv`, and supply both trios t
 
 This repository begins the projection workflow from those three prebuilt PLINK
 datasets. It does not include a verified FASTQ/BAM-to-query-trio driver for all 24
-imputed and 24 pseudo-haploid datasets. The exact pileupCaller build used for the
-pseudo-haploid calls was not recorded; this boundary is also listed in
+imputed and 24 pseudo-haploid datasets. The recorded pseudo-haploid calls used
+pileupCaller (sequenceTools) 1.5.4.0; the missing component is the complete upstream
+driver, not the software version. This boundary is also listed in
 `docs/KNOWN_LIMITATIONS.md`.
 
 AADR genotypes and the individual-level reference coordinates are obtained from the

@@ -30,40 +30,6 @@ cmp "$ROOT/data/summary/imputation/jackknife_deltaNRD.csv" \
   "$JACK_DIR/jackknife_deltaNRD.csv"
 printf '%s\n' 'PASS  jackknife outputs reproduce byte-for-byte'
 
-printf '%s\n' '== READv2 ORT15–ORT16 consistency =='
-"$PYTHON" - "$ROOT/data/summary/kinship/readv2_ort15_ort16.tsv" \
-  "$ROOT/figures/figure_06_kinship/input_values.tsv" <<'PY'
-import csv
-import math
-import sys
-
-with open(sys.argv[1], newline="", encoding="utf-8") as handle:
-    rows = {row["analysis"]: row for row in csv.DictReader(handle, delimiter="\t")}
-with open(sys.argv[2], newline="", encoding="utf-8") as handle:
-    values = {r["metric"]: r["value"] for r in csv.DictReader(handle, delimiter="\t")}
-
-required = {"primary_chr1_22_X_Y", "autosome_only_sensitivity"}
-if set(rows) != required:
-    raise SystemExit(f"Unexpected READv2 analyses: {sorted(rows)}")
-
-primary = rows["primary_chr1_22_X_Y"]
-sensitivity = rows["autosome_only_sensitivity"]
-observed = float(primary["KinshipCoefficient"])
-plotted = float(values["READv2_normalized_kinship"])
-if not math.isclose(observed, plotted, rel_tol=0.0, abs_tol=1e-15):
-    raise SystemExit(f"READv2 KC mismatch: summary={observed}, figure={plotted}")
-if int(primary["OverlapNSNPs"]) != 169172 or primary["First_degree_subtype"] != "Parent-offspring":
-    raise SystemExit("Primary READv2 row does not match the archived chr1-22/X/Y result")
-if (
-    int(sensitivity["OverlapNSNPs"]) != 157451
-    or sensitivity["First_degree_subtype"] != "Parent-offspring"
-    or not math.isclose(float(sensitivity["KinshipCoefficient"]), 0.23159213948114488,
-                        rel_tol=0.0, abs_tol=1e-15)
-):
-    raise SystemExit("Autosome-only READv2 sensitivity row is inconsistent")
-PY
-printf '%s\n' 'PASS  READv2 primary and autosome-only sensitivity rows are consistent'
-
 printf '%s\n' '== Reported-result summary validation =='
 "$PYTHON" "$ROOT/validate_reported_results.py"
 

@@ -32,8 +32,19 @@ ORT_CONFIG=/path/to/config.sh bash workflows/08_kinship/run_readv2_cemetery.sh \
 reference-panel allele frequencies between 0.1 and 0.9.
 `summarize_king_ibs0.py` calculates KING-robust kinship, opposing homozygotes,
 the unrelated expectation `mean(2 p^2 q^2)`, and the full-sibling expectation
-(one quarter of the unrelated value). The same calculation can be restricted to
-high-posterior-probability genotypes.
+(one quarter of the unrelated value). The wrapper generates both the genome-wide
+summary and a chromosome-1 sensitivity summary requiring maximum genotype
+probability of at least 0.99 in both individuals.
+
+```bash
+ORT_CONFIG=/path/to/config.sh bash workflows/08_kinship/run_king_ibs0.sh \
+  /path/to/ORT15.full_udg.imputed.vcf.gz \
+  /path/to/ORT16.full_udg.imputed.vcf.gz \
+  output/king_ibs0
+```
+
+The named outputs are `king_ibs0_genomewide.tsv` and
+`king_ibs0_chr1_gp99.tsv`.
 
 The analysis requires individual-level BAM/VCF inputs and the relevant reference
 frequency panel; those files are not distributed.

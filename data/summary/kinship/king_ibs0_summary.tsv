@@ -1,0 +1,3 @@
+analysis	sites	IBS0	KING_robust	observed_IBS0_per_site	unrelated_expected	full_sibling_expected	observed_over_full_sibling	genotype_filter
+genomewide	5272558	17988	0.2379	0.00341	0.07341	0.01835	0.19	RAF_0.1_0.9
+chromosome1_high_confidence	324285	36	NA	0.00011	0.07168	0.01792	0.01	RAF_0.1_0.9_and_maxGP_both_ge_0.99
