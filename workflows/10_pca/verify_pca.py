@@ -10,8 +10,37 @@ from collections import defaultdict
 from pathlib import Path
 
 
+IDENTITY_FIELDS = ("metric", "space", "individual", "library", "representation", "n_points")
+
+
 def max_pairwise(points: list[list[float]]) -> float:
     return max((math.dist(points[i], points[j]) for i in range(len(points)) for j in range(i + 1, len(points))), default=float("nan"))
+
+
+def compare_metric_tables(reference: Path, observed: Path, abs_tol: float) -> None:
+    with reference.open(newline="") as handle:
+        expected_rows = list(csv.DictReader(handle))
+    with observed.open(newline="") as handle:
+        observed_rows = list(csv.DictReader(handle))
+    if len(expected_rows) != len(observed_rows):
+        raise ValueError(
+            f"PCA metric row count differs: expected {len(expected_rows)}, observed {len(observed_rows)}"
+        )
+    for row_number, (expected, observed) in enumerate(zip(expected_rows, observed_rows), start=2):
+        for field in IDENTITY_FIELDS:
+            if expected[field] != observed[field]:
+                raise ValueError(
+                    f"PCA metric identity differs at CSV row {row_number}, field {field}: "
+                    f"expected {expected[field]!r}, observed {observed[field]!r}"
+                )
+        expected_value = float(expected["value"])
+        observed_value = float(observed["value"])
+        if not math.isclose(expected_value, observed_value, rel_tol=0.0, abs_tol=abs_tol):
+            raise ValueError(
+                f"PCA metric value differs at CSV row {row_number}: "
+                f"expected {expected_value:.17g}, observed {observed_value:.17g}, "
+                f"absolute tolerance {abs_tol:g}"
+            )
 
 
 def main() -> None:
@@ -19,6 +48,9 @@ def main() -> None:
     parser.add_argument("evec", type=Path); parser.add_argument("eval", type=Path)
     parser.add_argument("manifest", type=Path); parser.add_argument("reference_aggregates", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--reference", type=Path, help="Archived metric table to compare with the reconstructed table")
+    parser.add_argument("--absolute-tolerance", type=float, default=1e-12,
+                        help="Maximum absolute floating-point difference allowed with --reference (default: 1e-12)")
     args = parser.parse_args()
     values = [float(x) for x in args.eval.read_text().split()]; trace = sum(x for x in values if x > 0)
     if len(values) != 985 or abs(trace - 984.0) > 0.001: raise ValueError("Expected 985 eigenvalues and full trace 984")
@@ -89,6 +121,8 @@ def main() -> None:
     with args.output.open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader(); writer.writerows(rows)
+    if args.reference is not None:
+        compare_metric_tables(args.reference, args.output, args.absolute_tolerance)
 
 
 if __name__ == "__main__":

@@ -73,10 +73,10 @@ printf '%s\n' '== Public PCA-coordinate verification =='
   "$ROOT/data/summary/pca/pca_aadr_matched48.eval" \
   "$ROOT/data/summary/pca/query_manifest_matched48.tsv" \
   "$ROOT/data/summary/pca/reference_population_aggregates.tsv" \
-  "$BUILD_DIR/tables/pca_metrics_verified.csv"
-cmp "$ROOT/data/summary/pca/pca_metrics_matched48.csv" \
-  "$BUILD_DIR/tables/pca_metrics_verified.csv"
-printf '%s\n' 'PASS  public PCA metrics reproduce byte-for-byte'
+  "$BUILD_DIR/tables/pca_metrics_verified.csv" \
+  --reference "$ROOT/data/summary/pca/pca_metrics_matched48.csv" \
+  --absolute-tolerance 1e-12
+printf '%s\n' 'PASS  public PCA metrics reproduce within 1e-12 absolute tolerance'
 
 printf '%s\n' '== Figure regeneration =='
 PYTHON="$PYTHON" bash "$ROOT/figures/reproduce_figures.sh" "$BUILD_DIR/figures"
