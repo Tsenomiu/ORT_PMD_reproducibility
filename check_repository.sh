@@ -29,7 +29,7 @@ trap 'rm -rf "$TMP_ROOT"' EXIT
 # Shell syntax
 while IFS= read -r -d '' script; do
   bash -n "$script" || fail "shell syntax: $script"
-done < <(find . -type f -name '*.sh' -not -path './_build/*' -print0)
+done < <(find . -type f -name '*.sh' -not -path './.git/*' -not -path './_build/*' -print0)
 pass 'shell syntax'
 
 # Python syntax without writing caches into the release tree.
@@ -37,7 +37,7 @@ if command -v "$PYTHON" >/dev/null 2>&1; then
   while IFS= read -r -d '' script; do
     PYTHONPYCACHEPREFIX="$TMP_ROOT/pycache" "$PYTHON" -m py_compile "$script" || \
       fail "Python syntax: $script"
-  done < <(find . -type f -name '*.py' -not -path './_build/*' -print0)
+  done < <(find . -type f -name '*.py' -not -path './.git/*' -not -path './_build/*' -print0)
   pass 'Python syntax'
 else
   skip "Python syntax ($PYTHON unavailable)"
@@ -56,7 +56,7 @@ BAD_FILE=$(find . -type f \( \
     -name '*.fq' -o -name '*.fq.gz' -o -name '*.fa' -o -name '*.fasta' -o \
     -iname '*.vox' -o -iname '*.dcm' -o -iname '*.dicom' -o \
     -name '*.pyc' -o -name '.DS_Store' \
-  \) -not -path './_build/*' -print -quit)
+  \) -not -path './.git/*' -not -path './_build/*' -print -quit)
 if [[ -n "$BAD_FILE" ]]; then
   find . -type f \( \
     -name '*.bam' -o -name '*.bai' -o -name '*.cram' -o -name '*.crai' -o \
@@ -68,7 +68,7 @@ if [[ -n "$BAD_FILE" ]]; then
     -name '*.fq' -o -name '*.fq.gz' -o -name '*.fa' -o -name '*.fasta' -o \
     -iname '*.vox' -o -iname '*.dcm' -o -iname '*.dicom' -o \
     -name '*.pyc' -o -name '.DS_Store' \
-  \) -not -path './_build/*' -print >&2
+  \) -not -path './.git/*' -not -path './_build/*' -print >&2
   fail 'excluded binary/genomic/runtime files found'
 fi
 pass 'excluded-file scan'
@@ -78,13 +78,13 @@ pass 'excluded-file scan'
 PRIVATE_PATTERN='/media/test/|/home/(rc|test)/|/Users/[^/]+/ORT/|133[.]28[.]62[.]238|ssh[[:space:]]+(test|rc)([[:space:]]|$)'
 if command -v rg >/dev/null 2>&1; then
   if rg -n --hidden "$PRIVATE_PATTERN" . \
-      --glob '!check_repository.sh' --glob '!_build/**'; then
+      --glob '!check_repository.sh' --glob '!.git/**' --glob '!_build/**'; then
     fail 'private host or absolute working path found'
   fi
 else
   if grep -RInE "$PRIVATE_PATTERN" . \
       --exclude='check_repository.sh' \
-      --exclude-dir='_build' --exclude='*.pdf'; then
+      --exclude-dir='.git' --exclude-dir='_build' --exclude='*.pdf'; then
     fail 'private host or absolute working path found'
   fi
 fi
@@ -95,13 +95,13 @@ pass 'private-path scan'
 SECRET_PATTERN='BEGIN (RSA |OPENSSH |EC |DSA )?PRIVATE KEY|AKIA[0-9A-Z]{16}|ASIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]+'
 if command -v rg >/dev/null 2>&1; then
   if rg -n --hidden "$SECRET_PATTERN" . \
-      --glob '!check_repository.sh' --glob '!_build/**'; then
+      --glob '!check_repository.sh' --glob '!.git/**' --glob '!_build/**'; then
     fail 'credential-like material found'
   fi
 else
   if grep -RInE "$SECRET_PATTERN" . \
       --exclude='check_repository.sh' \
-      --exclude-dir='_build' --exclude='*.pdf'; then
+      --exclude-dir='.git' --exclude-dir='_build' --exclude='*.pdf'; then
     fail 'credential-like material found'
   fi
 fi
