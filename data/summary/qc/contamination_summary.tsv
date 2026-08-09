@@ -1,0 +1,7 @@
+individual	genome	input_library	method	estimate_pct	uncertainty_type	uncertainty_pct	informative_sites	reported_in_manuscript
+ORT15	nuclear_X	full-UDG	ANGSD Method 1 new-likelihood method-of-moments	0.2160	SE	0.08052491	6757	yes
+ORT15	nuclear_X	full-UDG	ANGSD Method 1 new-likelihood maximum-likelihood	0.3903	SE	0.1169853	6757	yes
+ORT15	nuclear_X	full-UDG	ANGSD Method 2 new-likelihood method-of-moments	0.2630	SE	0.1275129	6757	no
+ORT15	nuclear_X	full-UDG	ANGSD Method 2 new-likelihood maximum-likelihood	0.2978	SE	0.1257198	6757	no
+ORT15	mtDNA	non-UDG	standalone schmutzi mtCont	1.0	95% CI	0-2	NA	yes
+ORT16	mtDNA	non-UDG	standalone schmutzi mtCont	1.0	95% CI	0-2	NA	yes

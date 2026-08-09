@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summarize ALT fractions (DP>=3) and retention (DP>0) without mixing denominators."""
+"""Summarize ALT fractions and retention from REF+ALT allele-support depth."""
 from __future__ import annotations
 
 import argparse
@@ -24,7 +24,6 @@ def summarize(path: Path) -> dict[str, float | int]:
     covered = 0
     with path.open(newline="") as handle:
         for row in csv.DictReader(handle, delimiter="\t"):
-            dp = int(row["DP"] or 0)
             ad_ref = int((row["AD_REF"] or "0").split(",")[0])
             ad_alt = int((row["AD_ALT"] or "0").split(",")[0])
             depth = ad_ref + ad_alt
@@ -73,4 +72,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

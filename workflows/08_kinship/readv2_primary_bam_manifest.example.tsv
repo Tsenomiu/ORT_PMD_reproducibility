@@ -1,0 +1,4 @@
+sample	bam
+ORT1	/path/to/ORT1.full_udg_abc.softclipped6.bam
+ORT2	/path/to/ORT2.full_udg_abc.softclipped6.bam
+# Continue consecutively through ORT27; exactly 27 rows are required.

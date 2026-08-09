@@ -12,8 +12,11 @@ version=$("$PYTHON" -m pip show ancIBD 2>/dev/null | awk '$1=="Version:"{print $
 cp "$manifest" "$outdir/SAMPLE_MANIFEST.tsv"
 awk -F '\t' 'NR>1 && $1!="" && $1!~/^#/{print $1}' "$manifest" > "$outdir/iids.txt"
 [[ $(wc -l < "$outdir/iids.txt") -eq 16 ]] || { echo "Expected 16 samples" >&2; exit 1; }
-mapfile -t ids15 < <(awk -F '\t' 'NR>1 && $1~/^ORT15_/{print $1}' "$manifest")
-mapfile -t ids16 < <(awk -F '\t' 'NR>1 && $1~/^ORT16_/{print $1}' "$manifest")
+ids15=(); ids16=()
+while IFS= read -r iid; do ids15[${#ids15[@]}]="$iid"; done \
+  < <(awk -F '\t' 'NR>1 && $1~/^ORT15_/{print $1}' "$manifest")
+while IFS= read -r iid; do ids16[${#ids16[@]}]="$iid"; done \
+  < <(awk -F '\t' 'NR>1 && $1~/^ORT16_/{print $1}' "$manifest")
 : > "$outdir/pairs_64.txt"; printf 'iid1\tiid2\n' > "$outdir/PAIR_DESIGN.tsv"
 for iid1 in "${ids15[@]}"; do for iid2 in "${ids16[@]}"; do
   printf '%s %s\n' "$iid1" "$iid2" >> "$outdir/pairs_64.txt"

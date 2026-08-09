@@ -1,4 +1,4 @@
 sample	bam
-ORT6	/path/to/ORT6.collapsed.softclipped.bam
-ORT7	/path/to/ORT7.collapsed.softclipped.bam
+ORT6	/path/to/ORT6.full_udg_abc.softclipped6.bam
+ORT7	/path/to/ORT7.full_udg_abc.softclipped6.bam
 # Continue consecutively through ORT27; exactly 22 rows are required.

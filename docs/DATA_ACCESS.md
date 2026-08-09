@@ -25,9 +25,11 @@ The repository contains only compact inputs needed to rebuild figures or verify
 reported calculations, including:
 
 - per-bin imputation summaries and chromosome-jackknife counts;
-- focal PCA coordinates, eigenvalues, and population-level reference summaries;
-- filtered focal-pair ancIBD plotting tables;
+- ORT15 and ORT16 PCA coordinates, eigenvalues, and population-level reference summaries;
+- filtered ORT15–ORT16 ancIBD plotting tables;
 - mapDamage text summaries used for PMD plots; and
+- the complete 16-state TKGWV2 result table, the complete 210-pair primary READv2
+  output, ORT15–ORT16 READv2 sensitivity rows, and compact mitochondrial summaries;
 - small tabular inputs used by the kinship and imputation figures.
 
 These files are derived results, not raw sequence data.
@@ -38,7 +40,8 @@ These files are derived results, not raw sequence data.
 - PLINK or EIGENSTRAT genotype matrices;
 - hs37d5, 1000 Genomes, AADR, HapMapChrX, or schmutzi reference resources;
 - exact archaeological coordinates or the original field-report site plan;
-- cemetery-wide kinship data outside the focal ORT15–ORT16 comparison; and
+- the underlying cemetery-wide READv2 BAM cohort and the full autosome-only cohort
+  output; and
 - raw micro-CT volumes.
 
 ## Analysis-specific access boundaries
@@ -47,9 +50,9 @@ These files are derived results, not raw sequence data.
 |---|---|---|
 | Read processing, PMD correction, imputation | ENA PRJEB112497 | Reference genome, panels, and server-scale compute |
 | Concordance and jackknife | Rebuild VCFs from ENA; compact counts included | 1000 Genomes frequencies and GLIMPSE resources |
-| ancIBD | Compact focal plotting inputs included | AADR v62 and 1000 Genomes resources for a full rerun |
-| READv2 | Focal result described in the article | Additional cohort data for the 22-person normalisation |
-| PCA | Focal coordinates and aggregate backgrounds included | AADR genotype data for exact reference reconstruction |
+| ancIBD | Compact ORT15–ORT16 plotting inputs included | AADR v62 and 1000 Genomes resources for a full rerun |
+| READv2 | Complete primary 210-pair output and ORT15–ORT16 autosome-only sensitivity row included | Controlled cohort BAMs and the full autosome-only output for rerunning normalisation |
+| PCA | ORT15 and ORT16 coordinates and aggregate backgrounds included | AADR genotype data for exact reference reconstruction |
 | Site map | Figure available with the article | Controlled archaeological spatial information |
 | Micro-CT | Export code and acquisition metadata included | Original VOX volumes and selected slice coordinates |
 

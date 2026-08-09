@@ -1,0 +1,5 @@
+record_type	position	ORT15_call	ORT16_call	ORT15_INFO_DP	ORT16_INFO_DP	interpretation
+summary	NA	37_called_SNPs	37_called_SNPs	NA	NA	36_shared_called_SNPs; profiles_differ_at_3106_4215_7028
+difference	3106	CN_to_C_indel	reference	237	250	rCRS_N_placeholder_reference_ambiguity
+difference	4215	A_to_G	reference_or_no_variant	5	NA	ORT15_low_depth_singleton
+difference	7028	reference_or_no_variant	C_to_T	NA	5	ORT16_low_depth_singleton

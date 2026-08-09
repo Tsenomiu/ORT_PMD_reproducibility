@@ -21,7 +21,6 @@ export PCA_REFERENCE_POPULATIONS="${PCA_REFERENCE_POPULATIONS:-/path/to/presentd
 
 # `{CHROM}` is replaced with 1...22 by the scripts.
 export PHASE3_REF_PATTERN="${PHASE3_REF_PATTERN:-/path/to/1000G/chr{CHROM}.bcf}"
-export PHASE3_SITES_VCF_PATTERN="${PHASE3_SITES_VCF_PATTERN:-/path/to/1000G/chr{CHROM}.sites.vcf.gz}"
 export PHASE3_SITES_TSV_PATTERN="${PHASE3_SITES_TSV_PATTERN:-/path/to/1000G/chr{CHROM}.sites.tsv.gz}"
 export GENETIC_MAP_PATTERN="${GENETIC_MAP_PATTERN:-/path/to/maps/chr{CHROM}.gmap.gz}"
 export AF_TABLE_PATTERN="${AF_TABLE_PATTERN:-/path/to/1000G_AF/v51.1_1240k_AF_ch{CHROM}.fixed.tsv}"
@@ -51,10 +50,6 @@ export ANCIBD_RUN="${ANCIBD_RUN:-ancIBD-run}"
 export ANCIBD_SUMMARY="${ANCIBD_SUMMARY:-ancIBD-summary}"
 export PILEUPCALLER="${PILEUPCALLER:-pileupCaller}"
 export READ2_PY="${READ2_PY:-/path/to/READv2/READ2.py}"
-export TKGWV2_DIR="${TKGWV2_DIR:-/path/to/patched/TKGWV2}"
-export TKGWV2_GWV_BED="${TKGWV2_GWV_BED:-/path/to/1000GP_sites_noChr.bed}"
-export TKGWV2_DUMMY_PREFIX="${TKGWV2_DUMMY_PREFIX:-/path/to/DummyDataset_EAS}"
-export TKGWV2_EAS_FREQ="${TKGWV2_EAS_FREQ:-/path/to/1000GP_EAS_allchr_sorted.frq}"
 export PLINK="${PLINK:-plink}"
 export PLINK2="${PLINK2:-plink2}"
 export HAPLOGREP3="${HAPLOGREP3:-haplogrep3}"

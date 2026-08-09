@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Run KING-robust and IBS0 calculations from the two focal VCFs.
+# Run KING-robust and IBS0 calculations from the ORT15 and ORT16 VCFs.
 set -euo pipefail
 source "${ORT_CONFIG:?Set ORT_CONFIG to a configured config.sh}"
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)

@@ -7,7 +7,10 @@ manifest=${1:?Usage: merge_markdup.sh MANIFEST OUTPUT_DIR}
 outdir=${2:?}
 mkdir -p "$outdir"
 
-mapfile -t output_ids < <(awk -F '\t' 'NR>1 && $1!=""{print $1}' "$manifest" | sort -u)
+output_ids=()
+while IFS= read -r output_id; do
+  output_ids[${#output_ids[@]}]="$output_id"
+done < <(awk -F '\t' 'NR>1 && $1!=""{print $1}' "$manifest" | sort -u)
 for output_id in "${output_ids[@]}"; do
   mode=$(awk -F '\t' -v id="$output_id" 'NR>1 && $1==id{print $2}' "$manifest" | sort -u)
   [[ "$mode" == SE || "$mode" == PE ]] || { echo "One SE/PE mode required for $output_id" >&2; exit 1; }

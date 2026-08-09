@@ -1,5 +1,5 @@
 sample,treatment,strategy,dosage_r2_maf01,bestguess_r2_maf01,NRD_pct
-ORT15,raw,Raw (uncorrected),0.4354,0.4175,19.23
+ORT15,raw,Uncorrected,0.4354,0.4175,19.23
 ORT15,trim5,Trim-5,0.4474,0.4258,19.42
 ORT15,trim10,Trim-10,0.4364,0.4111,21.33
 ORT15,rescale5,Rescale-5,0.463,0.4413,18.32
@@ -7,7 +7,7 @@ ORT15,rescale10,Rescale-10,0.4698,0.4456,18.37
 ORT15,rescaled,Rescale-12,0.4699,0.4448,18.61
 ORT15,bamrefine5,bamRefine-5,0.4622,0.4406,18.3
 ORT15,bamrefine10,bamRefine-10,0.4664,0.4434,18.57
-ORT16,raw,Raw (uncorrected),0.4873,0.4698,15.6
+ORT16,raw,Uncorrected,0.4873,0.4698,15.6
 ORT16,trim5,Trim-5,0.5041,0.4813,15.69
 ORT16,trim10,Trim-10,0.4898,0.4624,17.51
 ORT16,rescale5,Rescale-5,0.5159,0.4933,14.85

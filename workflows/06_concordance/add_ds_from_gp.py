@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Add/replace FORMAT/DS using DS=P(0/1)+2*P(1/1) in a VCF stream."""
+"""Add/replace FORMAT/DS using DS=P(0/1)+2*P(1/1), rounded as executed."""
 from __future__ import annotations
 
 import argparse
@@ -42,7 +42,7 @@ def main() -> None:
                 if len(gp) != 3 or "." in gp:
                     values[ds_i] = "."
                 else:
-                    values[ds_i] = f"{float(gp[1]) + 2.0 * float(gp[2]):.8g}"
+                    values[ds_i] = f"{float(gp[1]) + 2.0 * float(gp[2]):.4f}"
                 fields[i] = ":".join(values)
             fields[8] = ":".join(keys)
             print("\t".join(fields))
@@ -50,4 +50,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

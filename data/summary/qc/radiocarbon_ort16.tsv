@@ -1,0 +1,4 @@
+individual	lab_code	delta13C_permil	delta13C_error	C14_age_BP	C14_age_error	calibration_age_BP	calibration_age_error	interval	cal_AD_start	cal_AD_end	probability_pct
+ORT16	PLD-55920	-18.10	0.19	705	15	707	17	1sigma	1278	1292	68.27
+ORT16	PLD-55920	-18.10	0.19	705	15	707	17	2sigma_primary	1274	1299	92.62
+ORT16	PLD-55920	-18.10	0.19	705	15	707	17	2sigma_minor	1372	1376	2.83
