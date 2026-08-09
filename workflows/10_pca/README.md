@@ -5,9 +5,13 @@ random pseudo-haploid 1240k calls, and 985 present-day HGDP/SGDP individuals fro
 AADR v62. The two query representations are projected together onto shared reference
 axes and do not influence those axes.
 
-`run_matched48_projection.sh` performs marker harmonisation, PLINK merging,
-EIGENSTRAT conversion, population labelling, and smartpca projection downstream of
-the three input PLINK datasets.
+`run_matched48_projection.sh` uses PLINK 2 to restrict the inputs to autosomes and
+normalise variant identifiers. It then uses PLINK 1.9 for marker extraction and
+dataset merging, followed by EIGENSTRAT conversion, population labelling, and
+smartpca projection of the three input PLINK datasets.
+
+Required executables are PLINK 1.9, PLINK 2, EIGENSOFT `convertf`, EIGENSOFT
+`smartpca`, and Python 3.
 
 Final settings:
 

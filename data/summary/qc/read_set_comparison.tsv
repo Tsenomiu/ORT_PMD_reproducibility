@@ -1,0 +1,7 @@
+individual	read_set	coverage_x	mean_mapping_quality	endogenous_pct
+ORT15	collapsed only	0.8980	24.5726	67.18
+ORT15	collapsed plus collapsed.truncated	0.9020	24.5874	66.75
+ORT15	collapsed plus collapsed.truncated plus unmerged pairs	0.9039	24.6118	58.61
+ORT16	collapsed only	1.4642	25.9665	83.18
+ORT16	collapsed plus collapsed.truncated	1.4691	25.9745	82.76
+ORT16	collapsed plus collapsed.truncated plus unmerged pairs	1.4715	25.9939	76.17

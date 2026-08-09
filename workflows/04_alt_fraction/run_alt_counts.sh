@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Count reference and alternative reads with the study filters.
+# Count reference and alternate reads with the study filters.
 set -euo pipefail
 source "${ORT_CONFIG:?Set ORT_CONFIG to a configured config.sh}"
 bam=${1:?Usage: run_alt_counts.sh BAM SITES_VCF SITES_ALLELES_TSV OUTPUT_TSV}

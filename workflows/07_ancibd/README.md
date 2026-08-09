@@ -25,6 +25,6 @@ python3 workflows/07_ancibd/summarize_cross64.py \
   work/cross64/PAIR_DESIGN.tsv work/cross64
 ```
 
-The VCF/BCF and ancIBD HDF5 intermediates are not distributed. Compact focal-pair
+The VCF/BCF and ancIBD HDF5 intermediates are not distributed. Compact ORT15–ORT16
 plotting summaries are included under `data/summary/ancibd/` and
 `figures/_shared/ancibd_v62/`.

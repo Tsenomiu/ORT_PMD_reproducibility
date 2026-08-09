@@ -5,7 +5,14 @@ source "${ORT_CONFIG:?Set ORT_CONFIG to a configured config.sh}"
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 imputed=${1:?Usage: run_matched48_projection.sh IMP_PREFIX PHAP_PREFIX REF_PREFIX IID_POP KEEP_POPS OUTPUT_DIR}
 phap=${2:?}; reference=${3:?}; iid_pop=${4:?}; keep_pops=${5:?}; outdir=${6:?}
-mkdir -p "$outdir"; cd "$outdir"
+imputed="$(cd "$(dirname "$imputed")" && pwd -P)/$(basename "$imputed")"
+phap="$(cd "$(dirname "$phap")" && pwd -P)/$(basename "$phap")"
+reference="$(cd "$(dirname "$reference")" && pwd -P)/$(basename "$reference")"
+iid_pop="$(cd "$(dirname "$iid_pop")" && pwd -P)/$(basename "$iid_pop")"
+keep_pops="$(cd "$(dirname "$keep_pops")" && pwd -P)/$(basename "$keep_pops")"
+mkdir -p "$outdir"
+outdir=$(cd "$outdir" && pwd -P)
+cd "$outdir"
 [[ $(wc -l < "$imputed.fam") -eq 24 && $(wc -l < "$phap.fam") -eq 24 && $(wc -l < "$reference.fam") -eq 985 ]] || {
   echo "Expected 24 imputed, 24 pseudo-haploid, 985 reference individuals" >&2; exit 1;
 }

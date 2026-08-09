@@ -1,0 +1,17 @@
+individual	treatment	label	comparator_dataset	target_dataset
+ORT15	raw	Uncorrected	ORT15_fu_raw	ORT15_nu_raw
+ORT15	trim5	Trim-5	ORT15_fu_raw	ORT15_nu_trim5
+ORT15	trim10	Trim-10	ORT15_fu_raw	ORT15_nu_trim10
+ORT15	rescale5	Rescale-5	ORT15_fu_raw	ORT15_nu_rescale5
+ORT15	rescale10	Rescale-10	ORT15_fu_raw	ORT15_nu_rescale10
+ORT15	rescale12	Rescale-12	ORT15_fu_raw	ORT15_nu_rescale12
+ORT15	bamrefine5	bamRefine-5	ORT15_fu_raw	ORT15_nu_bamrefine5
+ORT15	bamrefine10	bamRefine-10	ORT15_fu_raw	ORT15_nu_bamrefine10
+ORT16	raw	Uncorrected	ORT16_fu_raw	ORT16_nu_raw
+ORT16	trim5	Trim-5	ORT16_fu_raw	ORT16_nu_trim5
+ORT16	trim10	Trim-10	ORT16_fu_raw	ORT16_nu_trim10
+ORT16	rescale5	Rescale-5	ORT16_fu_raw	ORT16_nu_rescale5
+ORT16	rescale10	Rescale-10	ORT16_fu_raw	ORT16_nu_rescale10
+ORT16	rescale12	Rescale-12	ORT16_fu_raw	ORT16_nu_rescale12
+ORT16	bamrefine5	bamRefine-5	ORT16_fu_raw	ORT16_nu_bamrefine5
+ORT16	bamrefine10	bamRefine-10	ORT16_fu_raw	ORT16_nu_bamrefine10

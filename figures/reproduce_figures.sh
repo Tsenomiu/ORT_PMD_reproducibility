@@ -11,7 +11,6 @@ MPLCONFIGDIR=${MPLCONFIGDIR:-"$BUILD_DIR/.mplconfig"}
 export MPLCONFIGDIR
 
 mkdir -p "$BUILD_DIR" "$MPLCONFIGDIR"
-
 "$PYTHON" -c 'import matplotlib, numpy, PIL'
 
 check_pdf() {
@@ -36,70 +35,64 @@ else
   fi
 fi
 
-printf '%s\n' 'SKIP: Figure 2 (controlled archaeological coordinates and contour source)'
+"$PYTHON" "$CODE_DIR/figure_02_alt_fraction/make_figure.py" \
+  "$SUMMARY/damage/alt_fraction_recomputed_dp3_adsum.csv" \
+  "$BUILD_DIR/figure_02_alt_fraction.pdf"
+check_pdf 'Figure 2' "$BUILD_DIR/figure_02_alt_fraction.pdf"
 
-"$PYTHON" "$CODE_DIR/figure_03_pmd_uncorrected/make_figure.py" \
-  --output "$BUILD_DIR/figure_03_pmd_uncorrected.pdf"
-check_pdf 'Figure 3' "$BUILD_DIR/figure_03_pmd_uncorrected.pdf"
-
-"$PYTHON" "$CODE_DIR/figure_04_alt_fraction/make_figure.py" \
-  --input "$SUMMARY/damage/alt_fraction_summary.tsv" \
-  --output "$BUILD_DIR/figure_04_alt_fraction.pdf"
-check_pdf 'Figure 4' "$BUILD_DIR/figure_04_alt_fraction.pdf"
-
-"$PYTHON" "$CODE_DIR/figure_05_imputation/make_figure.py" \
+"$PYTHON" "$CODE_DIR/figure_03_imputation/make_figure.py" \
   --summary "$SUMMARY/imputation/imputation_summary.csv" \
-  --output "$BUILD_DIR/figure_05_imputation.pdf"
-check_pdf 'Figure 5' "$BUILD_DIR/figure_05_imputation.pdf"
+  --output "$BUILD_DIR/figure_03_imputation.pdf"
+check_pdf 'Figure 3' "$BUILD_DIR/figure_03_imputation.pdf"
 
-"$PYTHON" "$CODE_DIR/figure_06_ibd_summary/make_figures.py" \
+"$PYTHON" "$CODE_DIR/figure_04_ibd_summary/make_figures.py" \
   --asymmetric "$SUMMARY/ancibd/asymmetric_fulludg_raw.tsv" \
   --summary "$SUMMARY/ancibd/cross_treatment_pair_summary.tsv" \
   --resource-manifest "$SHARED/resource_manifest_minimal.json" \
   --output-dir "$BUILD_DIR"
-check_pdf 'Figure 6' "$BUILD_DIR/figure_06_ibd_summary.pdf"
-check_pdf 'Supplementary Figure S4' "$BUILD_DIR/supplementary_04_ibd_length_count.pdf"
+check_pdf 'Figure 4' "$BUILD_DIR/figure_04_ibd_summary.pdf"
+check_pdf 'Supplementary Figure S6' "$BUILD_DIR/supplementary_06_ibd_length_count.pdf"
 
-"$PYTHON" "$CODE_DIR/figure_07_ibd_karyogram/make_figure.py" \
+"$PYTHON" "$CODE_DIR/figure_05_ibd_karyogram/make_figure.py" \
   --base "$SHARED" \
   --resource-manifest "$SHARED/resource_manifest_minimal.json" \
-  --output "$BUILD_DIR/figure_07_ibd_karyogram.pdf"
-check_pdf 'Figure 7' "$BUILD_DIR/figure_07_ibd_karyogram.pdf"
+  --output-dir "$BUILD_DIR"
+check_pdf 'Figure 5' "$BUILD_DIR/figure_05_ibd_karyogram.pdf"
 
-"$PYTHON" "$CODE_DIR/figure_08_kinship/make_figure.py" \
-  --output "$BUILD_DIR/figure_08_kinship.pdf"
-check_pdf 'Figure 8' "$BUILD_DIR/figure_08_kinship.pdf"
+"$PYTHON" "$CODE_DIR/figure_06_kinship/make_figure.py" \
+  --output "$BUILD_DIR/figure_06_kinship.pdf"
+check_pdf 'Figure 6' "$BUILD_DIR/figure_06_kinship.pdf"
 
-ORT_FIGURE_OUTPUT="$BUILD_DIR/figure_09_pca.pdf" \
-  "$PYTHON" "$CODE_DIR/figure_09_pca/make_figure.py"
-check_pdf 'Figure 9 (aggregate reference background)' "$BUILD_DIR/figure_09_pca.pdf"
+ORT_FIGURE_OUTPUT="$BUILD_DIR/figure_07_pca.pdf" \
+  "$PYTHON" "$CODE_DIR/figure_07_pca/make_figure.py"
+check_pdf 'Figure 7 (aggregate reference background)' "$BUILD_DIR/figure_07_pca.pdf"
 
-printf '%s\n' 'SKIP: Supplementary Figure S1 (controlled VOX volumes; slice coordinates unconfirmed)'
+"$PYTHON" "$CODE_DIR/supplementary_01_pmd_uncorrected/make_figure.py" \
+  --output "$BUILD_DIR/supplementary_01_pmd_uncorrected.pdf"
+check_pdf 'Supplementary Figure S1' "$BUILD_DIR/supplementary_01_pmd_uncorrected.pdf"
 
-"$PYTHON" "$CODE_DIR/supplementary_02_pmd_corrected/make_figure.py" \
-  --output "$BUILD_DIR/supplementary_02_pmd_corrected.pdf"
-check_pdf 'Supplementary Figure S2' "$BUILD_DIR/supplementary_02_pmd_corrected.pdf"
+printf '%s\n' 'SKIP: Supplementary Figure S2 (controlled archaeological coordinates and contour source)'
+printf '%s\n' 'SKIP: Supplementary Figure S3 (controlled VOX volumes and selected slice coordinates)'
 
-"$PYTHON" "$CODE_DIR/supplementary_03_ibd_matrix/make_figure.py" \
+"$PYTHON" "$CODE_DIR/supplementary_04_pmd_corrected/make_figure.py" \
+  --output "$BUILD_DIR/supplementary_04_pmd_corrected.pdf"
+check_pdf 'Supplementary Figure S4' "$BUILD_DIR/supplementary_04_pmd_corrected.pdf"
+
+"$PYTHON" "$CODE_DIR/supplementary_05_ibd_matrix/make_figure.py" \
   --summary "$SUMMARY/ancibd/cross_treatment_pair_summary.tsv" \
   --resource-manifest "$SHARED/resource_manifest_minimal.json" \
-  --output "$BUILD_DIR/supplementary_03_ibd_matrix.pdf"
-check_pdf 'Supplementary Figure S3' "$BUILD_DIR/supplementary_03_ibd_matrix.pdf"
+  --output "$BUILD_DIR/supplementary_05_ibd_matrix.pdf"
+check_pdf 'Supplementary Figure S5' "$BUILD_DIR/supplementary_05_ibd_matrix.pdf"
 
 if command -v pdftex >/dev/null 2>&1; then
-  mkdir -p "$BUILD_DIR/pca_titration"
-  ORT_FIGURE_OUTPUT_DIR="$BUILD_DIR/pca_titration" \
-    "$PYTHON" "$CODE_DIR/supplementary_05_06_pca_titration/make_figures.py"
-  mv "$BUILD_DIR/pca_titration/supplementary_05_pca_titration_ort15.pdf" \
-    "$BUILD_DIR/supplementary_05_pca_titration_ort15.pdf"
-  mv "$BUILD_DIR/pca_titration/supplementary_06_pca_titration_ort16.pdf" \
-    "$BUILD_DIR/supplementary_06_pca_titration_ort16.pdf"
-  check_pdf 'Supplementary Figure S5 (aggregate reference background)' "$BUILD_DIR/supplementary_05_pca_titration_ort15.pdf"
-  check_pdf 'Supplementary Figure S6 (aggregate reference background)' "$BUILD_DIR/supplementary_06_pca_titration_ort16.pdf"
+  ORT_FIGURE_OUTPUT_DIR="$BUILD_DIR" \
+    "$PYTHON" "$CODE_DIR/supplementary_07_08_pca_titration/make_figures.py"
+  check_pdf 'Supplementary Figure S7 (aggregate reference background)' "$BUILD_DIR/supplementary_07_pca_titration_ort15.pdf"
+  check_pdf 'Supplementary Figure S8 (aggregate reference background)' "$BUILD_DIR/supplementary_08_pca_titration_ort16.pdf"
 else
-  printf '%s\n' 'SKIP: Supplementary Figures S5-S6 (pdftex not installed)'
+  printf '%s\n' 'SKIP: Supplementary Figures S7-S8 (pdftex not installed)'
 fi
 
-printf '%s\n' 'PASS: all figures supported by included inputs were generated.'
-printf '%s\n' 'NOTE: Figure 9 and S5-S6 use aggregate reference backgrounds; exact individual-level backgrounds require external AADR data.'
+printf '%s\n' 'PASS: all figure generators supported by the included inputs and installed tools completed.'
+printf '%s\n' 'NOTE: Figure 7 and S7-S8 use aggregate reference backgrounds; exact individual-level backgrounds require external AADR data.'
 printf 'Rebuilt files: %s\n' "$BUILD_DIR"

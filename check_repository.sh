@@ -75,7 +75,7 @@ pass 'excluded-file scan'
 
 # Private infrastructure. The checker excludes itself because it contains this
 # detection expression; all other text files must be portable.
-PRIVATE_PATTERN='/media/test/|/home/(rc|test)/|/Users/odongoo/|133[.]28[.]62[.]238|ssh[[:space:]]+(test|rc)([[:space:]]|$)'
+PRIVATE_PATTERN='/media/test/|/home/(rc|test)/|/Users/[^/]+/ORT/|133[.]28[.]62[.]238|ssh[[:space:]]+(test|rc)([[:space:]]|$)'
 if command -v rg >/dev/null 2>&1; then
   if rg -n --hidden "$PRIVATE_PATTERN" . \
       --glob '!check_repository.sh' --glob '!_build/**'; then
@@ -119,9 +119,21 @@ else
   pass 'CITATION.cff required fields (PyYAML unavailable)'
 fi
 
-for required in README.md CITATION.cff requirements.txt workflows figures data/summary docs; do
+for required in README.md LICENSE CITATION.cff requirements.txt workflows figures data/summary docs; do
   [[ -e "$required" ]] || fail "required path missing: $required"
 done
 pass 'required repository structure'
+
+# Verify the release file manifest after all structural and content checks. The
+# manifest excludes itself and runtime products under _build/.
+if command -v sha256sum >/dev/null 2>&1; then
+  sha256sum -c MANIFEST.sha256 >/dev/null || fail 'checksum manifest'
+  pass 'checksum manifest'
+elif command -v shasum >/dev/null 2>&1; then
+  shasum -a 256 -c MANIFEST.sha256 >/dev/null || fail 'checksum manifest'
+  pass 'checksum manifest'
+else
+  skip 'checksum manifest (no SHA-256 utility available)'
+fi
 
 printf '\nRepository checks complete: %d PASS, %d SKIP, 0 FAIL\n' "$PASS" "$SKIP"

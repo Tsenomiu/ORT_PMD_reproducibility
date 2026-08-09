@@ -32,4 +32,4 @@ done
   "$GLIMPSE2_IMAGE" GLIMPSE2_concordance \
   --input "$container_list" --gt-val --af-tag AF \
   --bins 0 0.001 0.01 0.02 0.05 0.10 0.20 0.30 0.40 0.50 \
-  --thread 16 --output "/out/conc_${individual}_${treatment}"
+  --thread "$THREADS" --output "/out/conc_${individual}_${treatment}"

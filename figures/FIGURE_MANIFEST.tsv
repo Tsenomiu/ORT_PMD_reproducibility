@@ -1,16 +1,16 @@
-number	label	title	output_file	workflow	input_status
-1	fig:workflow	Overview of the experimental workflow	figure_01_workflow.pdf	figure_01_workflow	INCLUDED_INPUTS
-2	fig:site_map	Geographic location and site plan	figure_02_site_map.pdf	not_distributed	EXTERNAL_INPUT_REQUIRED
-3	fig:pmd_uncorrected	PMD profiles before correction	figure_03_pmd_uncorrected.pdf	figure_03_pmd_uncorrected	INCLUDED_INPUTS
-4	fig:altfrac	Alternative-allele fraction and site retention	figure_04_alt_fraction.pdf	figure_04_alt_fraction	INCLUDED_INPUTS
-5	fig:imputation	GLIMPSE imputation concordance	figure_05_imputation.pdf	figure_05_imputation	INCLUDED_INPUTS
-6	fig:ibd	IBD1 length in asymmetric and same-treatment comparisons	figure_06_ibd_summary.pdf	figure_06_ibd_summary	INCLUDED_INPUTS
-7	fig:ibd_karyogram	All-SNP IBD1 karyograms	figure_07_ibd_karyogram.pdf	figure_07_ibd_karyogram	INCLUDED_INPUTS
-8	fig:kinship	Kinship of ORT15 and ORT16	figure_08_kinship.pdf	figure_08_kinship	INCLUDED_INPUTS
-9	fig:pca	Genome-wide PCA position	figure_09_pca.pdf	figure_09_pca	AGGREGATE_REFERENCE_INPUTS
-S1	fig:petrous_sampling	Pre-sampling micro-CT documentation	supplementary_01_ct.pdf	supplementary_01_ct	EXTERNAL_INPUT_REQUIRED
-S2	fig:pmd_corrected	PMD profiles after correction	supplementary_02_pmd_corrected.pdf	supplementary_02_pmd_corrected	INCLUDED_INPUTS
-S3	fig:ibd_matrix_supp	Cross-treatment IBD1 matrix	supplementary_03_ibd_matrix.pdf	supplementary_03_ibd_matrix	INCLUDED_INPUTS
-S4	fig:ibd_length_count_supp	IBD1 length-fragmentation diagnostic	supplementary_04_ibd_length_count.pdf	figure_06_ibd_summary	INCLUDED_INPUTS
-S5	fig:pca_titration_ort15	Coverage-titration PCA for ORT15	supplementary_05_pca_titration_ort15.pdf	supplementary_05_06_pca_titration	AGGREGATE_REFERENCE_INPUTS
-S6	fig:pca_titration_ort16	Coverage-titration PCA for ORT16	supplementary_06_pca_titration_ort16.pdf	supplementary_05_06_pca_titration	AGGREGATE_REFERENCE_INPUTS
+number	title	output_file	workflow	input_status
+1	Overview of the study workflow	figure_01_workflow.pdf	figure_01_workflow	INCLUDED_INPUTS
+2	Damage-associated allele support and site retention	figure_02_alt_fraction.pdf	figure_02_alt_fraction	INCLUDED_INPUTS
+3	Cross-library imputation agreement	figure_03_imputation.pdf	figure_03_imputation	INCLUDED_INPUTS
+4	IBD1 length in asymmetric and same-method comparisons	figure_04_ibd_summary.pdf	figure_04_ibd_summary	INCLUDED_INPUTS
+5	Transition-inclusive IBD1 karyograms	figure_05_ibd_karyogram.pdf	figure_05_ibd_karyogram	INCLUDED_INPUTS
+6	Kinship of ORT15 and ORT16	figure_06_kinship.pdf	figure_06_kinship	INCLUDED_INPUTS
+7	PCA position across correction states	figure_07_pca.pdf	figure_07_pca	AGGREGATE_REFERENCE_INPUTS
+S1	PMD profiles before correction	supplementary_01_pmd_uncorrected.pdf	supplementary_01_pmd_uncorrected	INCLUDED_INPUTS
+S2	Geographic location and site plan	supplementary_02_site_map.pdf	not_distributed	EXTERNAL_INPUT_REQUIRED
+S3	Pre-sampling petrous micro-CT documentation	supplementary_03_ct.pdf	supplementary_03_ct	EXTERNAL_INPUT_REQUIRED
+S4	PMD profiles after correction	supplementary_04_pmd_corrected.pdf	supplementary_04_pmd_corrected	INCLUDED_INPUTS
+S5	Cross-treatment IBD1 matrix	supplementary_05_ibd_matrix.pdf	supplementary_05_ibd_matrix	INCLUDED_INPUTS
+S6	IBD1 length-fragmentation diagnostic	supplementary_06_ibd_length_count.pdf	figure_04_ibd_summary	INCLUDED_INPUTS
+S7	Coverage-titration PCA for ORT15	supplementary_07_pca_titration_ort15.pdf	supplementary_07_08_pca_titration	AGGREGATE_REFERENCE_INPUTS
+S8	Coverage-titration PCA for ORT16	supplementary_08_pca_titration_ort16.pdf	supplementary_07_08_pca_titration	AGGREGATE_REFERENCE_INPUTS

@@ -5,10 +5,26 @@ independent analyses.
 
 ## READv2
 
-`run_readv2_cemetery.sh` creates pseudo-haploid calls at 1240k sites with
-`pileupCaller --randomHaploid`, restricts to autosomes, and runs READv2 using the
-within-cohort median baseline. The complete 22-person normalisation cohort is not
-available through PRJEB112497 alone.
+The primary reported result came from an archived ORT1--ORT27 1240k callset that
+included chromosomes 1--22, X, and Y. `run_readv2_primary_chrxy.sh` reconstructs
+the recorded calling logic with `pileupCaller --randomHaploid` and READv2's
+within-cohort median baseline. READv2 retained 21 individuals in the archived
+output. `run_readv2_cemetery.sh` reconstructs a later ORT6--ORT27 autosome-only
+sensitivity run, which returned the same first-degree parent--offspring subtype.
+
+For both runs, each cemetery input combined full-UDG libraries a--c and was
+soft-clipped by 6 bp at both read ends before pseudo-haploid calling. The public
+wrappers accept these already prepared BAMs through manifests; they do not recreate
+the upstream library merge or terminal soft-clipping. The complete cemetery cohorts
+are not available through PRJEB112497 alone.
+
+```bash
+ORT_CONFIG=/path/to/config.sh bash workflows/08_kinship/run_readv2_primary_chrxy.sh \
+  workflows/08_kinship/readv2_primary_bam_manifest.example.tsv output/readv2_primary
+
+ORT_CONFIG=/path/to/config.sh bash workflows/08_kinship/run_readv2_cemetery.sh \
+  workflows/08_kinship/readv2_bam_manifest.example.tsv output/readv2_autosomes
+```
 
 ## KING and IBS0
 

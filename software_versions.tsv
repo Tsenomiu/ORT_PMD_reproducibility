@@ -2,21 +2,26 @@ software	version_or_build	role
 AdapterRemoval	2.2.2	adapter removal and read collapsing
 BWA	0.7.17-r1188	alignment to hs37d5
 samtools	1.7	BAM processing, merge, and duplicate removal
-bcftools	1.16 (htslib 1.16 for mtDNA VCF)	pileup, genotype likelihoods, and mitochondrial calls
+Qualimap	2; exact build not recorded	endogenous-DNA quality-control summaries
+bcftools	1.16 / htslib 1.16	pileup, genotype likelihoods, concordance preparation, and mitochondrial calls
 BamUtil trimBam	1.0.15	terminal soft clipping
 mapDamage2	2.3.0a0-5175c20	damage profiling and base-quality rescaling
 bamRefine	0.2.1	SNP-aware PMD masking
 GLIMPSE1	1.1.1	low-coverage imputation and phasing
-GLIMPSE2_concordance	2.0.0-27-g0919952	fixed-comparator concordance and per-chromosome NRD
+GLIMPSE2_concordance	2.0.0; commit 3bed6d9; release 2022-12-07	fixed-comparator concordance and per-chromosome NRD
+GLIMPSE2 Docker runtime	local tag glimpse:v2.0.0-27-g0919952_20221207	runtime image tag; binary version recorded separately above
 ancIBD	0.7	IBD1 inference
 ANGSD	0.933	male-X nuclear contamination
 schmutzi mtCont	1.5.7	standalone mitochondrial contamination
 TKGWV2	1.0b	pseudo-haploid kinship coefficient
 READv2	2.01	cohort-normalised pseudo-haploid relatedness
 PLINK	1.90b6.24 (2021-06-06)	PLINK data processing
-PLINK2	exact build not recorded	KING-robust and IBS0 calculations
-pileupCaller	exact build not recorded	1240k pseudo-haploid calling
+PLINK 2	2.0.0-a.6.4LM (2024-12-06)	autosome restriction and variant-ID normalisation for matched-48 PCA
+pileupCaller (sequenceTools)	1.5.4.0	1240k pseudo-haploid calling
 HaploGrep 3	3.3.2	mitochondrial haplogroup assignment
 PhyloTree 17 Forensic Update	phylotree-fu-rcrs@1.3	mitochondrial classification tree
 EIGENSOFT smartpca	build 18140	PCA axes and projection
-Python plotting environment	minimums in requirements.txt	deterministic figure generation
+Python	3.14.0	locally verified figure-generation environment
+Matplotlib	3.10.7	locally verified deterministic figure generation
+NumPy	2.3.4	locally verified deterministic figure generation
+Pillow	12.0.0	locally verified raster export and figure checks

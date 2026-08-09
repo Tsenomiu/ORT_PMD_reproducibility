@@ -1,8 +1,0 @@
-metric	value	provenance
-TKGWV2_half_relatedness	0.2356	final bamRefine-5 full-UDG pair result; 4517214 SNPs
-KING_robust_kinship	0.2379	genome-wide IBS0/KING analysis; 5272558 sites
-READv2_normalized_kinship	0.230967	ORT15-ORT16 row; 169172 overlapping SNPs
-READv2_first_degree_subtype	parent-offspring	ORT15-ORT16 classification
-IBS0_observed_per_site	0.00341	genome-wide IBS0/KING analysis; 5272558 sites
-IBS0_full_sibling_expectation	0.01835	one-quarter of the unrelated expectation over the same sites
-IBS0_unrelated_expectation	0.07341	mean(2*p^2*q^2) over the same sites
