@@ -14,3 +14,5 @@
 *.jpeg binary
 *.npz binary
 *.svg text eol=lf
+*.patch text eol=lf
+workflows/08_kinship/tkgwv2/TKGWV2_compatibility.patch -whitespace

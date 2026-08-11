@@ -1,0 +1,16 @@
+context	software	version_or_build	role
+upstream	READv2	2.1.0 tag; program reports 2.01; commit 73739bef65b3725315417e70ad8edf6aca21f7b3	classification
+primary_RC	Python	3.9.15	READv2 runtime
+primary_RC	NumPy	2.0.2	numerical calculations
+primary_RC	pandas	2.3.1	table processing
+primary_RC	Matplotlib	3.9.1	READv2 plotting dependency
+primary_RC	plinkio	0.9.8	PLINK reading
+primary_RC	PLINK	1.90b6.24	missingness filter and PLINK dataset preparation
+later_TEST	Python	3.8.10	READv2 runtime
+later_TEST	NumPy	1.24.4	numerical calculations
+later_TEST	pandas	2.0.3	table processing
+later_TEST	Matplotlib	3.7.5	READv2 plotting dependency
+later_TEST	plinkio	0.9.8	PLINK reading
+later_TEST	samtools	1.13	joint pileup
+later_TEST	pileupCaller	1.5.4.0	pseudo-haploid calling
+later_TEST	PLINK	1.90b6.24	autosome restriction and PLINK dataset preparation

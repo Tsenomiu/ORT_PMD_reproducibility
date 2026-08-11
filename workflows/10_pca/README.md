@@ -1,5 +1,12 @@
 # 10 Population genetic context
 
+The curated recovery record is in [`recovery/`](recovery/). It separates TEST
+query preparation, the authoritative RC smartpca projection, method-distance
+verification, and plotting while replacing machine-specific paths with explicit
+variables. Public verification uses query-only ORT coordinates and aggregate
+reference summaries; individual-level licensed reference coordinates are not
+distributed.
+
 The PCA contains 24 GLIMPSE-imputed queries, the same 24 datasets represented as
 random pseudo-haploid 1240k calls, and 985 present-day HGDP/SGDP individuals from
 AADR v62. The two query representations are projected together onto shared reference

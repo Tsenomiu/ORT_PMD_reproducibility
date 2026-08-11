@@ -75,7 +75,7 @@ pass 'excluded-file scan'
 
 # Private infrastructure. The checker excludes itself because it contains this
 # detection expression; all other text files must be portable.
-PRIVATE_PATTERN='/media/test/|/home/(rc|test)/|/Users/[^/]+/ORT/|133[.]28[.]62[.]238|ssh[[:space:]]+(test|rc)([[:space:]]|$)'
+PRIVATE_PATTERN='/Users/|/home/|/media/|storage/rc|133[.]28[.]62[.]238|rx2000|ssh[[:space:]]+(test|rc)([[:space:]]|$)'
 if command -v rg >/dev/null 2>&1; then
   if rg -n --hidden "$PRIVATE_PATTERN" . \
       --glob '!check_repository.sh' --glob '!.git/**' --glob '!_build/**'; then
@@ -119,7 +119,7 @@ else
   pass 'CITATION.cff required fields (PyYAML unavailable)'
 fi
 
-for required in README.md LICENSE CITATION.cff requirements.txt workflows figures data/summary docs; do
+for required in README.md LICENSE CITATION.cff requirements.txt workflows figures data/summary data/processed docs; do
   [[ -e "$required" ]] || fail "required path missing: $required"
 done
 pass 'required repository structure'

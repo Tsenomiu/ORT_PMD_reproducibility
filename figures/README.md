@@ -38,7 +38,7 @@ AADR data.
 - **Figure 1:** The editable SVG is rendered through the bundled Matplotlib code so
   its embedded typeface matches the data figures.
 - **Figure 2:** Alternate-read fractions use combined REF+ALT depth of at least 3;
-  retention uses depth greater than 0. Covered sites are treatment-specific, so the
+  retention uses depth of at least 1. Covered sites are treatment-specific, so the
   contrast is descriptive and is not a fixed-common-site test of variant loss.
 - **Figure 3:** The uncorrected full-UDG imputed dataset is the fixed comparator for
   every non-UDG correction state from the same individual. It is not known genotype

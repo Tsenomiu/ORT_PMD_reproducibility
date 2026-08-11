@@ -8,11 +8,11 @@ software, inputs, outputs, and any available executable example.
 3. `03_pmd_correction`: trimBam, mapDamage2, and bamRefine treatments
 4. `04_alt_fraction`: reference/alternate read counts and site retention
 5. `05_imputation`: GLIMPSE genotype likelihoods, imputation, and phased-genotype generation
-6. `06_concordance`: fixed-comparator concordance and chromosome jackknife
+6. `06_concordance`: fixed-comparator concordance, chromosome jackknife, and Table 1 generation
 7. `07_ancibd`: AADR-v62 ancIBD analysis
-8. `08_kinship`: READv2, KING, and IBS0 analyses
+8. `08_kinship`: TKGWV2, READv2, KING, and IBS0 analyses
 9. `09_mtdna`: mitochondrial variant calling and haplogroup assignment
-10. `10_pca`: matched imputed and pseudo-haploid PCA projection
+10. `10_pca`: matched imputed and pseudo-haploid PCA preparation, projection, and recovery validation
 
 ## Configuration
 

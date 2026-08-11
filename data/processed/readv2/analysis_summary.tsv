@@ -1,0 +1,4 @@
+analysis	site_scope	input_people	retained_people	pair_count	median_raw_p0	focal_raw_p0	normalized_p0	normalized_p0_3dp	kinship_coefficient	kinship_coefficient_3dp	overlap_snps	degree	subtype
+primary_chr1_22_X_Y	AADR-v62.0 1240k autosomes, X and Y	27	21	210	0.24671998039541876	0.18973589010001654	0.7690333381022743	0.769	0.23096666189772574	0.231	169172	First Degree	Parent-offspring
+autosome_1240k	AADR-v62.0 1240k chromosomes 1-22	22	22	230	0.24853168423505886	0.19097369975420925	0.7684078605188551	0.768	0.23159213948114488	0.232	157451	First Degree	Parent-offspring
+transversion_only	AADR-v62.0 1240k transversions on chromosomes 1-22	22	22	230	0.24893068550585545	0.19167202572347267	0.7699815124598774	0.770	0.23001848754012255	0.230	31100	First Degree	N/A

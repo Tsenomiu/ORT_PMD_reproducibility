@@ -4,7 +4,9 @@
 
 Study reads are deposited in the European Nucleotide Archive under accession
 **PRJEB112497**. ENA is the authoritative source for filenames, checksums, metadata,
-and access status.
+and access status. The study remains private during preparation of this local
+release candidate; the accession should be described as publicly accessible only
+after its ENA release has been verified.
 
 | Library | ENA sample | BioSample | Library type |
 |---|---|---|---|
@@ -29,7 +31,10 @@ reported calculations, including:
 - filtered ORT15–ORT16 ancIBD plotting tables;
 - mapDamage text summaries used for PMD plots; and
 - the complete 16-state TKGWV2 result table, the complete 210-pair primary READv2
-  output, ORT15–ORT16 READv2 sensitivity rows, and compact mitochondrial summaries;
+  output, anonymized READv2 normalization vectors, ORT15–ORT16 sensitivity rows,
+  and compact mitochondrial summaries;
+- publication-safe PCA recovery manifests and Table 1 generation/provenance
+  records; and
 - small tabular inputs used by the kinship and imputation figures.
 
 These files are derived results, not raw sequence data.
@@ -51,7 +56,7 @@ These files are derived results, not raw sequence data.
 | Read processing, PMD correction, imputation | ENA PRJEB112497 | Reference genome, panels, and server-scale compute |
 | Concordance and jackknife | Rebuild VCFs from ENA; compact counts included | 1000 Genomes frequencies and GLIMPSE resources |
 | ancIBD | Compact ORT15–ORT16 plotting inputs included | AADR v62 and 1000 Genomes resources for a full rerun |
-| READv2 | Complete primary 210-pair output and ORT15–ORT16 autosome-only sensitivity row included | Controlled cohort BAMs and the full autosome-only output for rerunning normalisation |
+| READv2 | Complete primary 210-pair output, anonymized normalization vectors, and focal sensitivity rows included | Controlled BAMs and the unrecovered primary pseudo-haploid random state prevent byte-identical raw-input reconstruction |
 | PCA | ORT15 and ORT16 coordinates and aggregate backgrounds included | AADR genotype data for exact reference reconstruction |
 | Site map | Figure available with the article | Controlled archaeological spatial information |
 | Micro-CT | Export code and acquisition metadata included | Original VOX volumes and selected slice coordinates |

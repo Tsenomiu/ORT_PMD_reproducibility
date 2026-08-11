@@ -1,0 +1,8 @@
+ORT15_nu_raw	ORT16_fu_raw
+ORT15_nu_bamrefine5	ORT16_fu_bamrefine5
+ORT15_nu_rescale5	ORT16_fu_rescale5
+ORT15_nu_trim5	ORT16_fu_trim5
+ORT16_nu_raw	ORT15_fu_raw
+ORT16_nu_bamrefine5	ORT15_fu_bamrefine5
+ORT16_nu_rescale5	ORT15_fu_rescale5
+ORT16_nu_trim5	ORT15_fu_trim5

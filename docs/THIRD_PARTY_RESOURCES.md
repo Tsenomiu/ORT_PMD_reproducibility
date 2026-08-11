@@ -39,9 +39,11 @@ Patterson et al. (2006; doi:10.1371/journal.pgen.0020190) for the smartpca
 eigenanalysis method, and Schiffels (2026; doi:10.21105/joss.08634) for
 pileupCaller.
 
-TKGWV2 contributed a result reported in the associated article, but a public runner
-is not included because the locally patched conversion step is not available as a
-verified portable script.
+TKGWV2 v1.0b is pinned at upstream commit
+`c8638d47d3143b82ec969259df66e16f63b2b0ae`. The release candidate includes the
+exact recovered four-line compatibility patch and a processed-input runner
+reconstructed from successful logs. TKGWV2 and the patch are covered by
+GPL-2.0-only; see `../workflows/08_kinship/tkgwv2/THIRD_PARTY_NOTICE.md`.
 
 ## Mitochondrial reference, software and phylogeny citations
 

@@ -1,0 +1,17 @@
+run	sample1	sample2	used_snps	HRC	counts0	counts4	classification	fresh_matches_recovered_fields
+fu_fu	ORT15_fu_raw	ORT16_fu_raw	5170890	0.2096	386462	4784428	first_degree	PASS
+fu_fu	ORT15_fu_bamrefine5	ORT16_fu_bamrefine5	4517214	0.2356	319067	4198147	first_degree	PASS
+fu_fu	ORT15_fu_rescale5	ORT16_fu_rescale5	5110222	0.2444	344810	4765412	first_degree	PASS
+fu_fu	ORT15_fu_trim5	ORT16_fu_trim5	3880873	0.2333	275051	3605822	first_degree	PASS
+nu_nu	ORT15_nu_raw	ORT16_nu_raw	981982	0.1417	82485	899497	second_degree	PASS
+nu_nu	ORT15_nu_bamrefine5	ORT16_nu_bamrefine5	843168	0.1854	64592	778576	second_degree	PASS
+nu_nu	ORT15_nu_rescale5	ORT16_nu_rescale5	966422	0.1931	71085	895337	first_degree	PASS
+nu_nu	ORT15_nu_trim5	ORT16_nu_trim5	717822	0.1765	55873	661949	second_degree	PASS
+nu_fu	ORT15_nu_raw	ORT16_fu_raw	2530441	0.1680	202384	2328057	second_degree	PASS
+nu_fu	ORT15_nu_bamrefine5	ORT16_fu_bamrefine5	2209919	0.2058	163563	2046356	first_degree	PASS
+nu_fu	ORT15_nu_rescale5	ORT16_fu_rescale5	2497066	0.2131	177544	2319522	first_degree	PASS
+nu_fu	ORT15_nu_trim5	ORT16_fu_trim5	1905460	0.2008	142317	1763143	first_degree	PASS
+nu_fu	ORT16_nu_raw	ORT15_fu_raw	1977690	0.1765	156048	1821642	second_degree	PASS
+nu_fu	ORT16_nu_bamrefine5	ORT15_fu_bamrefine5	1698223	0.2122	124383	1573840	first_degree	PASS
+nu_fu	ORT16_nu_rescale5	ORT15_fu_rescale5	1949002	0.2203	136416	1812586	first_degree	PASS
+nu_fu	ORT16_nu_trim5	ORT15_fu_trim5	1436949	0.2089	105961	1330988	first_degree	PASS

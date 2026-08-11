@@ -1,0 +1,9 @@
+component	version	role	provenance
+PLINK	1.90b6.24 (6 Jun 2021)	query merging and final marker extraction	recovered execution record
+PLINK 2	2.0.0-a.6.4LM (6 Dec 2024)	autosomal restriction and variant-ID normalization	recovered final-projection record
+smartpca	EIGENSOFT build 18140	projection onto fixed reference axes	recovered final-projection record
+convertf	EIGENSOFT build 18140	PLINK-to-EIGENSTRAT conversion	recovered final-projection environment
+Python	3.10.12	marker harmonisation, labelling and validation	recovered final-projection record
+samtools	1.13	1240k mpileup for pseudo-haploid calls	recovered query-preparation environment
+bcftools	1.16	1240k restriction of imputed VCFs	recovered query-preparation environment
+pileupCaller	1.5.4.0	random pseudo-haploid calling	recovered query-preparation environment
