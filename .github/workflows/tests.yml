@@ -22,4 +22,6 @@ jobs:
       - name: Check repository
         run: bash check_repository.sh
       - name: Reproduce included outputs
+        env:
+          ORT_PCA_VALIDATION_MODE: ci-portable
         run: bash reproduce_all.sh

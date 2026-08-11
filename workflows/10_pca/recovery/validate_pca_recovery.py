@@ -10,12 +10,26 @@ import subprocess
 import sys
 from pathlib import Path
 
+import numpy as np
+from PIL import Image, ImageFilter
+
 
 ROOT = Path(__file__).resolve().parents[3]
 SUMMARY = ROOT / "data" / "summary" / "pca"
 PROCESSED = ROOT / "data" / "processed" / "pca"
 TITRATION = ROOT / "figures" / "supplementary_07_08_pca_titration" / "inputs" / "query_coordinates.tsv"
 RECOVERY = ROOT / "workflows" / "10_pca" / "recovery"
+CANONICAL_RASTERS = RECOVERY / "canonical_rasters"
+
+# These thresholds tolerate renderer-version anti-aliasing differences while
+# rejecting missing, displaced or visibly altered plot content. The canonical
+# strict mode remains the default and continues to require exact SHA-256 values.
+PORTABLE_MAX_NMAE = 0.020
+PORTABLE_MAX_DHASH_FRACTION = 0.060
+PORTABLE_MIN_PIXEL_CORRELATION = 0.995
+PORTABLE_MIN_INK_COVERAGE = 0.985
+PORTABLE_INK_THRESHOLD = 245
+PORTABLE_DILATION_SIZE = 5
 
 
 def read_csv(path: Path, delimiter: str = ",") -> list[dict[str, str]]:
@@ -31,6 +45,88 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def difference_hash(image: Image.Image, size: int = 32) -> np.ndarray:
+    gray = image.convert("L").resize((size + 1, size), Image.Resampling.LANCZOS)
+    pixels = np.asarray(gray, dtype=np.int16)
+    return (pixels[:, 1:] > pixels[:, :-1]).reshape(-1)
+
+
+def ink_mask(image: Image.Image) -> np.ndarray:
+    gray = np.asarray(image.convert("L"), dtype=np.uint8)
+    return gray < PORTABLE_INK_THRESHOLD
+
+
+def dilate(mask: np.ndarray) -> np.ndarray:
+    image = Image.fromarray(mask.astype(np.uint8) * 255)
+    expanded = image.filter(ImageFilter.MaxFilter(PORTABLE_DILATION_SIZE))
+    return np.asarray(expanded, dtype=np.uint8) > 0
+
+
+def coverage(source: np.ndarray, target_dilated: np.ndarray) -> float:
+    denominator = int(source.sum())
+    if denominator == 0:
+        return 1.0 if int(target_dilated.sum()) == 0 else 0.0
+    return float(np.logical_and(source, target_dilated).sum() / denominator)
+
+
+def portable_raster_metrics(reference_path: Path, observed_path: Path) -> dict[str, object]:
+    with Image.open(reference_path) as reference_file:
+        reference_format = reference_file.format
+        reference_mode = reference_file.mode
+        reference = reference_file.convert("RGB")
+    with Image.open(observed_path) as observed_file:
+        observed_format = observed_file.format
+        observed_mode = observed_file.mode
+        observed = observed_file.convert("RGB")
+
+    metrics: dict[str, object] = {
+        "reference_format": reference_format,
+        "observed_format": observed_format,
+        "reference_mode": reference_mode,
+        "observed_mode": observed_mode,
+        "reference_size": reference.size,
+        "observed_size": observed.size,
+    }
+    if reference.size != observed.size:
+        return metrics
+
+    reference_pixels = np.asarray(reference, dtype=np.float32)
+    observed_pixels = np.asarray(observed, dtype=np.float32)
+    metrics["nmae"] = float(np.mean(np.abs(reference_pixels - observed_pixels)) / 255.0)
+    correlation_size = (
+        max(1, reference.width // 4),
+        max(1, reference.height // 4),
+    )
+    reference_correlation = np.asarray(
+        reference.convert("L").resize(correlation_size, Image.Resampling.LANCZOS),
+        dtype=np.float32,
+    )
+    observed_correlation = np.asarray(
+        observed.convert("L").resize(correlation_size, Image.Resampling.LANCZOS),
+        dtype=np.float32,
+    )
+    reference_centered = reference_correlation.reshape(-1) - float(reference_correlation.mean())
+    observed_centered = observed_correlation.reshape(-1) - float(observed_correlation.mean())
+    correlation_denominator = float(
+        np.linalg.norm(reference_centered) * np.linalg.norm(observed_centered)
+    )
+    metrics["pixel_correlation"] = (
+        float(np.dot(reference_centered, observed_centered) / correlation_denominator)
+        if correlation_denominator
+        else 1.0 if np.array_equal(reference_pixels, observed_pixels) else 0.0
+    )
+
+    reference_hash = difference_hash(reference)
+    observed_hash = difference_hash(observed)
+    metrics["dhash_fraction"] = float(np.mean(reference_hash != observed_hash))
+
+    reference_ink = ink_mask(reference)
+    observed_ink = ink_mask(observed)
+    metrics["reference_ink_coverage"] = coverage(reference_ink, dilate(observed_ink))
+    metrics["observed_ink_coverage"] = coverage(observed_ink, dilate(reference_ink))
+    return metrics
+
+
 def metric_lookup(rows: list[dict[str, str]]) -> dict[tuple[str, str, str], float]:
     return {
         (row["metric"], row["space"], row["representation"]): float(row["value"])
@@ -43,6 +139,12 @@ def main() -> None:
     parser.add_argument("--raster-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--absolute-tolerance", type=float, default=1e-12)
+    parser.add_argument(
+        "--mode",
+        choices=("canonical-strict", "ci-portable"),
+        default="canonical-strict",
+        help="canonical-strict requires exact raster SHA-256; ci-portable uses documented visual-equivalence thresholds",
+    )
     args = parser.parse_args()
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
@@ -178,17 +280,71 @@ def main() -> None:
     )
     for check, expected in raster_checks:
         raster = args.raster_dir / expected["raster_filename"]
-        observed = sha256(raster) if raster.is_file() else "missing"
-        passed = observed == expected["sha256"]
-        results.append(
-            {
-                "check": check,
-                "manuscript_value": "identical",
-                "reproduced_value": "identical" if passed else observed,
-                "absolute_difference": "0 differing bytes" if passed else "checksum mismatch",
-                "status": "PASS" if passed else "FAIL",
-            }
-        )
+        if args.mode == "canonical-strict":
+            observed = sha256(raster) if raster.is_file() else "missing"
+            passed = observed == expected["sha256"]
+            results.append(
+                {
+                    "check": check,
+                    "manuscript_value": "identical",
+                    "reproduced_value": "identical" if passed else observed,
+                    "absolute_difference": "0 differing bytes" if passed else "checksum mismatch",
+                    "status": "PASS" if passed else "FAIL",
+                }
+            )
+        else:
+            reference = CANONICAL_RASTERS / expected["raster_filename"]
+            reference_valid = reference.is_file() and sha256(reference) == expected["sha256"]
+            try:
+                metrics = portable_raster_metrics(reference, raster)
+            except (FileNotFoundError, OSError, ValueError) as error:
+                metrics = {"error": str(error)}
+
+            same_size = metrics.get("reference_size") == metrics.get("observed_size")
+            png_format = metrics.get("reference_format") == metrics.get("observed_format") == "PNG"
+            rgb_mode = metrics.get("reference_mode") == metrics.get("observed_mode") == "RGB"
+            nmae = float(metrics.get("nmae", math.inf))
+            pixel_correlation = float(metrics.get("pixel_correlation", -math.inf))
+            dhash_fraction = float(metrics.get("dhash_fraction", math.inf))
+            reference_coverage = float(metrics.get("reference_ink_coverage", -math.inf))
+            observed_coverage = float(metrics.get("observed_ink_coverage", -math.inf))
+            passed = (
+                reference_valid
+                and same_size
+                and png_format
+                and rgb_mode
+                and nmae <= PORTABLE_MAX_NMAE
+                and pixel_correlation >= PORTABLE_MIN_PIXEL_CORRELATION
+                and dhash_fraction <= PORTABLE_MAX_DHASH_FRACTION
+                and reference_coverage >= PORTABLE_MIN_INK_COVERAGE
+                and observed_coverage >= PORTABLE_MIN_INK_COVERAGE
+            )
+            expected_size = metrics.get("reference_size", "missing")
+            observed_size = metrics.get("observed_size", "missing")
+            metric_summary = (
+                f"{metrics.get('observed_format', 'missing')}/"
+                f"{metrics.get('observed_mode', 'missing')} {observed_size}; "
+                f"NMAE={nmae:.6f}; correlation={pixel_correlation:.6f}; "
+                f"dHash={dhash_fraction:.6f}; "
+                f"reference ink={reference_coverage:.6f}; observed ink={observed_coverage:.6f}"
+            )
+            print(f"CI-portable raster metrics [{check}]: {metric_summary}")
+            results.append(
+                {
+                    "check": check,
+                    "manuscript_value": (
+                        f"canonical PNG {expected_size}; NMAE<={PORTABLE_MAX_NMAE:.3f}; "
+                        f"correlation>={PORTABLE_MIN_PIXEL_CORRELATION:.3f}; "
+                        f"dHash<={PORTABLE_MAX_DHASH_FRACTION:.3f}; "
+                        f"ink coverage>={PORTABLE_MIN_INK_COVERAGE:.3f}"
+                    ),
+                    "reproduced_value": (
+                        metric_summary
+                    ),
+                    "absolute_difference": "platform-tolerant visual comparison",
+                    "status": "PASS (ci-portable)" if passed else "FAIL",
+                }
+            )
         if not passed:
             failures.append(check)
 
@@ -218,8 +374,10 @@ def main() -> None:
         raise SystemExit("PCA validation failed: " + ", ".join(failures))
     if len(results) != 20:
         raise SystemExit(f"Expected 20 checks; produced {len(results)}")
-    print(f"PASS: {len(results)}/{len(results)} PCA recovery checks")
+    print(f"PASS: {len(results)}/{len(results)} PCA recovery checks ({args.mode})")
     print(f"PASS: metric-table comparison absolute tolerance {args.absolute_tolerance:g}")
+    if args.mode == "ci-portable":
+        print("PASS: three generated PNG rasters matched format, dimensions and portable visual-equivalence thresholds")
 
 
 if __name__ == "__main__":

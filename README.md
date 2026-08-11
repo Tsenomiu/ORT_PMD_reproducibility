@@ -7,8 +7,9 @@ Analysis workflows, figure generators, and compact derived data for:
 
 The study compares terminal trimming, base-quality rescaling, and SNP masking in
 matched full-UDG and non-UDG libraries from two ancient individuals, ORT15 and
-ORT16. Release **v1.1.0** adds curated recovery evidence for TKGWV2, READv2,
-PCA, and Table 1.
+ORT16. Release **v1.1.1** retains the curated recovery evidence added in v1.1.0
+and adds portable PCA raster validation for GitHub Actions. It does not change
+scientific data, results, parameters, figures, tables, or conclusions.
 
 ## Quick start
 
@@ -31,6 +32,14 @@ Results are written to `_build/`. A successful run ends with:
 ```text
 Reproduction complete: all locally reproducible checks passed.
 ```
+
+The default PCA check is `canonical-strict`: it requires the three regenerated
+150-dpi rasters to match the archived SHA-256 values exactly. Those canonical
+rasters were produced with Poppler 25.06.0 and TeX Live 2024. GitHub Actions
+uses the explicitly selected `ci-portable` mode, which keeps every numerical,
+coordinate, source-data, and plotting-input check strict while checking raster
+format, dimensions, and documented visual-equivalence thresholds. See the
+[PCA recovery workflow](workflows/10_pca/recovery/README.md) for details.
 
 `pdfTeX` (from TeX Live or MacTeX) is needed to create the final PDF wrappers for
 Supplementary Figures S7 and S8. If it is unavailable, the script completes the
@@ -65,7 +74,7 @@ and rebuilds the supported figures.
 | Supplementary Figures S2–S3 | Code and metadata are supplied; controlled source data are required |
 | TKGWV2 | Recovered patch, processed-input runner, and all 16 exact validation rows |
 | READv2 | Derived normalization inputs and validation of the reported primary and sensitivity results |
-| PCA | Path-neutral recovery workflow, query-only coordinates, aggregate references, and exact raster checks |
+| PCA | Path-neutral recovery workflow, query-only coordinates, aggregate references, canonical exact raster checks, and CI-portable visual checks |
 | Table 1 | Original generator, output, and 80-cell provenance validation |
 
 ## What requires external data
@@ -104,8 +113,9 @@ attempting a full rerun.
 - PCA recovery: `workflows/10_pca/recovery/`
 - Table 1: `workflows/06_concordance/table1/`
 - Main-output source map: `docs/main_output_source_manifest.tsv`
-- Release validation: `v1.1.0_VALIDATION_REPORT.md`
+- v1.1.0 scientific validation record: `v1.1.0_VALIDATION_REPORT.md`
 - Release exclusions: `v1.1.0_EXCLUSIONS.md`
+- v1.1.1 maintenance notes: `v1.1.1_RELEASE_NOTES.md`
 
 The exact original primary BAM-to-genotype command and random state used for
 pseudo-haploid sampling in READv2 were not preserved. The derived genotype

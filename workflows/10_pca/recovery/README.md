@@ -22,6 +22,7 @@ files here are curated, path-neutral copies or generated validation records:
 | `environment.tsv` | recovered environment record | Software versions used for query preparation and final projection. |
 | `validate_pca_recovery.py` | generated validation code | Recalculates all 20 archived checks. |
 | `run_validation_and_figures.sh` | publication wrapper | Recalculates metrics, rebuilds three figures and checks their 150-dpi rasters. |
+| `canonical_rasters/` | canonical validation fixtures | Byte-exact manuscript rasters whose SHA-256 values are recorded in `data/processed/pca/raster_reference_checksums.tsv`. |
 
 The projection wrapper calls the existing
 `workflows/10_pca/run_matched48_projection.sh`. It uses the existing
@@ -110,7 +111,7 @@ projected query points, comprising 24 imputed and 24 pseudo-haploid datasets.
 
 ## Public validation and figures
 
-Run all checks from the repository root:
+Run the canonical checks from the repository root:
 
 ```bash
 bash workflows/10_pca/recovery/run_validation_and_figures.sh BUILD_DIR
@@ -122,10 +123,45 @@ The wrapper:
 2. validates the reference, query, marker and titration counts;
 3. rebuilds Figure 7 and Supplementary Figures S7 and S8 from the released
    query-only coordinates and disclosure-controlled population aggregates;
-4. renders each PDF at 150 dpi and compares the SHA-256 checksum with the archived
-   manuscript raster.
+4. renders each PDF at 150 dpi and, by default, compares its SHA-256 checksum
+   with the archived manuscript raster.
 
 The recovery validation passed **20/20 checks**. All three regenerated rasters
 were byte-identical to the manuscript rasters. Detailed results are in
 `data/processed/pca/validation_results.tsv`, and the publication-safe file map is
 `data/processed/pca/input_output_manifest.tsv`.
+
+### Canonical-strict and CI-portable modes
+
+`canonical-strict` is the default and remains unchanged. It requires all 17
+numerical and structural checks to pass and all three generated rasters to
+match the archived SHA-256 values exactly. The canonical rasters were produced
+with Poppler 25.06.0 and TeX Live 2024.
+
+The failing v1.1.0 GitHub Actions runs used Poppler 24.02.0, whose anti-aliasing
+produced different PNG bytes even though the underlying numerical outputs and
+plotted scientific content were identical. CI therefore selects the portable
+mode explicitly:
+
+```bash
+ORT_PCA_VALIDATION_MODE=ci-portable \
+  bash workflows/10_pca/recovery/run_validation_and_figures.sh BUILD_DIR
+```
+
+The portable mode does not weaken numerical validation. It runs the same 17
+numerical and structural checks, verifies each bundled canonical raster against
+its archived SHA-256 value, requires generated files to be RGB PNGs with the
+exact expected dimensions, and compares them with the canonical rasters using
+all of these limits:
+
+- normalized mean absolute pixel error no greater than `0.020`;
+- fourfold-downsampled grayscale pixel correlation at least `0.995`;
+- 32 × 32 difference-hash disagreement no greater than `0.060`;
+- bidirectional dark-pixel coverage at least `0.985`, with a 2-pixel tolerance
+  for renderer-dependent edge placement.
+
+A missing raster, wrong format, wrong colour mode, wrong dimensions, corrupted
+canonical fixture, displaced content, or image outside any threshold fails.
+Portable mode tests scientific and visual equivalence without claiming
+renderer-dependent byte identity; it does not replace the canonical strict
+record.
