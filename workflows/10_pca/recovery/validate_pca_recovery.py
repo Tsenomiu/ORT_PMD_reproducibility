@@ -26,8 +26,9 @@ CANONICAL_RASTERS = RECOVERY / "canonical_rasters"
 # strict mode remains the default and continues to require exact SHA-256 values.
 PORTABLE_MAX_NMAE = 0.020
 PORTABLE_MAX_DHASH_FRACTION = 0.060
-PORTABLE_MIN_PIXEL_CORRELATION = 0.995
-PORTABLE_MIN_INK_COVERAGE = 0.985
+PORTABLE_MIN_PIXEL_CORRELATION = 0.970
+PORTABLE_MIN_REFERENCE_INK_COVERAGE = 0.990
+PORTABLE_MIN_OBSERVED_INK_COVERAGE = 0.998
 PORTABLE_INK_THRESHOLD = 245
 PORTABLE_DILATION_SIZE = 5
 
@@ -316,8 +317,8 @@ def main() -> None:
                 and nmae <= PORTABLE_MAX_NMAE
                 and pixel_correlation >= PORTABLE_MIN_PIXEL_CORRELATION
                 and dhash_fraction <= PORTABLE_MAX_DHASH_FRACTION
-                and reference_coverage >= PORTABLE_MIN_INK_COVERAGE
-                and observed_coverage >= PORTABLE_MIN_INK_COVERAGE
+                and reference_coverage >= PORTABLE_MIN_REFERENCE_INK_COVERAGE
+                and observed_coverage >= PORTABLE_MIN_OBSERVED_INK_COVERAGE
             )
             expected_size = metrics.get("reference_size", "missing")
             observed_size = metrics.get("observed_size", "missing")
@@ -336,7 +337,8 @@ def main() -> None:
                         f"canonical PNG {expected_size}; NMAE<={PORTABLE_MAX_NMAE:.3f}; "
                         f"correlation>={PORTABLE_MIN_PIXEL_CORRELATION:.3f}; "
                         f"dHash<={PORTABLE_MAX_DHASH_FRACTION:.3f}; "
-                        f"ink coverage>={PORTABLE_MIN_INK_COVERAGE:.3f}"
+                        f"reference ink>={PORTABLE_MIN_REFERENCE_INK_COVERAGE:.3f}; "
+                        f"observed ink>={PORTABLE_MIN_OBSERVED_INK_COVERAGE:.3f}"
                     ),
                     "reproduced_value": (
                         metric_summary

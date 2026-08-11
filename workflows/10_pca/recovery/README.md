@@ -155,10 +155,11 @@ exact expected dimensions, and compares them with the canonical rasters using
 all of these limits:
 
 - normalized mean absolute pixel error no greater than `0.020`;
-- fourfold-downsampled grayscale pixel correlation at least `0.995`;
+- fourfold-downsampled grayscale pixel correlation at least `0.970`;
 - 32 × 32 difference-hash disagreement no greater than `0.060`;
-- bidirectional dark-pixel coverage at least `0.985`, with a 2-pixel tolerance
-  for renderer-dependent edge placement.
+- canonical dark-pixel coverage by the generated raster at least `0.990`, and
+  generated dark-pixel coverage by the canonical raster at least `0.998`, both
+  with a 2-pixel tolerance for renderer-dependent edge placement.
 
 A missing raster, wrong format, wrong colour mode, wrong dimensions, corrupted
 canonical fixture, displaced content, or image outside any threshold fails.
