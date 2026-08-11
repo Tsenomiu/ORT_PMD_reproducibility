@@ -1,13 +1,14 @@
-# ORT post-mortem damage correction workflows
+# ORT PMD reproducibility workflow
 
 Analysis workflows, figure generators, and compact derived data for:
 
-> **Trade-offs in post-mortem damage correction for low-coverage ancient genomes:
-> site retention, imputation and kinship inference**
+> **Matched full-UDG and non-UDG ancient DNA libraries reveal trade-offs in
+> post-mortem damage correction for imputation and kinship inference**
 
 The study compares terminal trimming, base-quality rescaling, and SNP masking in
 matched full-UDG and non-UDG libraries from two ancient individuals, ORT15 and
-ORT16.
+ORT16. Release **v1.1.0** adds curated recovery evidence for TKGWV2, READv2,
+PCA, and Table 1.
 
 ## Quick start
 
@@ -48,6 +49,7 @@ bash check_repository.sh
 | `workflows/` | Ten analysis stages, from sequence processing through PCA |
 | `figures/` | Generators for main Figures 1–7 and Supplementary Figures S1–S8 |
 | `data/summary/` | Compact derived tables used by figures and validation checks |
+| `data/processed/` | Curated processed verification data for recovered workflows |
 | `docs/` | Detailed methods, data-access boundaries, external resources, and limitations |
 | `software_versions.tsv` | Recorded software versions and their roles |
 
@@ -61,7 +63,10 @@ and rebuilds the supported figures.
 | Figures | Main Figures 1–7 and Supplementary Figures S1 and S4–S8 |
 | External-data workflows | Portable commands are supplied; raw or licensed inputs are required |
 | Supplementary Figures S2–S3 | Code and metadata are supplied; controlled source data are required |
-| TKGWV2 | The complete 16-state result table is validated; no unverified runner is supplied |
+| TKGWV2 | Recovered patch, processed-input runner, and all 16 exact validation rows |
+| READv2 | Derived normalization inputs and validation of the reported primary and sensitivity results |
+| PCA | Path-neutral recovery workflow, query-only coordinates, aggregate references, and exact raster checks |
+| Table 1 | Original generator, output, and 80-cell provenance validation |
 
 ## What requires external data
 
@@ -71,8 +76,13 @@ configuration, and suitable compute. The repository does not contain FASTQ,
 BAM, VCF, HDF5, third-party reference panels, exact archaeological coordinates,
 or raw micro-CT volumes.
 
-Raw sequencing reads are deposited in the European Nucleotide Archive under
-study accession **PRJEB112497**. Third-party resources such as hs37d5, 1000
+Raw sequencing reads are registered in the European Nucleotide Archive under
+study accession **PRJEB112497**. The ENA study is managed separately and this
+repository does not claim that those reads are currently downloadable. The
+files in `data/summary/` and `data/processed/` are compact processed or derived
+verification data, not raw sequence data.
+
+Third-party resources such as hs37d5, 1000
 Genomes Phase 3, AADR v62, HapMapChrX, and the schmutzi mitochondrial panel must
 be obtained from their original providers.
 
@@ -84,7 +94,23 @@ separately licensed AADR data.
 
 See [Data access](docs/DATA_ACCESS.md),
 [Third-party resources](docs/THIRD_PARTY_RESOURCES.md), and
-[Known limitations](docs/KNOWN_LIMITATIONS.md) before attempting a full rerun.
+[Reproducibility limitations](docs/reproducibility_limitations.md) before
+attempting a full rerun.
+
+## Recovered workflow entry points
+
+- TKGWV2: `workflows/08_kinship/tkgwv2/`
+- READv2: `workflows/08_kinship/readv2/`
+- PCA recovery: `workflows/10_pca/recovery/`
+- Table 1: `workflows/06_concordance/table1/`
+- Main-output source map: `docs/main_output_source_manifest.tsv`
+- Release validation: `v1.1.0_VALIDATION_REPORT.md`
+- Release exclusions: `v1.1.0_EXCLUSIONS.md`
+
+The exact original primary BAM-to-genotype command and random state used for
+pseudo-haploid sampling in READv2 were not preserved. The derived genotype
+inputs, downstream READv2 commands, normalization procedure, and reported
+outputs are provided to permit verification of the published calculations.
 
 ## Workflow configuration
 
@@ -104,10 +130,16 @@ outside the repository.
 
 ## Citation
 
-Citation metadata are provided in [`CITATION.cff`](CITATION.cff). Please also
-cite the associated article and the primary software and resource papers listed
-in [`docs/THIRD_PARTY_RESOURCES.md`](docs/THIRD_PARTY_RESOURCES.md).
+Citation metadata are provided in [`CITATION.cff`](CITATION.cff). When citing
+the associated manuscript, use the title **Matched full-UDG and non-UDG ancient
+DNA libraries reveal trade-offs in post-mortem damage correction for imputation
+and kinship inference**. Please also cite the primary software and resource
+papers listed in
+[`docs/THIRD_PARTY_RESOURCES.md`](docs/THIRD_PARTY_RESOURCES.md).
 
 ## License
 
-This repository is released under the [MIT License](LICENSE).
+Author-written code and derived tables are released under the
+[MIT License](LICENSE). The TKGWV2 compatibility patch is a modification of
+GPL-2.0 software and is distributed under GPL-2.0-only; see
+[`workflows/08_kinship/tkgwv2/THIRD_PARTY_NOTICE.md`](workflows/08_kinship/tkgwv2/THIRD_PARTY_NOTICE.md).

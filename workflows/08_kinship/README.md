@@ -3,28 +3,29 @@
 The study uses complementary kinship summaries rather than treating them as fully
 independent analyses.
 
+The proposed v1.1.0 recovery additions are organized under:
+
+- [`tkgwv2/`](tkgwv2/) for the recovered TKGWV2 patch, processed-input runner,
+  manifests, and exact 16-row validation;
+- [`readv2/`](readv2/) for the recovered downstream commands, path-neutral
+  verification workflow, normalization data, and limitation statement.
+
 ## READv2
 
-The primary reported result came from an archived ORT1--ORT27 1240k callset that
-included chromosomes 1--22, X, and Y. `run_readv2_primary_chrxy.sh` reconstructs
-the recorded calling logic with `pileupCaller --randomHaploid` and READv2's
-within-cohort median baseline. READv2 retained 21 individuals in the archived
-output. `run_readv2_cemetery.sh` reconstructs a later ORT6--ORT27 autosome-only
-sensitivity run, which returned the same first-degree parent--offspring subtype.
-
-For both runs, each cemetery input combined full-UDG libraries a--c and was
-soft-clipped by 6 bp at both read ends before pseudo-haploid calling. The public
-wrappers accept these already prepared BAMs through manifests; they do not recreate
-the upstream library merge or terminal soft-clipping. The complete cemetery cohorts
-are not available through PRJEB112497 alone.
+The complete curated documentation and verification entry point is
+[`readv2/`](readv2/). It distinguishes the primary chromosomes 1--22/X/Y
+analysis from the later autosome-only and transversion-only sensitivities and
+provides the cohort-median normalization values needed to recompute the reported
+results.
 
 ```bash
-ORT_CONFIG=/path/to/config.sh bash workflows/08_kinship/run_readv2_primary_chrxy.sh \
-  workflows/08_kinship/readv2_primary_bam_manifest.example.tsv output/readv2_primary
-
-ORT_CONFIG=/path/to/config.sh bash workflows/08_kinship/run_readv2_cemetery.sh \
-  workflows/08_kinship/readv2_bam_manifest.example.tsv output/readv2_autosomes
+python3 workflows/08_kinship/readv2/validate_reported_results.py
 ```
+
+The exact original primary BAM-to-genotype command and random state used for
+pseudo-haploid sampling were not preserved. The package therefore verifies the
+reported values from recovered derived/downstream records but does not claim
+byte-identical reconstruction from the primary BAMs.
 
 ## KING and IBS0
 

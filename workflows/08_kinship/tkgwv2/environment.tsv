@@ -1,0 +1,13 @@
+context	software	version_or_build	role
+original_report	TKGWV2	1.0b	relatedness workflow
+original_report	R	4.3.3	R scripts
+original_report	data.table	1.18.4	R table processing
+original_report	PLINK	1.90b6.24	pairwise PED/MAP extraction and merging
+original_report	Python 3	exact patch version not recorded	TKGWV2 entry point and pileup conversion
+original_system	ugrep	7.5	system grep implementation that required the AWK compatibility substitutions
+fresh_validation	Python	3.8.12	TKGWV2 entry point
+fresh_validation	R	4.4.2	R scripts
+fresh_validation	data.table	1.15.4	R table processing
+fresh_validation	PLINK	1.90b6.24	pairwise PED/MAP extraction and merging
+conversion_provenance	samtools	1.13	BAM pileup
+conversion_provenance	bcftools/HTSlib	1.16/1.16	reference-panel construction

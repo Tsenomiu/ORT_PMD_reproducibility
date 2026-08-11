@@ -33,6 +33,19 @@ printf '%s\n' 'PASS  jackknife outputs reproduce byte-for-byte'
 printf '%s\n' '== Reported-result summary validation =='
 "$PYTHON" "$ROOT/validate_reported_results.py"
 
+printf '%s\n' '== Recovered TKGWV2 validation =='
+"$PYTHON" "$ROOT/workflows/08_kinship/tkgwv2/validation/validate_results.py"
+
+printf '%s\n' '== Recovered READv2 validation =='
+"$PYTHON" "$ROOT/workflows/08_kinship/readv2/validate_reported_results.py" \
+  --output "$BUILD_DIR/tables/readv2_validation_results.tsv"
+
+printf '%s\n' '== Recovered Table 1 validation =='
+"$PYTHON" "$ROOT/workflows/06_concordance/table1/validate_table1.py"
+
+printf '%s\n' '== Main-output source coverage =='
+"$PYTHON" "$ROOT/docs/validation/validate_main_output_sources.py"
+
 printf '%s\n' '== Public PCA-coordinate verification =='
 "$PYTHON" "$ROOT/workflows/10_pca/verify_pca.py" \
   "$ROOT/data/summary/pca/pca_ort_queries_matched48.evec" \
@@ -43,6 +56,14 @@ printf '%s\n' '== Public PCA-coordinate verification =='
   --reference "$ROOT/data/summary/pca/pca_metrics_matched48.csv" \
   --absolute-tolerance 1e-12
 printf '%s\n' 'PASS  public PCA metrics reproduce within 1e-12 absolute tolerance'
+
+printf '%s\n' '== Recovered PCA workflow and raster validation =='
+if command -v pdftex >/dev/null 2>&1 && command -v pdftoppm >/dev/null 2>&1; then
+  PYTHON="$PYTHON" bash "$ROOT/workflows/10_pca/recovery/run_validation_and_figures.sh" \
+    "$BUILD_DIR/pca_recovery"
+else
+  printf '%s\n' 'SKIP  recovered PCA raster validation (pdftex/pdftoppm unavailable)'
+fi
 
 printf '%s\n' '== Figure regeneration =='
 PYTHON="$PYTHON" bash "$ROOT/figures/reproduce_figures.sh" "$BUILD_DIR/figures"

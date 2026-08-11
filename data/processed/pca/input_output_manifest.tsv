@@ -1,0 +1,34 @@
+phase	role	path_or_placeholder	classification	checksum_type	checksum	included	validation
+query_preparation	24 imputed VCF inputs	<INPUT_DIR>/imputed/*.vcf.gz	external controlled input	NA	NA	no	paths supplied through query manifest
+query_preparation	24 treatment BAM inputs	<INPUT_DIR>/bam/*.bam	external controlled input	NA	NA	no	paths supplied through query manifest
+query_preparation	AADR v62.0 1240k target BIM	<REFERENCE_DIR>/aadr_v62_1240k.bim	external licensed reference	NA	NA	no	obtained from provider
+query_preparation	1240k PLINK scaffold	<REFERENCE_DIR>/aadr_1240k_scaffold	external licensed reference	NA	NA	no	obtained from provider
+query_preparation	chromosome-position to rsID map	<REFERENCE_DIR>/position_to_rsid.tsv	external derived mapping	NA	NA	no	reconstructed from provider BIM
+query_preparation	hs37d5 FASTA	<REFERENCE_DIR>/hs37d5.fa	external reference	NA	NA	no	obtained from provider
+query_preparation	1240k BED	<REFERENCE_DIR>/1240k.all.bed	external reference	NA	NA	no	obtained from provider
+query_preparation	AADR v62.0 1240k SNP file	<REFERENCE_DIR>/aadr_v62_1240k.snp	external licensed reference	NA	NA	no	obtained from provider
+query_preparation	imputed-query preparation	workflows/10_pca/recovery/prepare_imputed_queries.sh	reconstructed publication wrapper	NA	NA	yes	shell syntax checked
+query_preparation	pseudo-haploid-query preparation	workflows/10_pca/recovery/prepare_pseudohaploid_queries.sh	path-neutral publication copy	NA	NA	yes	shell syntax checked
+matched48	24-query imputed PLINK prefix	<INPUT_DIR>/ort_imputed	external processed genotype input	MD5	bed=39db30200917d40950d526da3dd43a19;bim=f4e18a4e69e2a43effedeaebc4612f4a;fam=61090a711ec6289c46b7e4d2625cb509	no	input checksums recovered
+matched48	24-query pseudo-haploid PLINK prefix	<INPUT_DIR>/ort_nonimputed	external processed genotype input	MD5	bed=3ac8f4b3db6e75c88104873703f02139;bim=43207f1abb5123291680ae95e8b8aac0;fam=3f042c9cf67143994bc93087f5225c3f	no	input checksums recovered
+matched48	985-person HGDP/SGDP reference PLINK prefix	<REFERENCE_DIR>/aadr_mod	external licensed reference	MD5	bed=ecff09a6b5639353e4f00fe1679b9d8a;bim=a2d415e2b937164c0cc890f8be599a36;fam=a3a814018a515811d50469c72380aca2	no	input checksums recovered
+matched48	154-population axis list	workflows/10_pca/recovery/keep_pops_ref.txt	original recovered parameter data	SHA-256	278ebfebc0cb68c2d480433e41e4bb7a2354906cffab592eef63afbb02e9841c	yes	154 lines
+matched48	projection workflow	workflows/10_pca/run_matched48_projection.sh	path-neutral publication workflow	NA	NA	yes	syntax checked; recovered parameters retained
+matched48	recovered final-run wrapper	workflows/10_pca/recovery/run_recovered_matched48_projection.sh	path-neutral publication wrapper	NA	NA	yes	retains query-BIM sanitisation and recovered output gates
+matched48	marker harmonisation	workflows/10_pca/harmonize_markers.py	publication code	NA	NA	yes	Python syntax checked
+matched48	population labelling	workflows/10_pca/label_eigenstrat.py	publication code	NA	NA	yes	Python syntax checked
+matched48	smartpca parameter template	workflows/10_pca/recovery/smartpca_matched48.par.template	path-neutral recovered parameters	NA	NA	yes	matches final settings
+public_validation	48-query coordinates	data/summary/pca/pca_ort_queries_matched48.evec	processed source data	SHA-256	7a6b99f508ddbc7802111bc9f6761c93b068573fe14d7e7a51f0e3585dc0220e	yes	48 query rows; no reference-individual rows
+public_validation	final eigenvalues	data/summary/pca/pca_aadr_matched48.eval	processed source data	SHA-256	17080ebc48e70462570241ee23d6163c86066a16699ce2757a7339e53c5664b3	yes	985 values; trace checked
+public_validation	48-query treatment manifest	data/summary/pca/query_manifest_matched48.tsv	processed source data	SHA-256	a47f8bfc6c4a1834770f9b7a11d7073f955cc85c774a9226a7b3e326011417d8	yes	48 rows
+public_validation	reference population aggregates	data/summary/pca/reference_population_aggregates.tsv	processed source data	SHA-256	a67869a152cdd5fb960f8cf96efb965f02c81474c949a89f3bc9c614686199a3	yes	aggregate only
+public_validation	archived method-distance metrics	data/summary/pca/pca_metrics_matched48.csv	generated validation output	SHA-256	d52a18b31ea1c19a93ef36ff62d7a5abcbeb33e64eb859a0a2ce1801bdfd47db	yes	matches recalculation at 1e-12
+main_figure	Figure 7 query plotting coordinates	figures/figure_07_pca/inputs/query_coordinates.tsv	processed source data	SHA-256	afc60df89667026e8ddb74448d1d8900d15250622d1fc907e4530224ee35f12d	yes	24 imputed + 24 pseudo-haploid
+main_figure	Figure 7 aggregate reference background	figures/figure_07_pca/inputs/reference_aggregates.npz	processed source data	SHA-256	5a6d92f15b86fac329e22df5ba0d4a6348d6fee752a8d1d5fc5e19669cbd8a3f	yes	no individual rows
+main_figure	Figure 7 plotting script	figures/figure_07_pca/make_figure.py	publication code	NA	NA	yes	raster matched exactly
+titration_figure	S7/S8 query plotting coordinates	figures/supplementary_07_08_pca_titration/inputs/query_coordinates.tsv	processed source data	SHA-256	ee5ad31798616f49c8a497418954e607851b753e8346ff2fe5cb4f015e6c6c58	yes	1694 query rows
+titration_figure	S7/S8 aggregate reference background	figures/supplementary_07_08_pca_titration/inputs/reference_aggregates.npz	processed source data	SHA-256	a7bf8098412c9d7cf66be92c702fc71ad9be5ae11f7afdb80fc5d70afcd34824	yes	no individual rows
+titration_figure	S7/S8 plotting script	figures/supplementary_07_08_pca_titration/make_figures.py	publication code	NA	NA	yes	both rasters matched exactly
+generated_output	Figure 7 PDF	<OUTPUT_DIR>/figure_07_pca.pdf	generated validation output	SHA-256	3f3fa2f656cb9cbca55fdf12ae3eff660934fe732b488d930a35c97389307c59	no; regenerated on demand	150-dpi raster matched exactly
+generated_output	Supplementary Figure S7 PDF	<OUTPUT_DIR>/supplementary_07_pca_titration_ort15.pdf	generated validation output	SHA-256	e595df3a99a9be98651dc01692edf10d3ace909ad28b3d2ba820d7c993cb7f51	no; regenerated on demand	150-dpi raster matched exactly
+generated_output	Supplementary Figure S8 PDF	<OUTPUT_DIR>/supplementary_08_pca_titration_ort16.pdf	generated validation output	SHA-256	0632714223a26e57586d5472f444ab465c11f3fe12497b0d565c9e2835cfb37e	no; regenerated on demand	150-dpi raster matched exactly

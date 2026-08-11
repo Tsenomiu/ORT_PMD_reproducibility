@@ -26,3 +26,6 @@ sites without an eligible frequency bin do not enter its denominator.
 chromosomes 1–22. `compute_jackknife.py` reconstructs the paired leave-one-
 chromosome-out NRD comparison from the included chromosome counts. Run the compact
 regression check with `bash reproduce_all.sh` from the repository root.
+
+The recovered original Table 1 generator and its 16-row/80-cell validation are
+documented in [`table1/`](table1/).

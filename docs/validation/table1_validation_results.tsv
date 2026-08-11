@@ -1,0 +1,5 @@
+check	observed	expected	status
+data_rows	16	16	PASS
+mapped_cells	80	80	PASS
+cell_matches	80	80	PASS
+generator_rows	16	16	PASS

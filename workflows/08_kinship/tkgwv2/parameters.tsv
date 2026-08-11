@@ -1,0 +1,14 @@
+stage	parameter	value	note
+software	upstream_version	v1.0b	Released July 2022
+software	upstream_commit	c8638d47d3143b82ec969259df66e16f63b2b0ae	Pinned source for patch application
+alignment_reference	build	hs37d5/GRCh37	Reference used for the retained processed inputs
+reference_panel	population	1000_Genomes_Phase_3_EAS	Allele frequencies used by plink2tkrelated
+bam_conversion	samtools_options	-Q 30 -q 30 -B	Recorded pileup base quality, mapping quality and BAQ options
+bam_conversion	variant_scope	biallelic_1000_Genomes_sites	Genome-wide SNP panel
+bam_conversion	pseudo_haploid_sampling	unseeded_random.choice	Exact BAM-level random state was not recorded
+processed_input	format	individual_PLINK_PED_MAP	Deterministic exact-reproduction boundary
+processed_input	map_cleanup	duplicate_SNP_identifiers_removed	Recorded post-conversion cleanup
+relatedness	utility	plink2tkrelated	TKGWV2 processed-input stage
+relatedness	ignore_threshold	1	TKGWV2 v1.0b default; no override supplied
+relatedness	dyads	three_included_files	Four fu_fu, four nu_nu and eight nu_fu comparisons
+relatedness	random_seed	not_applicable	No random operation in processed-PED stage

@@ -1,0 +1,11 @@
+genotypename:    <OUTPUT_DIR>/matched48.geno
+snpname:         <OUTPUT_DIR>/matched48.snp
+indivname:       <OUTPUT_DIR>/matched48.labelled.ind
+evecoutname:     <OUTPUT_DIR>/pca_aadr_matched48.evec
+evaloutname:     <OUTPUT_DIR>/pca_aadr_matched48.eval
+poplistname:     <PROJECT_ROOT>/workflows/10_pca/recovery/keep_pops_ref.txt
+numoutevec:      10
+numthreads:      16
+lsqproject:      YES
+numoutlieriter:  0
+altnormstyle:    NO

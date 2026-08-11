@@ -1,0 +1,44 @@
+analysis	check	recomputed_value	reported_value	status
+sample_manifest	primary_input_people	27	27	PASS
+sample_manifest	primary_retained_people	21	21	PASS
+sample_manifest	primary_mind_exclusions	ORT1,ORT17,ORT19,ORT20,ORT22,ORT25	ORT1,ORT17,ORT19,ORT20,ORT22,ORT25	PASS
+sample_manifest	later_input_people	22	22	PASS
+primary_chr1_22_X_Y	pair_count	210	210	PASS
+primary_chr1_22_X_Y	rank_sequence	1-210	1-210	PASS
+primary_chr1_22_X_Y	all_pair_normalized_values	raw_P0 / cohort_median	raw_P0 / cohort_median	PASS
+primary_chr1_22_X_Y	median_baseline	0.24671998039541876	0.24671998039541876	PASS
+primary_chr1_22_X_Y	focal_raw_p0	0.18973589010001654	0.18973589010001654	PASS
+primary_chr1_22_X_Y	normalized_p0	0.76903333810227426	0.7690333381022743	PASS
+primary_chr1_22_X_Y	kinship_coefficient	0.23096666189772574	0.23096666189772574	PASS
+primary_chr1_22_X_Y	overlap_snps	169172	169172	PASS
+primary_chr1_22_X_Y	degree	First Degree	First Degree	PASS
+primary_chr1_22_X_Y	subtype	Parent-offspring	Parent-offspring	PASS
+primary_chr1_22_X_Y	rounded_p0_3dp	0.769	0.769	PASS
+primary_chr1_22_X_Y	rounded_kc_3dp	0.231	0.231	PASS
+primary_chr1_22_X_Y	analysis_summary	consistent	consistent	PASS
+autosome_1240k	pair_count	230	230	PASS
+autosome_1240k	rank_sequence	1-230	1-230	PASS
+autosome_1240k	all_pair_normalized_values	raw_P0 / cohort_median	raw_P0 / cohort_median	PASS
+autosome_1240k	median_baseline	0.24853168423505886	0.24853168423505886	PASS
+autosome_1240k	focal_raw_p0	0.19097369975420925	0.19097369975420925	PASS
+autosome_1240k	normalized_p0	0.76840786051885512	0.7684078605188551	PASS
+autosome_1240k	kinship_coefficient	0.23159213948114488	0.23159213948114488	PASS
+autosome_1240k	overlap_snps	157451	157451	PASS
+autosome_1240k	degree	First Degree	First Degree	PASS
+autosome_1240k	subtype	Parent-offspring	Parent-offspring	PASS
+autosome_1240k	rounded_p0_3dp	0.768	0.768	PASS
+autosome_1240k	rounded_kc_3dp	0.232	0.232	PASS
+autosome_1240k	analysis_summary	consistent	consistent	PASS
+transversion_only	pair_count	230	230	PASS
+transversion_only	rank_sequence	1-230	1-230	PASS
+transversion_only	all_pair_normalized_values	raw_P0 / cohort_median	raw_P0 / cohort_median	PASS
+transversion_only	median_baseline	0.24893068550585545	0.24893068550585545	PASS
+transversion_only	focal_raw_p0	0.19167202572347267	0.19167202572347267	PASS
+transversion_only	normalized_p0	0.76998151245987745	0.7699815124598774	PASS
+transversion_only	kinship_coefficient	0.23001848754012255	0.23001848754012255	PASS
+transversion_only	overlap_snps	31100	31100	PASS
+transversion_only	degree	First Degree	First Degree	PASS
+transversion_only	subtype	N/A	N/A	PASS
+transversion_only	rounded_p0_3dp	0.770	0.770	PASS
+transversion_only	rounded_kc_3dp	0.230	0.230	PASS
+transversion_only	analysis_summary	consistent	consistent	PASS

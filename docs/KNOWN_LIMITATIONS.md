@@ -1,5 +1,9 @@
 # Known reproducibility limitations
 
+The release-candidate limitation statement is maintained in
+[`reproducibility_limitations.md`](reproducibility_limitations.md). The summary
+below is retained for compatibility with links from v1.0.1.
+
 This repository supports deterministic regeneration of included summary statistics
 and figures from compact inputs. It is not a self-contained copy of the full analysis
 environment.
@@ -9,10 +13,10 @@ environment.
 - Read processing, PMD correction, imputation, and most kinship workflows require
   study reads from ENA accession PRJEB112497 and separately obtained reference data.
 - BAM, VCF/BCF, HDF5, PLINK, and EIGENSTRAT intermediates are not distributed.
-- The complete 210-pair output from the primary READv2 cohort is included as a
-  derived table. The input BAM cohort and the later autosome-only cohort inputs are
-  controlled and are not contained in PRJEB112497, so cohort-level normalisation
-  cannot be rerun from this repository alone.
+- Derived READv2 normalization inputs and focal results support recomputation of
+  the reported values. The exact primary BAM-to-genotype command and pseudo-haploid
+  random state were not preserved, so raw-BAM-to-result byte identity is not
+  claimed.
 - AADR and 1000 Genomes resources retain their provider terms and are not bundled.
 
 ## Figures requiring non-distributed inputs
@@ -24,19 +28,18 @@ environment.
 - PCA plotting code includes aggregate reference backgrounds suitable for checking
   the ORT15 and ORT16 coordinates. Reproducing the exact individual-level reference
   background requires separately licensed AADR data.
-- The matched PCA projection wrapper starts from prebuilt PLINK query datasets. The
-  repository does not reconstruct all 24 imputed and 24 pseudo-haploid query datasets
-  from FASTQ/BAM inputs. The recorded pseudo-haploid calls used pileupCaller
-  (sequenceTools) 1.5.4.0.
+- The recovered PCA package documents TEST query preparation and the authoritative
+  RC projection. Licensed individual-level reference inputs and controlled ORT
+  genomic inputs remain external. The recorded pseudo-haploid calls used
+  pileupCaller (sequenceTools) 1.5.4.0.
 
 ## Workflow coverage
 
 The numbered workflow directories provide final scripts or portable command wrappers
 for the main analysis stages. Each README lists the required inputs and expected
-outputs. The complete 16-state TKGWV2 result table is included and validated, but a
-TKGWV2 runner is not supplied because the exact locally patched conversion code used
-in the study is not available as a verified, portable script; the repository does not
-substitute an untested reconstruction.
+outputs. The recovered TKGWV2 package supplies the exact four-line compatibility
+patch, a path-neutral runner reconstructed from successful logs, and exact validation
+of all 16 reported rows from the retained processed-input boundary.
 
 Local automated checks therefore test syntax, compact numerical reconstructions, and
 figure generation. They do not execute server-scale processing from FASTQ files.

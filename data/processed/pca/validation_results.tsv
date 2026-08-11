@@ -1,0 +1,21 @@
+check	manuscript_value	reproduced_value	absolute_difference	status
+reference_individuals	985	985	0	PASS
+reference_populations	154	154	0	PASS
+projected_query_points	48	48	0	PASS
+smartpca_markers	1113348	1113348	0	PASS
+PC1_variance_pct	6.45	6.4458665485734405	0.0041334514265595	PASS (rounding)
+PC2_variance_pct	4.37	4.36853034226717	0.00146965773283	PASS (rounding)
+PC3_variance_pct	1.53	1.5331999186296736	0.0031999186296736	PASS (rounding)
+PC4_variance_pct	1.04	1.037474200698338	0.002525799301662	PASS (rounding)
+imputed_spread_median_PC1_2	0.00047	0.0004662277660168385	0.0000037722339831615	PASS (rounding)
+imputed_spread_maximum_PC1_2	0.00102	0.0010198039027185582	0.0000001960972814418	PASS (rounding)
+pseudohaploid_spread_median_PC1_2	0.00217	0.0021729017198825465	0.0000029017198825465	PASS (rounding)
+pseudohaploid_spread_maximum_PC1_2	0.00336	0.003361547262794322	0.000001547262794322	PASS (rounding)
+imputed_vs_pseudohaploid_median_PC1_2	0.00309	0.003084592406944879	0.000005407593055121	PASS (rounding)
+titration_projected_points	1694	1694	0	PASS
+titration_ORT15_points	842	842	0	PASS
+titration_ORT16_points	852	852	0	PASS
+titration_missing_ORT15_nu_trim10_0.20x	10	10	0	PASS
+main_Figure_7_150dpi_raster	identical	identical	0 differing bytes	PASS
+Supplementary_Figure_S7_150dpi_raster	identical	identical	0 differing bytes	PASS
+Supplementary_Figure_S8_150dpi_raster	identical	identical	0 differing bytes	PASS
