@@ -8,6 +8,15 @@ repo_root=$(cd "$script_dir/../../.." && pwd -P)
 build_dir=${1:-"$repo_root/_build/pca_recovery"}
 PYTHON=${PYTHON:-python3}
 PDFTOPPM=${PDFTOPPM:-pdftoppm}
+VALIDATION_MODE=${ORT_PCA_VALIDATION_MODE:-canonical-strict}
+
+case "$VALIDATION_MODE" in
+  canonical-strict|ci-portable) ;;
+  *)
+    echo "ORT_PCA_VALIDATION_MODE must be canonical-strict or ci-portable" >&2
+    exit 2
+    ;;
+esac
 
 mkdir -p "$build_dir"
 build_dir=$(cd "$build_dir" && pwd -P)
@@ -41,7 +50,12 @@ ORT_FIGURE_OUTPUT_DIR="$build_dir" \
 "$PYTHON" "$script_dir/validate_pca_recovery.py" \
   --raster-dir "$build_dir" \
   --output "$build_dir/validation_results_recomputed.tsv" \
+  --mode "$VALIDATION_MODE" \
   --absolute-tolerance 1e-12
 
-echo "PASS: three PCA PDFs rebuilt and their 150-dpi rasters matched"
+if [[ "$VALIDATION_MODE" == "canonical-strict" ]]; then
+  echo "PASS: three PCA PDFs rebuilt and their 150-dpi raster SHA-256 values matched"
+else
+  echo "PASS: three PCA PDFs rebuilt and passed CI-portable raster validation"
+fi
 echo "Validation outputs: $build_dir"

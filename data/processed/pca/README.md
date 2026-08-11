@@ -22,3 +22,11 @@ plotting are disclosure-controlled population aggregates.
 structural checks; the final three record byte-identical 150-dpi raster
 comparisons against the manuscript figures. `input_output_manifest.tsv` maps each
 input, script and expected output without exposing machine-specific locations.
+
+These TSV files are the archived `canonical-strict` record. They and
+`raster_reference_checksums.tsv` remain unchanged. Canonical rasters were
+produced with Poppler 25.06.0 and TeX Live 2024. The failing v1.1.0 GitHub
+Actions runs used Poppler 24.02.0, which changed raster anti-aliasing and PNG
+bytes without changing numerical outputs or scientific content. The separate
+runtime `ci-portable` mode still requires all numerical and structural checks,
+RGB PNG format, exact dimensions, and documented visual-equivalence thresholds.

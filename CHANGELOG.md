@@ -1,9 +1,17 @@
 # Changelog
 
-## Proposed v1.1.0
+## v1.1.1
 
-This entry describes the local release candidate. It is not a published tag or
-GitHub release.
+- Add an explicit `ci-portable` PCA raster-validation mode for GitHub Actions.
+- Retain `canonical-strict` as the default, including all 20 PCA checks and all
+  three exact canonical raster SHA-256 comparisons.
+- Document the renderer-dependent anti-aliasing difference between canonical
+  Poppler 25.06.0 / TeX Live 2024 output and Poppler 24.02.0 in the failing
+  v1.1.0 GitHub Actions runs.
+- No scientific data, analysis results, parameters, source values, figure
+  content, tables, or conclusions changed.
+
+## v1.1.0
 
 - Add the recovered TKGWV2 v1.0b compatibility patch, a path-neutral
   processed-input runner, input and environment manifests, and exact validation
