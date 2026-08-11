@@ -23,7 +23,7 @@ docs/validation/table1_validation_results.tsv	A	generated validation output	7e00
 docs/validation/validate_main_output_sources.py	A	generated validation output	b89338574f9ff1d7fb58ec215e978ef9661030393b7d825092ac9cf762e7e2dd	Curated release-candidate file
 docs/workflow_manifest.md	A	documentation	ed15afc4ef0826f1c75bf1151a2de1c0e77cb0e4dfd7838d165ae702380de13b	Curated release-candidate file
 v1.1.0_EXCLUSIONS.md	A	documentation	6144703ed78eb882b90547e7533836cc57daaae9c3e00fa1bb322e5b9465c78c	Curated release-candidate file
-v1.1.0_RELEASE_NOTES.md	A	documentation	74d8d6ba5349380e57bd60096b5f7951527d407a52d95e730144875102c74a40	Curated release-candidate file
+v1.1.0_RELEASE_NOTES.md	A	documentation	0291cb19d0bc4a0876877714e1937803922492ca354bd7a3c1ba11bf6cc0581e	Curated release-candidate file
 v1.1.0_VALIDATION_REPORT.md	A	documentation	0aeab239009a13cec2d39a82ae3e186acc785da54f278dce3c862ae6d01ce813	Curated release-candidate file
 workflows/06_concordance/table1/README.md	A	documentation	67dc3ca4a888586be01b93289846292a8315e64ed651cc346d0c78147d7b5553	Curated release-candidate file
 workflows/06_concordance/table1/generate_table1.py	A	original recovered code	078e93b4f367004037be6bd7562dd66dcf8b13a63ea3b36e7869c676df4d4f13	Curated release-candidate file
@@ -66,8 +66,8 @@ workflows/08_kinship/readv2_primary_bam_manifest.example.tsv	D	documentation	-	R
 workflows/08_kinship/run_readv2_cemetery.sh	D	documentation	-	Removed superseded v1.0.1 READv2 wrapper or example that overstated the recoverable raw-input boundary
 workflows/08_kinship/run_readv2_primary_chrxy.sh	D	documentation	-	Removed superseded v1.0.1 READv2 wrapper or example that overstated the recoverable raw-input boundary
 .gitattributes	M	documentation	46ccde7fdd67b52a2ae205f36e12cd81ec7f5b5f2d13486e206b42e792b25e9c	Curated release-candidate file
-CITATION.cff	M	documentation	c7087b6d6d1f224e0cd0d0b78823727c7bec29a0b8f4941951e3ebf5d0af1b3c	Curated release-candidate file
-README.md	M	documentation	85617a1afed79966fd87c83478f8bd5db71a7e35f37d437a1d194fa2e57378c8	Curated release-candidate file
+CITATION.cff	M	documentation	ec79c624573ef054dfe517cbb9e69539ffa4e8b7bb9dbeadf116952792aadf33	Curated release-candidate file
+README.md	M	documentation	148612f0321a13207e5629e3e9ea69f9a6bf6a17f9d4f8d96cde258ff24d4eb5	Curated release-candidate file
 check_repository.sh	M	generated validation output	17d39b4a5a301f891af3bbb3e7e690d7b8bb2ad4dc4ac4e88393de913d62611f	Curated release-candidate file
 docs/DATA_ACCESS.md	M	documentation	142f44f57ce506725b06458726641a3539d3a0d98ea4e255285197c63a80b28e	Curated release-candidate file
 docs/KNOWN_LIMITATIONS.md	M	documentation	12ce584a8bbcba6b61111e11e77cdd82e81f4775a79ef70176ded13a961898d3	Curated release-candidate file

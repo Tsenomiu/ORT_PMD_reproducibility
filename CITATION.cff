@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use these workflows, please cite the software archive and the associated article."
 title: "ORT PMD reproducibility workflow"
 type: software
-version: "1.1.0-rc"
+version: "1.1.0"
 repository-code: "https://github.com/Tsenomiu/ORT_PMD_reproducibility"
 license: MIT
 authors:
@@ -17,7 +17,7 @@ authors:
     given-names: Takashi
 preferred-citation:
   type: article
-  title: "Trade-offs in post-mortem damage correction for low-coverage ancient genomes: site retention, imputation and kinship inference"
+  title: "Matched full-UDG and non-UDG ancient DNA libraries reveal trade-offs in post-mortem damage correction for imputation and kinship inference"
   authors:
     - family-names: Ravdandorj
       given-names: Odongoo
