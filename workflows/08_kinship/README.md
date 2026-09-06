@@ -3,7 +3,7 @@
 The study uses complementary kinship summaries rather than treating them as fully
 independent analyses.
 
-The proposed v1.1.0 recovery additions are organized under:
+The TKGWV2 and READv2 workflows are organized under:
 
 - [`tkgwv2/`](tkgwv2/) for the recovered TKGWV2 patch, processed-input runner,
   manifests, and exact 16-row validation;

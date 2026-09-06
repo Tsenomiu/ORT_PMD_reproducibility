@@ -6,9 +6,9 @@ genotypes.
 
 - `damage/alt_fraction_recomputed_dp3_adsum.csv`: the 26 correction-state rows used
   by main Figure 2 and Supplementary Table S2.
-- `damage/deltaalt_uncertainty/`: compact Round45 LOCO state intervals, primary
+- `damage/deltaalt_uncertainty/`: LOCO state intervals, primary
   paired jackknife contrasts, common-callable sensitivity summaries, diagnostics,
-  canonical validation and sanitized source checksums used by Reduce18F/Figure 2.
+  validation and source checksums used by Figure 2.
 - `imputation/`: the 16-row treatment summary, per-chromosome concordance counts and
   expected paired-jackknife outputs used by main Figure 3 and Table 1.
 - `ancibd/`: asymmetric and 64-state IBD1 summaries used by main Figure 4 and

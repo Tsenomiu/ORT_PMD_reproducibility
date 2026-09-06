@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Shorten the README and consolidate release reports into one validation guide.
+  Historical reports remain available in their original Git tags.
+- Remove the duplicate limitations document and use one shared TKGWV2 expected-
+  results table for figure generation and validation. No result values, analysis
+  parameters or scientific checks change.
+
 ## v1.2.0
 
 - Add the Reduce18F/Round45 DeltaALT uncertainty analysis: 26 LOCO state

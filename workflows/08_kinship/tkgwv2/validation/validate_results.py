@@ -12,7 +12,8 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 PACKAGE = HERE.parent
-EXPECTED_PATH = PACKAGE / "source_data" / "tkgwv2_pair_results.tsv"
+ROOT = PACKAGE.parents[2]
+EXPECTED_PATH = ROOT / "data" / "summary" / "kinship" / "tkgwv2_pair_results.tsv"
 RECOVERED_VALIDATION_PATH = HERE / "reproduced_results.tsv"
 CHECKED_REPORT_PATH = HERE / "validation_results.tsv"
 RUNS = ("fu_fu", "nu_nu", "nu_fu")

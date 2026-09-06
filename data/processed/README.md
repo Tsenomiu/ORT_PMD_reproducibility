@@ -1,7 +1,6 @@
 # Processed verification data
 
-This directory contains compact processed or derived data curated for the
-proposed v1.1.0 release. It contains no raw sequence reads or full genotype
+Compact processed data for verification, without raw reads or full genotype
 matrices.
 
 - `readv2/`: anonymized cohort-normalization values and focal READv2 results;

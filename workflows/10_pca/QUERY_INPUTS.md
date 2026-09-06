@@ -17,7 +17,7 @@ datasets. It does not include a verified FASTQ/BAM-to-query-trio driver for all 
 imputed and 24 pseudo-haploid datasets. The recorded pseudo-haploid calls used
 pileupCaller (sequenceTools) 1.5.4.0; the missing component is the complete upstream
 driver, not the software version. This boundary is also listed in
-`docs/KNOWN_LIMITATIONS.md`.
+[`docs/reproducibility_limitations.md`](../../docs/reproducibility_limitations.md).
 
 AADR genotypes and the individual-level reference coordinates are obtained from the
 provider and are not stored in this repository.
