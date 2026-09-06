@@ -2,7 +2,8 @@ cff-version: 1.2.0
 message: "If you use these workflows, please cite the software archive and the associated article."
 title: "ORT PMD reproducibility workflow"
 type: software
-version: "1.2.0"
+version: "1.2.1"
+date-released: "2026-09-06"
 repository-code: "https://github.com/Tsenomiu/ORT_PMD_reproducibility"
 license: MIT
 authors:

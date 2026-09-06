@@ -1,12 +1,15 @@
 # Changelog
 
-## Unreleased
+## v1.2.1
 
 - Shorten the README and consolidate release reports into one validation guide.
   Historical reports remain available in their original Git tags.
-- Remove the duplicate limitations document and use one shared TKGWV2 expected-
-  results table for figure generation and validation. No result values, analysis
-  parameters or scientific checks change.
+- Remove the duplicate limitations document.
+- Align supplementary figure directories, output names and validation labels
+  with the manuscript: S1–S4 and S7–S8 are rebuilt; S5–S6 require external inputs.
+- Keep a checksum-pinned TKGWV2 expected table separate from the figure source
+  and reproduced results, with regression tests that reject altered values.
+- No scientific results or analysis parameters change.
 
 ## v1.2.0
 

@@ -39,8 +39,8 @@ environment. See [validation](docs/VALIDATION.md) for details.
 | [docs](docs/METHODS_DETAILS.md) | Methods, validation and reproducibility boundaries |
 
 Figure 1 was created in PowerPoint and is not regenerated here. The compact
-package rebuilds main Figures 2–7 and Supplementary Figures S1 and S4–S8;
-S2–S3 require external spatial or CT inputs. See the [figure map](figures/README.md).
+package rebuilds main Figures 2–7 and Supplementary Figures S1–S4 and S7–S8;
+S5–S6 require external spatial or CT inputs. See the [figure map](figures/README.md).
 
 ## Data and reproducibility
 

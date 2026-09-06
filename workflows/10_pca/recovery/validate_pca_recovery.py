@@ -17,7 +17,7 @@ from PIL import Image, ImageFilter
 ROOT = Path(__file__).resolve().parents[3]
 SUMMARY = ROOT / "data" / "summary" / "pca"
 PROCESSED = ROOT / "data" / "processed" / "pca"
-TITRATION = ROOT / "figures" / "supplementary_07_08_pca_titration" / "inputs" / "query_coordinates.tsv"
+TITRATION = ROOT / "figures" / "supplementary_03_04_pca_titration" / "inputs" / "query_coordinates.tsv"
 RECOVERY = ROOT / "workflows" / "10_pca" / "recovery"
 CANONICAL_RASTERS = RECOVERY / "canonical_rasters"
 
@@ -276,8 +276,8 @@ def main() -> None:
     raster_rows = read_csv(PROCESSED / "raster_reference_checksums.tsv", delimiter="\t")
     raster_checks = (
         ("main_Figure_7_150dpi_raster", raster_rows[0]),
-        ("Supplementary_Figure_S7_150dpi_raster", raster_rows[1]),
-        ("Supplementary_Figure_S8_150dpi_raster", raster_rows[2]),
+        ("Supplementary_Figure_S3_150dpi_raster", raster_rows[1]),
+        ("Supplementary_Figure_S4_150dpi_raster", raster_rows[2]),
     )
     for check, expected in raster_checks:
         raster = args.raster_dir / expected["raster_filename"]

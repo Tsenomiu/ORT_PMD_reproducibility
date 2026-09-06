@@ -26,6 +26,10 @@ python3 workflows/08_kinship/tkgwv2/validation/validate_results.py
 
 The expected terminal message is `TKGWV2 validation: 16/16 PASS`.
 
+The validator compares independently reproduced results with a checksum-pinned
+manuscript table frozen from v1.2.0. It separately checks the Figure 6 source
+against that same frozen table; no expected values are generated during a run.
+
 ## File provenance
 
 | Path | Classification | Purpose |
@@ -37,7 +41,8 @@ The expected terminal message is `TKGWV2 validation: 16/16 PASS`.
 | `input_checksums.tsv` | generated provenance record | Sizes and SHA-256 checksums for the deterministic external inputs |
 | `parameters.tsv` | recovered/generated documentation | Recorded parameters and deterministic-boundary notes |
 | `environment.tsv` | recovered/generated documentation | Original recorded and fresh-validation environments |
-| [Shared expected results](../../../data/summary/kinship/tkgwv2_pair_results.tsv) | processed source data | The 16 manuscript values, also used by Figure 6 |
+| `validation/expected_results.tsv` | frozen manuscript reference | Byte-identical to the v1.2.0 manuscript table; SHA-256 pinned in the validator |
+| [Figure 6 source](../../../data/summary/kinship/tkgwv2_pair_results.tsv) | processed figure data | Checked separately against the frozen manuscript reference |
 | `validation/reproduced_results.tsv` | generated validation output | Normalized results from the fresh processed-input rerun |
 | `validation/validation_results.tsv` | generated validation output | Cell-by-cell comparisons of reported and reproduced values |
 | `validation/validate_results.py` | publication validation code | Rechecks all 16 comparisons locally |

@@ -10,7 +10,7 @@ present elsewhere in the repository are intentionally not duplicated:
 - `data/summary/pca/reference_population_aggregates.tsv`: population aggregates;
 - `data/summary/pca/pca_metrics_matched48.csv`: archived method-distance metrics;
 - `figures/figure_07_pca/inputs/`: query coordinates and aggregate background;
-- `figures/supplementary_07_08_pca_titration/inputs/`: titration query
+- `figures/supplementary_03_04_pca_titration/inputs/`: titration query
   coordinates and aggregate background.
 
 No individual-level AADR coordinates or genotypes are included. The recovered

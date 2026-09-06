@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 from decimal import Decimal
 from pathlib import Path
 
@@ -13,7 +14,10 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 PACKAGE = HERE.parent
 ROOT = PACKAGE.parents[2]
-EXPECTED_PATH = ROOT / "data" / "summary" / "kinship" / "tkgwv2_pair_results.tsv"
+EXPECTED_PATH = HERE / "expected_results.tsv"
+# Frozen manuscript table from v1.2.0; never regenerated from plotted or run output.
+EXPECTED_SHA256 = "5ce9e4b7fafba218349d66e78606fdc61880ee8e4848e1477e5d36c2564ba98f"
+FIGURE_SOURCE_PATH = ROOT / "data" / "summary" / "kinship" / "tkgwv2_pair_results.tsv"
 RECOVERED_VALIDATION_PATH = HERE / "reproduced_results.tsv"
 CHECKED_REPORT_PATH = HERE / "validation_results.tsv"
 RUNS = ("fu_fu", "nu_nu", "nu_fu")
@@ -22,6 +26,23 @@ RUNS = ("fu_fu", "nu_nu", "nu_fu")
 def read_tsv(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as handle:
         return list(csv.DictReader(handle, delimiter="\t"))
+
+
+def load_expected_results(path: Path = EXPECTED_PATH) -> list[dict[str, str]]:
+    if hashlib.sha256(path.read_bytes()).hexdigest() != EXPECTED_SHA256:
+        raise SystemExit("frozen TKGWV2 expected-results checksum changed")
+    return read_tsv(path)
+
+
+def validate_figure_source(
+    expected_rows: list[dict[str, str]], figure_rows: list[dict[str, str]]
+) -> None:
+    expected = {(r["sample1"], r["sample2"]): r for r in expected_rows}
+    figure = {(r["sample1"], r["sample2"]): r for r in figure_rows}
+    if len(expected_rows) != 16 or len(figure_rows) != 16 or len(figure) != 16:
+        raise SystemExit("TKGWV2 figure source must contain 16 unique pairs")
+    if figure != expected:
+        raise SystemExit("TKGWV2 figure source differs from frozen expected results")
 
 
 def normalize_relationship(value: str) -> str:
@@ -169,12 +190,14 @@ def main() -> int:
     parser.add_argument("--output", type=Path, help="write the comparison TSV here")
     args = parser.parse_args()
 
+    expected = load_expected_results()
+    validate_figure_source(expected, read_tsv(FIGURE_SOURCE_PATH))
     observed = (
         load_tkgwv2_outputs(args.results_dir)
         if args.results_dir
         else read_tsv(args.reproduced_results)
     )
-    report = build_report(read_tsv(EXPECTED_PATH), observed)
+    report = build_report(expected, observed)
 
     if args.output:
         write_report(args.output, report)

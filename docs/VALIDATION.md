@@ -17,7 +17,7 @@ every release file except itself; runtime outputs are excluded.
 | DeltaALT | 26 LOCO state intervals, 90 primary paired contrasts and 24 common-callable sensitivity contrasts; synthetic block-jackknife tests |
 | Concordance | Dosage/best-guess column identity, dosage reconstruction and byte-exact chromosome-jackknife outputs |
 | Mitochondrial | 12 tests, invalid-input rejection and corrected 36/37/36 SNP counts; target-site and rCRS-spacer summaries |
-| TKGWV2 | 16 reported-versus-reproduced comparisons, including HRC 0.2356 and 4,517,214 SNPs |
+| TKGWV2 | 16 comparisons against a checksum-pinned expected table, a separate figure-source check and mutation regression tests |
 | READv2 | 43 checks of primary and sensitivity summaries and normalization arithmetic |
 | Table 1 | 16 generated rows and 80 cell-to-source mappings; comparison with a separately supplied Word manuscript is optional |
 | PCA | Numerical tolerance 1e-12, structural checks and three raster comparisons |

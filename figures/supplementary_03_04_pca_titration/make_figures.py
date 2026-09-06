@@ -19,8 +19,8 @@ the inputs contain density masks and fixed-bin counts with a minimum cell count 
 three.
 
 Inputs: inputs/query_coordinates.tsv, inputs/reference_aggregates.npz
-Outputs: supplementary_07_pca_titration_ort15.pdf and
-         supplementary_08_pca_titration_ort16.pdf
+Outputs: supplementary_03_pca_titration_ort15.pdf and
+         supplementary_04_pca_titration_ort16.pdf
 The plotting code is compatible with the locally available Matplotlib stack.
 The PDF wraps a 600-dpi PNG with deterministic pdfTeX settings because the
 Matplotlib PDF backend clips one repeated-marker panel.
@@ -255,9 +255,9 @@ def main():
           "reference background: disclosure-controlled aggregate",
           "Yakut mean:", yak_mean, "n_yak:", n_yak)
     m15 = build("ORT15", [o for o in ort if o[0]["ind"]=="ORT15"], aggregate, yak_mean, n_yak,
-                os.path.join(OUTPUT_DIR,"supplementary_07_pca_titration_ort15"))
+                os.path.join(OUTPUT_DIR,"supplementary_03_pca_titration_ort15"))
     m16 = build("ORT16", [o for o in ort if o[0]["ind"]=="ORT16"], aggregate, yak_mean, n_yak,
-                os.path.join(OUTPUT_DIR,"supplementary_08_pca_titration_ort16"))
+                os.path.join(OUTPUT_DIR,"supplementary_04_pca_titration_ort16"))
     print("methods present ORT15:", sorted(m15))
     print("methods present ORT16:", sorted(m16))
 

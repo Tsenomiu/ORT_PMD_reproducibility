@@ -12,7 +12,7 @@ genotypes.
 - `imputation/`: the 16-row treatment summary, per-chromosome concordance counts and
   expected paired-jackknife outputs used by main Figure 3 and Table 1.
 - `ancibd/`: asymmetric and 64-state IBD1 summaries used by main Figure 4 and
-  Supplementary Figures S5--S6.
+  Supplementary Figures S7--S8.
 - `kinship/tkgwv2_pair_results.tsv`: all 16 TKGWV2 correction-state comparisons in
   Supplementary Table S6.
 - `kinship/readv2_cemetery_210_pairs.tsv`: the complete 210-pair READv2 output used

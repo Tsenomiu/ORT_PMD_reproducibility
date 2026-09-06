@@ -4,10 +4,10 @@
 The script reads the transition-inclusive AADR v62 CROSS64 summary. Figure 4
 combines the preselected asymmetric subset (full-UDG held uncorrected,
 non-UDG correction varied) with same-method full-UDG/full-UDG and
-non-UDG/non-UDG comparisons. Figure S6 is the 16-point length-versus-count
+non-UDG/non-UDG comparisons. Figure S8 is the 16-point length-versus-count
 diagnostic across the four library-pair categories.
 
-Primary calls use strict >12 cM (and, for Figure S6 panel b, >20 cM) together
+Primary calls use strict >12 cM (and, for Figure S8 panel b, >20 cM) together
 with the >220 SNP/cM density filter. No external gap merge is used.
 """
 
@@ -356,7 +356,7 @@ def draw_figure4(
     return x_min, x_max
 
 
-def draw_s4_diagnostic(rows: Sequence[Mapping[str, str]], output: Path) -> None:
+def draw_length_count_diagnostic(rows: Sequence[Mapping[str, str]], output: Path) -> None:
     selected = [row for row in rows if row.get("same_treatment") == "yes"]
     if len(selected) != 16:
         raise ValueError(f"Expected 16 same-treatment rows, found {len(selected)}")
@@ -473,7 +473,7 @@ def write_validation(
         "status": "PASS",
         "analysis": "AADR v62 all-SNP corrected ancIBD",
         "filters": {
-            "length": "strict >12 cM; Figure S6 also strict >20 cM",
+            "length": "strict >12 cM; Figure S8 also strict >20 cM",
             "density": "strict >220 SNP/cM",
             "external_gap_merge": False,
         },
@@ -495,12 +495,12 @@ def write_validation(
                 }
                 for panel, direction, design, _title in FIGURE4_PANELS
             ],
-            "figureS6_same_treatment_rows": sum(
+            "figureS8_same_treatment_rows": sum(
                 row.get("same_treatment") == "yes" for row in summary_rows
             ),
         },
     }
-    with (output_dir / "FIG4_S6_VALIDATION.json").open("w") as handle:
+    with (output_dir / "FIG4_S8_VALIDATION.json").open("w") as handle:
         json.dump(payload, handle, indent=2, sort_keys=True)
         handle.write("\n")
 
@@ -545,7 +545,7 @@ def write_display_values(
     same_index = index_unique(
         selected, ("library_direction", "same_treatment_method")
     )
-    with (output_dir / "FIGS6_DISPLAY_VALUES.tsv").open("w", newline="") as handle:
+    with (output_dir / "FIGS8_DISPLAY_VALUES.tsv").open("w", newline="") as handle:
         fields = (
             "library_direction",
             "same_treatment_method",
@@ -591,9 +591,9 @@ def main() -> None:
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     figure4 = args.output_dir / "figure_04_ibd_summary.pdf"
-    figure_s6 = args.output_dir / "supplementary_06_ibd_length_count.pdf"
+    figure_s8 = args.output_dir / "supplementary_08_ibd_length_count.pdf"
     figure4_xlim = draw_figure4(asymmetric_rows, summary_rows, figure4)
-    draw_s4_diagnostic(summary_rows, figure_s6)
+    draw_length_count_diagnostic(summary_rows, figure_s8)
     write_display_values(args.output_dir, asymmetric_rows, summary_rows)
     write_validation(
         args.output_dir,
@@ -606,9 +606,9 @@ def main() -> None:
         figure4_xlim,
     )
     print(f"figure4={figure4}")
-    print(f"figureS6={figure_s6}")
+    print(f"figureS8={figure_s8}")
     print(f"callable_map_denominator_cM={denominator:.6f}")
-    print("design_validation=PASS (4 Figure 4 panels/16 rows; 16 Figure S6 rows)")
+    print("design_validation=PASS (4 Figure 4 panels/16 rows; 16 Figure S8 rows)")
 
 
 if __name__ == "__main__":

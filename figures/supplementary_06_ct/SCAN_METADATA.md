@@ -1,4 +1,4 @@
-# Supplementary Figure S3 - CT metadata
+# Supplementary Figure S6 - CT metadata
 
 The figure documents the petrous portions before destructive sampling. CT was
 used for anatomical localisation and documentation only; no quantitative CT

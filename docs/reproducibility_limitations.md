@@ -25,8 +25,8 @@ publicly available under ENA study accession PRJEB112497. ENA is the authoritati
 source for filenames, checksums, metadata, and current access status.
 
 Controlled archaeological coordinates and raw micro-CT volumes are also not
-distributed in this repository. Supplementary Figure S2 and Supplementary
-Figure S3 therefore retain documented external-input boundaries.
+distributed in this repository. Supplementary Figure S5 and Supplementary
+Figure S6 therefore retain documented external-input boundaries.
 
 ## Mitochondrial calling boundary
 

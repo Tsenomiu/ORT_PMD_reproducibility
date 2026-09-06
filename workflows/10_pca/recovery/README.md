@@ -30,7 +30,7 @@ The projection wrapper calls the existing
 duplicated here. The method-distance calculation is the existing
 `workflows/10_pca/verify_pca.py`. The plotting code and compact plotting inputs
 remain in `figures/figure_07_pca/` and
-`figures/supplementary_07_08_pca_titration/`.
+`figures/supplementary_03_04_pca_titration/`.
 
 ## External inputs
 
@@ -121,7 +121,7 @@ The wrapper:
 
 1. recalculates the method-distance table with an absolute tolerance of `1e-12`;
 2. validates the reference, query, marker and titration counts;
-3. rebuilds Figure 7 and Supplementary Figures S7 and S8 from the released
+3. rebuilds Figure 7 and Supplementary Figures S3 and S4 from the released
    query-only coordinates and disclosure-controlled population aggregates;
 4. renders each PDF at 150 dpi and, by default, compares its SHA-256 checksum
    with the archived manuscript raster.

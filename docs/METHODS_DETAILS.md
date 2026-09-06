@@ -53,7 +53,7 @@ bamRefine changes only bases overlapping selected SNPs. Their post-correction cu
 therefore need not flatten. Soft-clipping removes terminal bases from the plotted
 alignment and visibly flattens the read-end curve.
 
-For Supplementary Figure S4, the archived full-UDG profile tables came from merged
+For Supplementary Figure S2, the archived full-UDG profile tables came from merged
 pre-deduplication collapsed BAMs, whereas the non-UDG profile tables came from
 post-deduplication collapsed BAMs. The figure labels and caption state this distinction;
 the diagnostic supports within-row comparisons among correction states rather than a

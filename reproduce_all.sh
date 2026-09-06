@@ -42,6 +42,7 @@ printf '%s\n' '== Reported-result summary validation =='
 "$PYTHON" "$ROOT/validate_reported_results.py"
 
 printf '%s\n' '== Recovered TKGWV2 validation =='
+"$PYTHON" "$ROOT/workflows/08_kinship/tkgwv2/validation/test_validate_results.py"
 "$PYTHON" "$ROOT/workflows/08_kinship/tkgwv2/validation/validate_results.py"
 
 printf '%s\n' '== Recovered READv2 validation =='
