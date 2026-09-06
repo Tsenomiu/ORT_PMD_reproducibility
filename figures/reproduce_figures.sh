@@ -24,19 +24,9 @@ check_pdf() {
   printf 'PASS: %s -> %s\n' "$label" "$path"
 }
 
-if "$CODE_DIR/figure_01_workflow/render_svg.sh" "$BUILD_DIR/figure_01_workflow.pdf"; then
-  check_pdf 'Figure 1' "$BUILD_DIR/figure_01_workflow.pdf"
-else
-  status=$?
-  if test "$status" -eq 77; then
-    printf '%s\n' 'SKIP: Figure 1 (no supported SVG-to-PDF converter)'
-  else
-    exit "$status"
-  fi
-fi
-
 "$PYTHON" "$CODE_DIR/figure_02_alt_fraction/make_figure.py" \
   "$SUMMARY/damage/alt_fraction_recomputed_dp3_adsum.csv" \
+  "$SUMMARY/damage/deltaalt_uncertainty/state_ci_loco.csv" \
   "$BUILD_DIR/figure_02_alt_fraction.pdf"
 check_pdf 'Figure 2' "$BUILD_DIR/figure_02_alt_fraction.pdf"
 

@@ -2,6 +2,7 @@ software	version_or_build	role
 AdapterRemoval	2.2.2	adapter removal and read collapsing
 BWA	0.7.17-r1188	alignment to hs37d5
 samtools	1.7	BAM processing, merge, and duplicate removal
+samtools / htslib	1.13 / 1.13	corrected mitochondrial input validation and MT extraction
 Qualimap	2; exact build not recorded	endogenous-DNA quality-control summaries
 bcftools	1.16 / htslib 1.16	pileup, genotype likelihoods, concordance preparation, and mitochondrial calls
 BamUtil trimBam	1.0.15	terminal soft clipping

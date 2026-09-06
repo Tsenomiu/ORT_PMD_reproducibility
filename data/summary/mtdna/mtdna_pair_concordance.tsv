@@ -1,5 +1,5 @@
-record_type	position	ORT15_call	ORT16_call	ORT15_INFO_DP	ORT16_INFO_DP	interpretation
-summary	NA	37_called_SNPs	37_called_SNPs	NA	NA	36_shared_called_SNPs; profiles_differ_at_3106_4215_7028
-difference	3106	CN_to_C_indel	reference	237	250	rCRS_N_placeholder_reference_ambiguity
-difference	4215	A_to_G	reference_or_no_variant	5	NA	ORT15_low_depth_singleton
-difference	7028	reference_or_no_variant	C_to_T	NA	5	ORT16_low_depth_singleton
+record_type	position	ORT15	ORT16	ORT15_depth	ORT16_depth	interpretation
+summary	NA	36_called_ALT_SNPs	37_called_ALT_SNPs	NA	NA	36 exact shared POS_REF_ALT calls; ORT15 call set is a subset of ORT16
+artifact	3106	CN>C	CN>C	152	148	left-anchored deletion of artificial rCRS N spacer at 3107; exclude from biological SNP and discordance counts
+site	4215	no_qualifying_coverage	no_qualifying_coverage	0	0	old ORT15 A>G call does not survive; one truncated-read molecule was counted twice after nested-state merge
+site	7028	no_qualifying_coverage	C>T_1_read_call	0	1	ORT16 call has one forward read (MAPQ37; BQ40; AF=1/1) and is not a confirmed pairwise difference

@@ -1,3 +1,3 @@
-sample	software	tree	haplogroup	quality_score	classification_status	executed_mpileup_filters
-ORT15	HaploGrep3_3.3.2	phylotree-fu-rcrs@1.3	D4o1	0.8911	reliable_score_gt_0.8	MAPQ30_baseQ30_no_explicit_DP_filter
-ORT16	HaploGrep3_3.3.2	phylotree-fu-rcrs@1.3	D4o1	0.9107	reliable_score_gt_0.8	MAPQ30_baseQ30_no_explicit_DP_filter
+sample	input_read_set	caller	calling_filters	haplogrep_version	tree	haplogroup	quality_score	interpretation
+ORT15	full-UDG collapsed-only .1	bcftools 1.16 haploid	MAPQ>=30;BQ>=30;BAQ_disabled;no_global_DP_filter	3.3.2	phylotree-fu-rcrs@1.3	D4o1	0.8911	software-reported assignment
+ORT16	full-UDG collapsed-only .1	bcftools 1.16 haploid	MAPQ>=30;BQ>=30;BAQ_disabled;no_global_DP_filter	3.3.2	phylotree-fu-rcrs@1.3	D4o1	0.9107	software-reported assignment

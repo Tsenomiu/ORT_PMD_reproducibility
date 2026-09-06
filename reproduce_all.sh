@@ -19,6 +19,14 @@ printf '%s\n' '== Posterior-dosage reconstruction unit test =='
 "$PYTHON" "$ROOT/workflows/06_concordance/test_add_ds_from_gp.py"
 printf '%s\n' 'PASS  dosage reconstruction and four-decimal precision'
 
+printf '%s\n' '== Corrected mitochondrial workflow unit tests =='
+"$PYTHON" "$ROOT/workflows/09_mtdna/test_mtdna_workflow.py"
+printf '%s\n' 'PASS  canonical mtDNA manifest and corrected summary reconstruction'
+
+printf '%s\n' '== DeltaALT uncertainty compact-release validation =='
+"$PYTHON" "$ROOT/workflows/04_alt_fraction/uncertainty/test_deltaalt_uncertainty.py"
+"$PYTHON" "$ROOT/workflows/04_alt_fraction/uncertainty/validate_deltaalt_uncertainty.py"
+
 printf '%s\n' '== Chromosome-jackknife reconstruction =='
 JACK_DIR="$BUILD_DIR/tables/jackknife"
 "$PYTHON" "$ROOT/workflows/06_concordance/compute_jackknife.py" \

@@ -16,3 +16,7 @@ C-to-T and G-to-A sites form the damage-transition group. Every treatment is
 summarised with the same rules and its own callable site set; the workflow does
 not impose a fixed common-site intersection. Counts for every treatment must come
 from that treatment's own pileup.
+
+The `uncertainty/` subdirectory contains the Reduce18F/Round45 paired LOCO,
+5-Mb and 10-Mb genomic-block jackknife scripts, common-callable sensitivity
+analysis, compact-output validator and its explicit external per-site-data boundary.

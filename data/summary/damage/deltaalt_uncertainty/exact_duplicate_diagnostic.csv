@@ -1,0 +1,27 @@
+individual,library,treatment,exact_adjacent_duplicate_rows,duplicate_covered_sites,duplicate_damage_alt_fraction_sum,duplicate_damage_n_dp3,duplicate_transversion_alt_fraction_sum,duplicate_transversion_n_dp3,published_row_counting_deltaalt_pp,deduplicated_diagnostic_deltaalt_pp,deduplicated_minus_published_pp,published_covered_sites,deduplicated_covered_sites,diagnostic_only
+ORT15,fu,raw,1,1,0,0,0,0,0.47189148571,0.47189148571,0,28845214,28845213,yes; not used in primary jackknife
+ORT15,fu,trim5,1,1,0,0,0,0,-0.0853798080344,-0.0853798080344,0,24340058,24340057,yes; not used in primary jackknife
+ORT15,fu,rescale5,1,1,0,0,0,0,-0.755917571676,-0.755917571676,0,28742289,28742288,yes; not used in primary jackknife
+ORT15,fu,rescale12,1,1,0,0,0,0,-1.7277128682,-1.7277128682,0,28655823,28655822,yes; not used in primary jackknife
+ORT15,fu,bamrefine5,1,1,0,0,0,0,-0.0599231327802,-0.0599231327802,0,26617815,26617814,yes; not used in primary jackknife
+ORT16,fu,raw,2,2,0,0,0,0,0.337202875899,0.337202875899,0,45566134,45566132,yes; not used in primary jackknife
+ORT16,fu,trim5,2,2,0,0,0,0,-0.134393355579,-0.134393355579,0,40115936,40115934,yes; not used in primary jackknife
+ORT16,fu,rescale5,2,2,0,0,0,0,-0.744605712773,-0.744605712773,0,45451585,45451583,yes; not used in primary jackknife
+ORT16,fu,rescale12,2,2,0,0,0,0,-1.63226868284,-1.63226868284,0,45348234,45348232,yes; not used in primary jackknife
+ORT16,fu,bamrefine5,2,2,0,0,0,0,-0.114035433206,-0.114035433206,0,42880311,42880309,yes; not used in primary jackknife
+ORT15,nu,raw,0,0,0,0,0,0,0.853592271869,0.853592271869,0,14380094,14380094,yes; not used in primary jackknife
+ORT15,nu,trim5,0,0,0,0,0,0,0.414248135638,0.414248135638,0,12183234,12183234,yes; not used in primary jackknife
+ORT15,nu,trim10,0,0,0,0,0,0,0.259937271295,0.259937271295,0,9916713,9916713,yes; not used in primary jackknife
+ORT15,nu,rescale5,0,0,0,0,0,0,-0.253640774446,-0.253640774446,0,14273288,14273288,yes; not used in primary jackknife
+ORT15,nu,rescale10,0,0,0,0,0,0,-1.01047765824,-1.01047765824,0,14214445,14214445,yes; not used in primary jackknife
+ORT15,nu,rescale12,0,0,0,0,0,0,-1.24270077129,-1.24270077129,0,14196082,14196082,yes; not used in primary jackknife
+ORT15,nu,bamrefine5,0,0,0,0,0,0,0.411390441419,0.411390441419,0,13259633,13259633,yes; not used in primary jackknife
+ORT15,nu,bamrefine10,0,0,0,0,0,0,0.269827806014,0.269827806014,0,12124414,12124414,yes; not used in primary jackknife
+ORT16,nu,raw,1,1,0,0,0,0,0.637461096186,0.637461096186,0,17628662,17628661,yes; not used in primary jackknife
+ORT16,nu,trim5,1,1,0,0,0,0,0.231335513838,0.231335513838,0,15045489,15045488,yes; not used in primary jackknife
+ORT16,nu,trim10,1,1,0,0,0,0,0.135868909732,0.135868909732,0,12359179,12359178,yes; not used in primary jackknife
+ORT16,nu,rescale5,1,1,0,0,0,0,-0.430588929965,-0.430588929965,0,17511873,17511872,yes; not used in primary jackknife
+ORT16,nu,rescale10,1,1,0,0,0,0,-1.12444490882,-1.12444490882,0,17454352,17454351,yes; not used in primary jackknife
+ORT16,nu,rescale12,1,1,0,0,0,0,-1.34716142853,-1.34716142853,0,17436192,17436191,yes; not used in primary jackknife
+ORT16,nu,bamrefine5,1,1,0,0,0,0,0.24875692898,0.24875692898,0,16293931,16293930,yes; not used in primary jackknife
+ORT16,nu,bamrefine10,1,1,0,0,0,0,0.109925099922,0.109925099922,0,14951642,14951641,yes; not used in primary jackknife

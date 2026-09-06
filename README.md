@@ -1,15 +1,18 @@
 # ORT PMD reproducibility workflow
 
-Analysis workflows, figure generators, and compact derived data for:
+Analysis workflows, data-figure generators, and compact derived data for:
 
 > **Matched full-UDG and non-UDG ancient DNA libraries reveal trade-offs in
 > post-mortem damage correction for imputation and kinship inference**
 
 The study compares terminal trimming, base-quality rescaling, and SNP masking in
 matched full-UDG and non-UDG libraries from two ancient individuals, ORT15 and
-ORT16. Release **v1.1.1** retains the curated recovery evidence added in v1.1.0
-and adds portable PCA raster validation for GitHub Actions. It does not change
-scientific data, results, parameters, figures, tables, or conclusions.
+ORT16. Release **v1.2.0** corrects the mitochondrial input workflow by using one
+collapsed-only full-UDG read-set BAM per individual and prohibiting overlapping
+nested-state merges. D4o1 assignments are unchanged; corrected caller-emitted SNP
+counts are 36 for ORT15 and 37 for ORT16, with 36 exact shared calls. The release
+also adds the Reduce18F/Round45 DeltaALT genomic-block uncertainty summaries and
+confidence intervals used by Figure 2.
 
 ## Quick start
 
@@ -56,7 +59,7 @@ bash check_repository.sh
 | Path | Contents |
 |---|---|
 | `workflows/` | Ten analysis stages, from sequence processing through PCA |
-| `figures/` | Generators for main Figures 1–7 and Supplementary Figures S1–S8 |
+| `figures/` | Generators for main Figures 2–7 and Supplementary Figures S1–S8 |
 | `data/summary/` | Compact derived tables used by figures and validation checks |
 | `data/processed/` | Curated processed verification data for recovered workflows |
 | `docs/` | Detailed methods, data-access boundaries, external resources, and limitations |
@@ -68,14 +71,18 @@ and rebuilds the supported figures.
 
 | Component | What runs from included files |
 |---|---|
-| Numerical checks | Concordance, jackknife, TKGWV2, READv2, mitochondrial, and PCA summaries |
-| Figures | Main Figures 1–7 and Supplementary Figures S1 and S4–S8 |
+| Numerical checks | DeltaALT uncertainty, concordance, jackknife, TKGWV2, READv2, corrected mitochondrial, and PCA summaries |
+| Figures | Main Figures 2–7 and Supplementary Figures S1 and S4–S8 |
 | External-data workflows | Portable commands are supplied; raw or licensed inputs are required |
 | Supplementary Figures S2–S3 | Code and metadata are supplied; controlled source data are required |
 | TKGWV2 | Recovered patch, processed-input runner, and all 16 exact validation rows |
 | READv2 | Derived normalization inputs and validation of the reported primary and sensitivity results |
 | PCA | Path-neutral recovery workflow, query-only coordinates, aggregate references, canonical exact raster checks, and CI-portable visual checks |
 | Table 1 | Original generator, output, and 80-cell provenance validation |
+
+Figure 1 is an author-prepared workflow schematic created in PowerPoint, not a
+data-derived figure. Its source artwork is therefore not included in this
+repository and `reproduce_all.sh` does not regenerate it.
 
 ## What requires external data
 
@@ -85,9 +92,9 @@ configuration, and suitable compute. The repository does not contain FASTQ,
 BAM, VCF, HDF5, third-party reference panels, exact archaeological coordinates,
 or raw micro-CT volumes.
 
-Raw sequencing reads are registered in the European Nucleotide Archive under
-study accession **PRJEB112497**. The ENA study is managed separately and this
-repository does not claim that those reads are currently downloadable. The
+Raw sequencing reads are publicly available in the European Nucleotide Archive
+under study accession **PRJEB112497**. ENA is the authoritative source for
+filenames, checksums, metadata, and current access status. The
 files in `data/summary/` and `data/processed/` are compact processed or derived
 verification data, not raw sequence data.
 
@@ -110,12 +117,17 @@ attempting a full rerun.
 
 - TKGWV2: `workflows/08_kinship/tkgwv2/`
 - READv2: `workflows/08_kinship/readv2/`
+- Corrected mitochondrial calling: `workflows/09_mtdna/`
+- DeltaALT uncertainty: `workflows/04_alt_fraction/uncertainty/`
 - PCA recovery: `workflows/10_pca/recovery/`
 - Table 1: `workflows/06_concordance/table1/`
 - Main-output source map: `docs/main_output_source_manifest.tsv`
 - v1.1.0 scientific validation record: `v1.1.0_VALIDATION_REPORT.md`
 - Release exclusions: `v1.1.0_EXCLUSIONS.md`
 - v1.1.1 maintenance notes: `v1.1.1_RELEASE_NOTES.md`
+- v1.2.0 correction and uncertainty notes: `v1.2.0_RELEASE_NOTES.md`
+- v1.2.0 correction validation: `v1.2.0_VALIDATION_REPORT.md`
+- v1.2.0 changed-file inventory: `v1.2.0_FILE_MANIFEST.tsv`
 
 The exact original primary BAM-to-genotype command and random state used for
 pseudo-haploid sampling in READv2 were not preserved. The derived genotype

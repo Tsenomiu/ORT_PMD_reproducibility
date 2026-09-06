@@ -11,9 +11,11 @@ removes PCR duplicates.
 - `merge_markdup.sh` merges BAMs and applies the appropriate samtools duplicate
   workflow.
 
-Three read sets can be assembled: collapsed reads only; collapsed plus
-`collapsed.truncated`; or both collapsed classes plus unmerged paired reads. The
-reported imputation and IBD analyses use collapsed reads only.
+Three alternative, nested read sets can be assembled: collapsed reads only;
+collapsed plus `collapsed.truncated`; or both collapsed classes plus unmerged
+paired reads. These are overlapping supersets, not independent datasets, and must
+never be merged with one another. The reported imputation, IBD and corrected
+mitochondrial analyses use collapsed reads only.
 
 ```bash
 export ORT_CONFIG="$PWD/workflows/config.sh"

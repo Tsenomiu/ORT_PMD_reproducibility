@@ -1,5 +1,30 @@
 # Changelog
 
+## v1.2.0
+
+- Add the Reduce18F/Round45 DeltaALT uncertainty analysis: 26 LOCO state
+  intervals, 90 primary paired contrasts, 24 common-callable sensitivity
+  contrasts, path-neutral provenance scripts and Figure 2 confidence intervals.
+- Validate correction-versus-uncorrected effects under paired LOCO, 5-Mb and
+  10-Mb genomic-block jackknives and document the external per-site TSV boundary.
+
+- Correct the mitochondrial workflow to use one canonical collapsed-only,
+  deduplicated full-UDG BAM per sample and reject overlapping `.2`/`.3` nested
+  read-set states.
+- Add checksum-enforced manifest validation, aggregate target-site support, exact-call
+  comparison code, synthetic regression tests and checksummed corrected
+  provenance.
+- Replace the defective 37/37 mitochondrial summary with 36 ORT15 and 37 ORT16
+  caller-emitted SNPs, of which 36 match exactly by position, REF and ALT.
+- Retain D4o1 and HaploGrep scores 0.8911/0.9107; remove the unsupported ORT15
+  A4215G claim and classify one-read ORT16 C7028T as unconfirmed.
+- Record `MT:3106 CN>C` in both samples as the non-biological artificial rCRS
+  N-spacer deletion and keep it outside biological SNP/discordance counts.
+- Retire the obsolete Figure 1 SVG and rendering scripts. Figure 1 is an
+  author-prepared PowerPoint schematic and is no longer claimed as a
+  repository-generated figure.
+- Preserve every v1.1.x historical release record without revision.
+
 ## v1.1.1
 
 - Add an explicit `ci-portable` PCA raster-validation mode for GitHub Actions.

@@ -4,9 +4,7 @@
 
 Study reads are deposited in the European Nucleotide Archive under accession
 **PRJEB112497**. ENA is the authoritative source for filenames, checksums, metadata,
-and access status. The study remains private during preparation of this local
-release candidate; the accession should be described as publicly accessible only
-after its ENA release has been verified.
+and access status. The accession and associated runs are publicly accessible.
 
 | Library | ENA sample | BioSample | Library type |
 |---|---|---|---|
@@ -27,12 +25,15 @@ The repository contains only compact inputs needed to rebuild figures or verify
 reported calculations, including:
 
 - per-bin imputation summaries and chromosome-jackknife counts;
+- DeltaALT state intervals, paired genomic-block contrasts, common-callable
+  sensitivity summaries and sanitized per-state source checksums;
 - ORT15 and ORT16 PCA coordinates, eigenvalues, and population-level reference summaries;
 - filtered ORT15–ORT16 ancIBD plotting tables;
 - mapDamage text summaries used for PMD plots; and
 - the complete 16-state TKGWV2 result table, the complete 210-pair primary READv2
   output, anonymized READv2 normalization vectors, ORT15–ORT16 sensitivity rows,
-  and compact mitochondrial summaries;
+  and corrected compact mitochondrial classification, exact-call and aggregate
+  target-site summaries;
 - publication-safe PCA recovery manifests and Table 1 generation/provenance
   records; and
 - small tabular inputs used by the kinship and imputation figures.
@@ -55,8 +56,10 @@ These files are derived results, not raw sequence data.
 |---|---|---|
 | Read processing, PMD correction, imputation | ENA PRJEB112497 | Reference genome, panels, and server-scale compute |
 | Concordance and jackknife | Rebuild VCFs from ENA; compact counts included | 1000 Genomes frequencies and GLIMPSE resources |
+| DeltaALT uncertainty | All reported compact state/contrast summaries included | External per-site allele-count TSVs are required for the server-scale full scan |
 | ancIBD | Compact ORT15–ORT16 plotting inputs included | AADR v62 and 1000 Genomes resources for a full rerun |
 | READv2 | Complete primary 210-pair output, anonymized normalization vectors, and focal sensitivity rows included | Controlled BAMs and the unrecovered primary pseudo-haploid random state prevent byte-identical raw-input reconstruction |
+| Mitochondrial calling | Corrected D4o1 classification, pair concordance, aggregate target-site support and rCRS-spacer summaries included | Canonical collapsed-only BAMs, VCFs, hs37d5 and HaploGrep runtime remain external; 36/37 are linear-rCRS caller-emitted counts |
 | PCA | ORT15 and ORT16 coordinates and aggregate backgrounds included | AADR genotype data for exact reference reconstruction |
 | Site map | Figure available with the article | Controlled archaeological spatial information |
 | Micro-CT | Export code and acquisition metadata included | Original VOX volumes and selected slice coordinates |

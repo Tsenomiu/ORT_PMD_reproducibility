@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify that all seven main figures and Table 1 have identifiable sources."""
+"""Verify repository-source status for all seven main figures and Table 1."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "docs/main_output_source_manifest.tsv"
 EXPECTED = {f"Figure {number}" for number in range(1, 8)} | {"Table 1"}
+EXTERNAL_AUTHOR_ARTWORK = {"Figure 1"}
 
 
 def split_paths(value: str) -> list[str]:
@@ -27,7 +28,26 @@ def main() -> None:
         )
 
     checked = 0
+    repository_backed = 0
     for row in rows:
+        if row["manuscript_output"] in EXTERNAL_AUTHOR_ARTWORK:
+            for field in (
+                "source_data_file",
+                "script_used",
+                "expected_output",
+                "repository_path",
+            ):
+                if row[field].strip() != "NA":
+                    raise AssertionError(
+                        f"{row['manuscript_output']} must mark {field} as NA"
+                    )
+            if not row["validation_status"].strip():
+                raise AssertionError(
+                    f"missing validation status: {row['manuscript_output']}"
+                )
+            checked += 1
+            continue
+
         for field in ("source_data_file", "script_used"):
             paths = split_paths(row[field])
             if not paths:
@@ -48,8 +68,13 @@ def main() -> None:
                 f"missing validation status: {row['manuscript_output']}"
             )
         checked += 1
+        repository_backed += 1
 
-    print(f"PASS  main-output source coverage: {checked}/8")
+    print(
+        "PASS  main-output source/status coverage: "
+        f"{checked}/8 ({repository_backed} repository-backed; "
+        "Figure 1 author-prepared externally)"
+    )
 
 
 if __name__ == "__main__":

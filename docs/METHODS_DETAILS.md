@@ -88,6 +88,14 @@ retains its own callable site set; the analysis does not impose a fixed common-s
 intersection. The difference is therefore a descriptive measure of preprocessing,
 not a direct test of genuine variant loss.
 
+Uncertainty for this study-specific contrast (DeltaALT) used paired genomic-block
+jackknives. The primary analysis retained each state's eligible-site set and used
+leave-one-autosome-out (22 blocks), 5-Mb (577 blocks), and 10-Mb (289 blocks)
+schemes. Every paired contrast omitted the same physical block from all terms.
+Figure 2 shows the LOCO 95% intervals. A separate sensitivity analysis intersected
+exact CHR/POS/REF/ALT keys and required `AD[0] + AD[1] >= 3` in every compared
+state; it did not replace the correction-specific-site primary analysis.
+
 ## Imputation and fixed-comparator concordance
 
 Autosomal genotype likelihoods were calculated at biallelic 1000 Genomes Phase 3 SNPs with bcftools 1.16/htslib 1.16, MAPQ $\geq 30$, and base quality $\geq 20$. Indels were excluded, no minimum read-depth filter was imposed, and the executed mpileup used the bcftools 1.16 default per-file maximum depth of 250. The 250-read setting is an upper cap, not a minimum. In particular, the combined REF+ALT depth $\geq 3$ rule used for the alternate-read-fraction endpoint was not applied to imputation; a site covered by one or two eligible reads could contribute genotype likelihoods. GLIMPSE v1.1.1 used the 2,504-sample Phase 3 SHAPEIT2 integrated v5b reference panel and GRCh37 genetic maps. Chromosomes were divided into chunks with a 2-Mb minimum window and 200-kb buffer, imputed with `GLIMPSE_phase`, ligated, and converted to phased GTs with `GLIMPSE_sample --solve`. The public wrapper states seed 15052011 explicitly; this is the fixed GLIMPSE v1.1.1 default used when the executed command omitted `--seed`. Because the sampled output contains GT but not GP, posterior genotype probabilities were copied from the ligated BCF, sample identifiers were normalised, and chromosomes 1–22 were concatenated. Phase accuracy and switch error were not evaluated separately.
@@ -239,18 +247,43 @@ This was a standalone, one-pass mtCont analysis, not the complete iterative schm
 
 ## Mitochondrial variant calling and haplogroup assignment
 
-Mitochondrial variants were called from each full-UDG `MT` BAM with bcftools v1.16/htslib v1.16 as follows:
+Mitochondrial variants were called independently for each individual from the
+collapsed-only, deduplicated full-UDG read-set BAM (`.1`, combining collapsed
+reads from full-UDG libraries a--c). The overlapping `.2` and `.3` read-set states
+were not merged. Reads had been aligned competitively with BWA v0.7.17 to hs37d5,
+which contains nuclear, decoy and rCRS mitochondrial sequence (NC_012920). The
+`MT` contig was extracted with samtools v1.13/htslib v1.13. Variants were called
+with bcftools v1.16/htslib v1.16 as follows:
 
 ```text
-bcftools mpileup -r MT -f hs37d5.fa -B -q30 -Q30 -Ou FULL_UDG_MTY.bam |
+bcftools mpileup -r MT -f hs37d5.fa -B -q30 -Q30 -Ou FULL_UDG_COLLAPSED_ONLY.MT.bam |
 bcftools call --ploidy 1 -m
 ```
 
-Thus, the executed call set used MAPQ $\geq 30$ and base quality $\geq 30$ with BAQ disabled (`-B`) and haploid calling. Direct inspection of the complete VCFs confirms that no global depth $\geq 3$ filter was applied: 52 ORT15 records and 173 ORT16 records have `INFO/DP` of 1 or 2.
+The executed call used MAPQ $\geq 30$ and base quality $\geq 30$, disabled BAQ
+with `-B`, and used haploid multiallelic calling. The bcftools v1.16 default
+per-file maximum input depth of 250 was retained. No global minimum-depth,
+allele-fraction or strand-balance filter was applied. Called SNPs were compared by
+chromosome, position, REF and ALT; absence of a call was not interpreted as a
+confident reference genotype.
 
-The low-depth records did not enter the called SNP set used for the haplogroup interpretation. Each individual has 37 called single-nucleotide ALT variants, and the minimum `INFO/DP` among those variants is 5. Consequently, applying a post hoc depth $\geq 3$ criterion to the 37 called SNPs would remove none of them and would not change that haplogroup variant set. This observation does not establish that a depth-filtered whole-mitogenome consensus was executed; it establishes only that all called haplogroup SNPs already exceed the stated depth threshold.
+HaploGrep 3 v3.3.2 with PhyloTree 17 Forensic Update
+(`phylotree-fu-rcrs@1.3`) assigned both individuals to D4o1, with software-reported
+scores of 0.8911 and 0.9107. ORT15 and ORT16 had 36 and 37 called mtDNA SNPs,
+respectively, and all 36 ORT15 calls matched ORT16 exactly. The sole additional
+ORT16 caller-emitted SNP was C7028T at `INFO/DP=1`, supported by one forward read
+with MAPQ 37 and base quality 40. ORT15 had no qualifying coverage at this site;
+the call was therefore not interpreted as a confirmed between-individual
+difference. Neither corrected input had qualifying coverage at position 4215, so
+the historical ORT15 A4215G call did not survive the corrected read-set selection.
 
-HaploGrep 3 v3.3.2 was subsequently used with PhyloTree 17 Forensic Update (`phylotree-fu-rcrs@1.3`), producing D4o1 assignments with reported quality scores 0.891 and 0.911. For the between-individual comparison, called single-nucleotide ALT records were keyed by position, REF, and ALT. Each individual had 37 such SNPs; 36 were shared at the same position and allele. The individual-specific SNPs were ORT15 A4215G and ORT16 C7028T, both at depth 5. The additional ORT15 record at position 3106 (`CN` to `C`) was treated separately as an rCRS reference-ambiguity record rather than as one of the 37 SNPs.
+Both VCFs contained the left-anchored `MT:3106 CN>C` record. This represents
+deletion of the artificial rCRS `N` spacer at position 3107 and was excluded from
+biological SNP and discordance counts. The corrected linear-rCRS call counts are
+descriptive caller outputs rather than complete breakpoint-independent
+mitogenome totals. Competitive hs37d5 mapping plus MAPQ 30 is adequate for the
+multi-marker D4o1 assignment; a shifted/circular-reference sensitivity is needed
+only if complete whole-mitogenome call counts are claimed.
 
 ## PCA projection and marker trace
 

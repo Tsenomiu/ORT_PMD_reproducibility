@@ -1,0 +1,9 @@
+individual,comparison_id,n_states_intersected,matched_variant_keys,common_depth_ge3_keys,eligible_damage_keys,eligible_transversion_keys,excluded_other_snp_class_keys,exact_duplicate_rows_collapsed_across_input_reads
+ORT15,raw_nu_minus_raw_fu,2,5923596,47250,19429,15033,12788,1
+ORT15,nu_bamrefine5_minus_rescale5,2,14385804,411170,164795,132373,114002,0
+ORT15,rescale5_shift_nu_minus_fu,4,5923596,46319,18639,14892,12788,2
+ORT15,rescale12_shift_nu_minus_fu,4,5923596,45754,18161,14805,12788,2
+ORT16,raw_nu_minus_raw_fu,2,11319368,194457,79042,62293,53122,3
+ORT16,nu_bamrefine5_minus_rescale5,2,17636863,735586,291091,237808,206687,2
+ORT16,rescale5_shift_nu_minus_fu,4,11319368,191049,76166,61761,53122,6
+ORT16,rescale12_shift_nu_minus_fu,4,11319368,189219,74556,61541,53122,6

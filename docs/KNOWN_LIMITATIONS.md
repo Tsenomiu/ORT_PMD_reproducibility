@@ -17,6 +17,12 @@ environment.
   the reported values. The exact primary BAM-to-genotype command and pseudo-haploid
   random state were not preserved, so raw-BAM-to-result byte identity is not
   claimed.
+- Corrected mitochondrial summaries use one collapsed-only full-UDG BAM per
+  individual and exclude overlapping nested read-set states. BAM/VCF regeneration
+  remains an external-data step; linear-rCRS SNP totals are not claimed as complete
+  breakpoint-independent mitogenomes.
+- DeltaALT point estimates and all reported jackknife summaries are included;
+  a full uncertainty rerun requires the external per-site allele-count TSVs.
 - AADR and 1000 Genomes resources retain their provider terms and are not bundled.
 
 ## Figures requiring non-distributed inputs

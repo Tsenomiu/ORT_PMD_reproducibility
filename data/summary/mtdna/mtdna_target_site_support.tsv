@@ -1,0 +1,5 @@
+sample	chrom	position	ref	alt	mapq_min	baseq_min	qualifying_ref_reads	qualifying_alt_reads	qualifying_other_reads	distinct_alt_read_names	alt_forward	alt_reverse	alt_fraction_ref_alt	alt_mapq_min	alt_mapq_max	alt_baseq_min	alt_baseq_max
+ORT15	MT	4215	A	G	30	30	0	0	0	0	0	0	NA	NA	NA	NA	NA
+ORT15	MT	7028	C	T	30	30	0	0	0	0	0	0	NA	NA	NA	NA	NA
+ORT16	MT	4215	A	G	30	30	0	0	0	0	0	0	NA	NA	NA	NA	NA
+ORT16	MT	7028	C	T	30	30	0	1	0	1	1	0	1.0	37	37	40	40

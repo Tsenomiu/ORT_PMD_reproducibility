@@ -119,15 +119,207 @@ def validate_king_ibs0() -> None:
 
 def validate_mtdna() -> None:
     calls = rows(ROOT / "data/summary/mtdna/haplogrep_classification.tsv")
-    if len(calls) != 2 or {r["haplogroup"] for r in calls} != {"D4o1"}:
-        raise AssertionError("unexpected mitochondrial classifications")
-    scores = {r["sample"]: float(r["quality_score"]) for r in calls}
-    close(scores["ORT15"], 0.8911)
-    close(scores["ORT16"], 0.9107)
+    if len(calls) != 2 or {row["sample"] for row in calls} != {"ORT15", "ORT16"}:
+        raise AssertionError("unexpected mitochondrial classification rows")
+    by_sample = {row["sample"]: row for row in calls}
+    for sample, score in (("ORT15", 0.8911), ("ORT16", 0.9107)):
+        row = by_sample[sample]
+        expected = {
+            "input_read_set": "full-UDG collapsed-only .1",
+            "caller": "bcftools 1.16 haploid",
+            "calling_filters": "MAPQ>=30;BQ>=30;BAQ_disabled;no_global_DP_filter",
+            "haplogrep_version": "3.3.2",
+            "tree": "phylotree-fu-rcrs@1.3",
+            "haplogroup": "D4o1",
+            "interpretation": "software-reported assignment",
+        }
+        for field, value in expected.items():
+            if row[field] != value:
+                raise AssertionError(f"unexpected {sample} mitochondrial {field}")
+        close(float(row["quality_score"]), score)
+
     concordance = rows(ROOT / "data/summary/mtdna/mtdna_pair_concordance.tsv")
-    summary = next(r for r in concordance if r["record_type"] == "summary")
-    if "36_shared_called_SNPs" not in summary["interpretation"]:
-        raise AssertionError("mitochondrial concordance summary changed")
+    if len(concordance) != 4:
+        raise AssertionError("expected four mitochondrial concordance rows")
+    keyed = {(row["record_type"], row["position"]): row for row in concordance}
+    if len(keyed) != 4:
+        raise AssertionError("duplicate mitochondrial concordance key")
+    expected_rows = {
+        ("summary", "NA"): (
+            "36_called_ALT_SNPs",
+            "37_called_ALT_SNPs",
+            "NA",
+            "NA",
+            "36 exact shared POS_REF_ALT calls; ORT15 call set is a subset of ORT16",
+        ),
+        ("artifact", "3106"): (
+            "CN>C",
+            "CN>C",
+            "152",
+            "148",
+            "left-anchored deletion of artificial rCRS N spacer at 3107; exclude from biological SNP and discordance counts",
+        ),
+        ("site", "4215"): (
+            "no_qualifying_coverage",
+            "no_qualifying_coverage",
+            "0",
+            "0",
+            "old ORT15 A>G call does not survive; one truncated-read molecule was counted twice after nested-state merge",
+        ),
+        ("site", "7028"): (
+            "no_qualifying_coverage",
+            "C>T_1_read_call",
+            "0",
+            "1",
+            "ORT16 call has one forward read (MAPQ37; BQ40; AF=1/1) and is not a confirmed pairwise difference",
+        ),
+    }
+    if set(keyed) != set(expected_rows):
+        raise AssertionError("unexpected mitochondrial concordance row keys")
+    for key, expected in expected_rows.items():
+        row = keyed[key]
+        observed = tuple(
+            row[field]
+            for field in ("ORT15", "ORT16", "ORT15_depth", "ORT16_depth", "interpretation")
+        )
+        if observed != expected:
+            raise AssertionError(f"unexpected mitochondrial concordance row: {key}")
+
+    spacer = {row["sample"]: row for row in rows(ROOT / "data/summary/mtdna/mtdna_3106_spacer_audit.tsv")}
+    if set(spacer) != {"ORT15", "ORT16"}:
+        raise AssertionError("unexpected MT:3106 spacer rows")
+    expected_spacer = {
+        "ORT15": ("152", "126", "0.828947", "65", "57"),
+        "ORT16": ("148", "131", "0.885135", "65", "63"),
+    }
+    for sample, expected in expected_spacer.items():
+        row = spacer[sample]
+        observed = tuple(row[field] for field in ("DP", "IDV", "IMF", "ALT_forward", "ALT_reverse"))
+        if (row["position"], row["REF"], row["ALT"], row["GT"]) != ("3106", "CN", "C", "1"):
+            raise AssertionError(f"unexpected {sample} MT:3106 allele")
+        if observed != expected or "non-biological" not in row["interpretation"]:
+            raise AssertionError(f"unexpected {sample} MT:3106 support")
+
+    support = {
+        (row["sample"], row["position"]): row
+        for row in rows(ROOT / "data/summary/mtdna/mtdna_target_site_support.tsv")
+    }
+    if set(support) != {
+        ("ORT15", "4215"),
+        ("ORT15", "7028"),
+        ("ORT16", "4215"),
+        ("ORT16", "7028"),
+    }:
+        raise AssertionError("unexpected mitochondrial target-site rows")
+    for key, row in support.items():
+        if row["mapq_min"] != "30" or row["baseq_min"] != "30":
+            raise AssertionError(f"unexpected target-site filters: {key}")
+    ort16_7028 = support[("ORT16", "7028")]
+    expected_7028 = ("0", "1", "1", "1", "0", "1.0", "37", "37", "40", "40")
+    observed_7028 = tuple(
+        ort16_7028[field]
+        for field in (
+            "qualifying_ref_reads",
+            "qualifying_alt_reads",
+            "distinct_alt_read_names",
+            "alt_forward",
+            "alt_reverse",
+            "alt_fraction_ref_alt",
+            "alt_mapq_min",
+            "alt_mapq_max",
+            "alt_baseq_min",
+            "alt_baseq_max",
+        )
+    )
+    if observed_7028 != expected_7028:
+        raise AssertionError("unexpected ORT16 C7028T aggregate support")
+    for key, row in support.items():
+        if key != ("ORT16", "7028") and any(
+            int(row[field]) != 0
+            for field in (
+                "qualifying_ref_reads",
+                "qualifying_alt_reads",
+                "qualifying_other_reads",
+                "distinct_alt_read_names",
+                "alt_forward",
+                "alt_reverse",
+            )
+        ):
+            raise AssertionError(f"unexpected qualifying coverage: {key}")
+        if key != ("ORT16", "7028") and any(
+            row[field] != "NA"
+            for field in (
+                "alt_fraction_ref_alt", "alt_mapq_min", "alt_mapq_max",
+                "alt_baseq_min", "alt_baseq_max",
+            )
+        ):
+            raise AssertionError(f"unexpected zero-coverage ALT metrics: {key}")
+
+    manifest = rows(ROOT / "workflows/09_mtdna/full_udg_bam_manifest.example.tsv")
+    if len(manifest) != 2 or {row["sample"] for row in manifest} != {"ORT15", "ORT16"}:
+        raise AssertionError("unexpected mitochondrial example manifest rows")
+    if any(
+        row["read_set_state"] != "full_udg_collapsed_only"
+        or row["input_scope"] != "combined_libraries_a_b_c"
+        or row["bam"].endswith((".2.bam", ".3.bam"))
+        for row in manifest
+    ):
+        raise AssertionError("nested or noncanonical mitochondrial example input")
+
+    input_checksums = {
+        row["sample"]: row
+        for row in rows(ROOT / "workflows/09_mtdna/corrected_input_checksums.tsv")
+    }
+    expected_inputs = {
+        "ORT15": "674f891b87a43fe4de33e0ed189ba11eada8c935904593f3ab563eb422a64d65",
+        "ORT16": "c614879709587d95fdb2e4b44b34ffef4be89be7f3307a0f93d305d1570970ba",
+    }
+    if set(input_checksums) != set(expected_inputs):
+        raise AssertionError("unexpected corrected mitochondrial input-checksum rows")
+    for sample, expected_sha in expected_inputs.items():
+        row = input_checksums[sample]
+        if (
+            row["read_set_state"] != "full_udg_collapsed_only"
+            or row["input_scope"] != "combined_libraries_a_b_c"
+            or row["sha256"] != expected_sha
+        ):
+            raise AssertionError(f"unexpected corrected input provenance for {sample}")
+
+    output_checksums = {
+        (row["sample"], row["output_type"]): row["sha256"]
+        for row in rows(ROOT / "workflows/09_mtdna/corrected_output_checksums.tsv")
+    }
+    expected_outputs = {
+        ("ORT15", "MT_BAM"): "01b43a77adae34d3e6d4ee05033a6b9fe06bbe8abb976f4e189d750087b70f16",
+        ("ORT15", "mtDNA_VCF_GZ"): "9e2a9f5d8c7e695dabfa8f7eceb99ecf14a2d8cc41e0cd649c82c247e7a27f9c",
+        ("ORT15", "HaploGrep_TSV"): "f0c833230e8ac72fc289e9289cc95e8f2b06ee5be8a391587f29061523bc06c2",
+        ("ORT16", "MT_BAM"): "cf1af68204a4cb57a426ceccdccd8a4787825e637a318081de584d9db1ecfae2",
+        ("ORT16", "mtDNA_VCF_GZ"): "a1aa1a28e8d0831d2da5d57a9aa4d4809f3775fcff68b646a46d166da5a7c50a",
+        ("ORT16", "HaploGrep_TSV"): "ccd8d89ddf73e57fff6b9820f8e0bb4edddf0f580f879629fa2bdba335cbb9f3",
+    }
+    if output_checksums != expected_outputs:
+        raise AssertionError("corrected mitochondrial output checksums changed")
+
+    environment = {
+        row["component"]: row
+        for row in rows(ROOT / "workflows/09_mtdna/environment.tsv")
+    }
+    expected_environment = {
+        "samtools_htslib": ("1.13", "NA"),
+        "bcftools_htslib": ("1.16", "NA"),
+        "hs37d5_fasta": ("GRCh37/hs37d5", "65add55817fc9a5de8221caf36e84bf8670f94bef9cff7889093692b271a765d"),
+        "hs37d5_fai": ("GRCh37/hs37d5", "1eab7540d4b62ef0b43b50581d027be37c1ee57da9e9cb75957e750641c8630c"),
+        "HaploGrep3_archive": ("3.3.2", "957165143ddd7d6ad9f34cc3af56b784fc236081e031c99bea4a574d6ad70959"),
+        "HaploGrep3_jar": ("3.3.2", "b7ac239b55b8253dfe03c299f7257e186c73b9505e0e7f8b7a8b14850b10d3f9"),
+        "phylotree-fu-rcrs_tree_yaml": ("1.3", "776dc754f466ab4f516e94742b3a79f33cec1a20b8fa582f7e0543fc0151d8d0"),
+        "phylotree-fu-rcrs_tree_xml": ("1.3", "07275e7a32f2d9ddb13252f357559eaa3537f677600e127f5b3a1a2c089d45be"),
+    }
+    if set(environment) != set(expected_environment):
+        raise AssertionError("unexpected corrected mitochondrial environment rows")
+    for component, expected in expected_environment.items():
+        row = environment[component]
+        if (row["version_or_identifier"], row["sha256"]) != expected or not row["role"]:
+            raise AssertionError(f"unexpected environment provenance for {component}")
 
 
 def main() -> None:

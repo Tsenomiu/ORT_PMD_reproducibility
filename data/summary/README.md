@@ -6,6 +6,9 @@ genotypes.
 
 - `damage/alt_fraction_recomputed_dp3_adsum.csv`: the 26 correction-state rows used
   by main Figure 2 and Supplementary Table S2.
+- `damage/deltaalt_uncertainty/`: compact Round45 LOCO state intervals, primary
+  paired jackknife contrasts, common-callable sensitivity summaries, diagnostics,
+  canonical validation and sanitized source checksums used by Reduce18F/Figure 2.
 - `imputation/`: the 16-row treatment summary, per-chromosome concordance counts and
   expected paired-jackknife outputs used by main Figure 3 and Table 1.
 - `ancibd/`: asymmetric and 64-state IBD1 summaries used by main Figure 4 and
@@ -19,7 +22,9 @@ genotypes.
   KING/IBS0 summaries.
 - `kinship/ibs0_positive_control.tsv`: the same-individual chromosome-1 nested
   read-set control.
-- `mtdna/`: HaploGrep classifications and the compact ORT15--ORT16 call comparison.
+- `mtdna/`: corrected collapsed-only HaploGrep classifications, the compact
+  ORT15--ORT16 exact-call comparison, aggregate 4215/7028 support and the
+  non-biological rCRS-spacer audit. No read names are included.
 - `pca/`: query coordinates, eigenvalues, query manifest, population-level reference
   aggregates and expected PCA metrics.
 - `qc/`: library QC, read-set comparison, radiocarbon and contamination summaries.
