@@ -73,17 +73,17 @@ if [[ -n "$BAD_FILE" ]]; then
 fi
 pass 'excluded-file scan'
 
-# Private infrastructure. The checker excludes itself because it contains this
-# detection expression; all other text files must be portable.
-PRIVATE_PATTERN='/Users/|/home/|/media/|storage/rc|133[.]28[.]62[.]238|rx2000|ssh[[:space:]]+(test|rc)([[:space:]]|$)'
+# Generic infrastructure patterns, without embedding real server identifiers.
+# Include this checker in the scan so it cannot conceal a matching disclosure.
+# Match addresses in connection contexts; dotted software versions are allowed.
+PRIVATE_PATTERN='/([U]sers|[h]ome|[m]edia)/|[s]torage/[A-Za-z0-9_-]+|ssh[[:space:]]+([A-Za-z0-9_.-]+@)?[A-Za-z0-9_.-]+([[:space:]]|$)|([A-Za-z0-9_.-]+@|https?://)[0-9]{1,3}([.][0-9]{1,3}){3}([/:[:space:]]|$)'
 if command -v rg >/dev/null 2>&1; then
-  if rg -n --hidden "$PRIVATE_PATTERN" . \
-      --glob '!check_repository.sh' --glob '!.git/**' --glob '!_build/**'; then
+  if rg -l --hidden "$PRIVATE_PATTERN" . \
+      --glob '!.git/**' --glob '!_build/**'; then
     fail 'private host or absolute working path found'
   fi
 else
-  if grep -RInE "$PRIVATE_PATTERN" . \
-      --exclude='check_repository.sh' \
+  if grep -RIlE "$PRIVATE_PATTERN" . \
       --exclude-dir='.git' --exclude-dir='_build' --exclude='*.pdf'; then
     fail 'private host or absolute working path found'
   fi
@@ -94,12 +94,12 @@ pass 'private-path scan'
 # elsewhere and are not themselves evidence of a leaked secret.
 SECRET_PATTERN='BEGIN (RSA |OPENSSH |EC |DSA )?PRIVATE KEY|AKIA[0-9A-Z]{16}|ASIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]+'
 if command -v rg >/dev/null 2>&1; then
-  if rg -n --hidden "$SECRET_PATTERN" . \
+  if rg -l --hidden "$SECRET_PATTERN" . \
       --glob '!check_repository.sh' --glob '!.git/**' --glob '!_build/**'; then
     fail 'credential-like material found'
   fi
 else
-  if grep -RInE "$SECRET_PATTERN" . \
+  if grep -RIlE "$SECRET_PATTERN" . \
       --exclude='check_repository.sh' \
       --exclude-dir='.git' --exclude-dir='_build' --exclude='*.pdf'; then
     fail 'credential-like material found'

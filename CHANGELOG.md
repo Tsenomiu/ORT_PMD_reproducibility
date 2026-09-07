@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Remove server-specific identifiers from the privacy checker, scan the checker
+  itself, and report matching filenames without disclosing their contents.
+
 ## v1.2.1
 
 - Shorten the README and consolidate release reports into one validation guide.
