@@ -1,9 +1,10 @@
 # Changelog
 
-## Unreleased
+## v1.2.2
 
 - Remove server-specific identifiers from the privacy checker, scan the checker
   itself, and report matching filenames without disclosing their contents.
+- Scientific data, analysis parameters and figure generators are unchanged.
 
 ## v1.2.1
 
